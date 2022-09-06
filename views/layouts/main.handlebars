@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DnD Character Manager</title>
+  <link rel="stylesheet" href="/css/jass.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div class="flex-column justify-space-around">
+    <header class="display-flex justify-space-between align-center p-2">
+      <h1>
+        <a href="/">DnD Character Manager</a>
+      </h1>
+      <nav>
+        <!-- Conditionally render login or logout links -->
+        {{#if logged_in}}
+        <button class="no-button" id="logout">logout</button>
+        <main class="container container-fluid mt-5">
+        {{{ body }}}
+        {{else}}
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Login</h2>
+
+                <form class="form login-form">
+                <div class="form-group">
+                    <label for="email-login">email:</label>
+                    <input class="form-input" type="text" id="email-login" />
+                </div>
+                <div class="form-group">
+                    <label for="password-login">password:</label>
+                    <input class="form-input" type="password" id="password-login" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">login</button>
+                </div>
+                </form>
+            </div>
+        <div class="col-md-6">
+        <a href="/signup">Signup</a>
+        {{/if}}
+      </nav>
+    </header>
+    <div class="guide">User Guide</div>
+        <p>Whether you are a veteran of the game or just learning how to create a DnD character, 
+        our character builder tool and digital character sheets make it easier than ever to play the game!</p>
+    <footer>
+      
+    </footer>
+  </div>
+
+  <!-- Render script for logged in users only -->
+  {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+</body>
+
+</html>
