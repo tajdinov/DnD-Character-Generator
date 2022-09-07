@@ -1,6 +1,10 @@
 <section class="card">
   <a href="/character/{{id}}">
-    <header>{{name}}</header>
+    <header>{{character.name}}</header>
+
+    <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{character.id}}">DELETE</button>
+    </div>
     
   </a>
 </section>
