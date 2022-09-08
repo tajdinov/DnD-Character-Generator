@@ -11,4 +11,6 @@ sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   port: 3306,
 });
 
+sequelize.sync();
+
 module.exports = sequelize;
