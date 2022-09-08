@@ -18,12 +18,39 @@ router.post("/", async (req, res) => {
   res.json({ newUser });
 });
 
-router.post("/login", (req, res) => {
-  // TODO
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.sendStatus(400);
+  }
+  const userData = await User.findOne({ where: { email } });
+  if (!userData) {
+    return res.sendStatus(400);
+  }
+
+  const validPassword = await userData.checkPassword(password);
+
+  if (validPassword) {
+    req.session.save(err => {
+      if (err) {
+        return res.sendStatus(500);
+      }
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+      return res.status(200).json({ user: userData });
+    });
+  }
 });
 
 router.post("/logout", (req, res) => {
-  // TODO
+  if (req.session.logged_in) {
+    // Remove the session variables
+    req.session.destroy(() => {
+      res.sendStatus(204);
+    });
+  } else {
+    res.sendStatus(400);
+  }
 });
 
 module.exports = router;
