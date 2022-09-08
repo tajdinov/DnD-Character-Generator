@@ -32,3 +32,10 @@ Class.belongsTo(Character, {
 Race.belongsTo(Character, {
   foreignKey: "character_id",
 });
+
+module.exports = {
+  User,
+  Character,
+  Class,
+  Race,
+};
