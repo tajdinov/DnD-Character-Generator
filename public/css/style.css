@@ -45,11 +45,11 @@ body {
     text-align: center;
 }
 
-.login-box .user-box {
+.login-box .login-form .user-box {
     position: relative;
 }
 
-.login-box .user-box input {
+.login-box .login-form .user-box input {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
@@ -61,7 +61,7 @@ body {
     background: transparent;
 }
 
-.login-box .user-box label {
+.login-box .login-form .user-box label {
     position: absolute;
     top: 0;
     left: 0;
@@ -72,8 +72,8 @@ body {
     transition: .5s;
 }
 
-.login-box .user-box input:focus~label,
-.login-box .user-box input:valid~label {
+.login-box .login-form .user-box input:focus~label,
+.login-box .login-form .user-box input:valid~label {
     top: -20px;
     left: 0;
     color: #03e9f4;
@@ -93,6 +93,7 @@ body {
     transition: .5s;
     margin-top: 20px;
     letter-spacing: 4px;
+    cursor: pointer;
 }
 
 .btn_submit:hover {

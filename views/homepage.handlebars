@@ -1,12 +1,13 @@
 <div class="row">
   <div class="col-auto">
     <h2>Welcome, {{first_name}}!</h2>
+    <h3>Your Characters</h3>
+    <a class="btn_new_char" type="submit" href="/create">Create a Character</a>
   </div>
 </div>
 
   {{#if characters.length}}
   <div class="col-md-6 project-list">
-    <h3>Your Characters</h3>
 
     {{#each characters as |character|}}
     <div class="row mb-2">
@@ -23,4 +24,4 @@
 </div>
 
 
-<script src="./js/profile.js"></script>
+<script src="./js/homepage.js"></script>

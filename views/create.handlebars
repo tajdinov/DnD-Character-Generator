@@ -3,12 +3,6 @@
         Dumbos and Donkeys Character Generator
       </h2>
     </header>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <button class="no-button" id="logout">logout</button>
-        <main class="container container-fluid mt-5">
-        {{{ body}}}
-        {{else}}
 
         <h3>Create a New Character</h3>
 
@@ -65,12 +59,7 @@
             <div class="user-box">
               <label for="intelligence">Intelligence</label>
               <input class="form-input" type="number" id="intelligence" name="intelligence" />
-            </div>
-            <div class="user-box">
-              <label for="charisma">Charisma</label>
-              <input class="form-input" type="number" id="charisma" name="charisma" />
-            </div>
-            
+            </div>            
             <div class="user-box">
               <button type="submit" class="btn btn-primary">Next</button>
             </div>
