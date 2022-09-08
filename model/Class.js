@@ -1,7 +1,7 @@
 // import important parts of sequelize library
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 // import our database connection from config.js
-const sequelize = require('../config/connection');
+const sequelize = require("../config/connection");
 
 // initialize Class model (table) by extending off Sequelize's Model class
 class Class extends Model {}
@@ -21,11 +21,11 @@ Class.init(
       allowNull: false,
     },
     character_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'character',
-          key: 'id',
-        },
+      type: DataTypes.INTEGER,
+      references: {
+        model: "character",
+        key: "id",
+      },
     },
   },
   {
@@ -33,7 +33,7 @@ Class.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'class',
+    modelName: "class",
   }
 );
 
