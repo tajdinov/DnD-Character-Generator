@@ -6,8 +6,8 @@ const sequelize = require("../config/connection");
 
 // initialize User model (table) by extending off Sequelize's Model class
 class User extends Model {
-  checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
+  async checkPassword(loginPw) {
+    return await bcrypt.compare(loginPw, this.password);
   }
 }
 
