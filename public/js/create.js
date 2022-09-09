@@ -21,6 +21,8 @@ const generateStats = async event => {
 
   let next = $("#create2");
   next.removeClass("hidden");
+  let btn = $(".btn_generate");
+  btn.addClass("hidden");
 };
 
 const create1 = async event => {
@@ -37,6 +39,7 @@ const create2 = async event => {
 
   let box2 = $(".character-second-box");
   let box3 = $(".character-third-box");
+
   box2.addClass("hidden");
   box3.removeClass("hidden");
 };
@@ -73,7 +76,7 @@ const createFormHandler = async event => {
     wisdom &&
     intelligence
   ) {
-    const response = await fetch("/api/character", {
+    const response = await fetch(`/api/projects`, {
       method: "POST",
       body: JSON.stringify({
         character_name,
@@ -93,6 +96,7 @@ const createFormHandler = async event => {
 
     if (response.ok) {
       document.location.replace("/homepage");
+      console.log(response);
     } else {
       alert("Failed to create a character");
     }
