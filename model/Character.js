@@ -20,6 +20,10 @@ Character.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    hit_poins: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     strength: {
       type: DataTypes.INTEGER,
       allowNull: false,

@@ -1,78 +1,79 @@
-<header class="header_dnd">
-      <h2>
-        Dumbos and Donkeys Character Generator
-      </h2>
-    </header>
 
-        <h3>Create a New Character</h3>
+            <h3>Create a New Character</h3>
 
-        <div class="character-first-box">
-          <form class="form new-character-form">
-            <div class="user-box">
-              <label for="character-name">Name</label>
-              <input class="form-input" type="text" id="character-name" name="character-name" />
+            <div class="character-first-box" id="character-first-box">
+              <form class="form new-character-form">
+                <div class="user-box">
+                  <label for="character-name">Name</label>
+                  <input class="form-input" type="text" id="character-name" name="character-name" />
+                </div>
+                <div class="user-box">
+                  <label for="character-class">Class</label>
+                  <select class="form-input" type="text" id="character-class" name="character-class">
+                    <option value="rogue">Rogue</option>
+                    <option value="mage">Mage</option>
+                    <option value="warrior">Warrior</option>
+                  </select>
+                </div>
+                <div class="user-box">
+                  <label for="character-race">Race</label>
+                  <select class="form-input" type="text" id="character-race" name="character-race">
+                    <option value="human">Human</option>
+                    <option value="elf">Elf</option>
+                    <option value="drarf">Dwarf</option>
+                    <option value="orc">Orc</option>
+                  </select>
+                </div>
+                <div class="user-box">
+                  <button type="submit" class="btn btn-primary" id="create1">Next</button>
+                </div>
+              </form>
+            </div> 
+          
+            <div class="character-second-box hidden" id="character-second-box">
+              <form class="form new-character-form">
+                <div class="user-box">
+                  <button class="generateStats">Generate</button>
+                </div>
+                <div class="user-box">
+                  <label for="hit-points">Hit Points</label>
+                  <input class="form-input" type="text" id="hit-points" name="hit-points" />
+                </div>
+                <div class="user-box">
+                  <label for="strength">Strength</label>
+                  <input class="form-input" type="text" id="strength" name="strength" />
+                </div>
+                <div class="user-box">
+                  <label for="constitution">Constitution</label>
+                  <input class="form-input" type="text" id="constitution" name="constitution" />
+                </div>
+                <div class="user-box">
+                  <label for="dexterity">Dexterity</label>
+                  <input class="form-input" type="text" id="dexterity" name="dexterity" />
+                </div>
+                <div class="user-box">
+                  <label for="wisdom">Wisdom</label>
+                  <input class="form-input" type="text" id="wisdom" name="wisdom" />
+                </div>
+                <div class="user-box">
+                  <label for="intelligence">Intelligence</label>
+                  <input class="form-input" type="text" id="intelligence" name="intelligence" />
+                </div>            
+                <div class="user-box">
+                  <button type="submit" class="btn btn-primary hidden" id="create2">Next</button>
+                </div>
+              </form>
             </div>
-            <div class="user-box">
-              <label for="character-class">Class</label>
-              <select class="form-input" type="text" id="character-class" name="character-class">
-                <option value="rogue">Rogue</option>
-                <option value="mage">Mage</option>
-                <option value="warrior">Warrior</option>
-              </select>
+
+            <div class="character-third-box hidden" id="character-third-box hidden">
+              <form class="form new-character-form">
+                <div class="user-box">
+                  <label for="character-picture">Upload an image</label>
+                  <input class="form-input" type="file" id="character-picture" name="character-picture" accept="image/png, image/jpeg" />
+                </div>
+                <div class="user-box">
+                    <a class="btn_create" type="submit" formaction="/homepage">Create</a>
+                  </button>
+                </div>
+              </form>
             </div>
-            <div class="user-box">
-              <label for="character-race">Race</label>
-              <select class="form-input" type="text" id="character-race" name="character-race">
-                <option value="human">Human</option>
-                <option value="elf">Elf</option>
-                <option value="drarf">Dwarf</option>
-                <option value="orc">Orc</option>
-              </select>
-            </div>
-            <div class="user-box">
-              <button type="submit" class="btn btn-primary">Next</button>
-            </div>
-          </form>
-        </div>
-        <div class="character-second-box">
-          <form class="form new-character-form">
-            <div class="user-box">
-              <label for="hit-points">Hit Points</label>
-              <input class="form-input" type="number" id="hit-points" name="hit-points" />
-            </div>
-            <div class="user-box">
-              <label for="strength">Strength</label>
-              <input class="form-input" type="number" id="strength" name="strength" />
-            </div>
-            <div class="user-box">
-              <label for="constitution">Constitution</label>
-              <input class="form-input" type="number" id="constitution" name="constitution" />
-            </div>
-            <div class="user-box">
-              <label for="dexterity">Dexterity</label>
-              <input class="form-input" type="number" id="dexterity" name="dexterity" />
-            </div>
-            <div class="user-box">
-              <label for="wisdom">Wisdom</label>
-              <input class="form-input" type="number" id="wisdom" name="wisdom" />
-            </div>
-            <div class="user-box">
-              <label for="intelligence">Intelligence</label>
-              <input class="form-input" type="number" id="intelligence" name="intelligence" />
-            </div>            
-            <div class="user-box">
-              <button type="submit" class="btn btn-primary">Next</button>
-            </div>
-          </form>
-        </div>
-        <div class="character-third-box">
-          <form class="form new-character-form">
-            <div class="user-box">
-              <label for="character-picture">Upload an image</label>
-              <input class="form-input" type="file" id="character-picture" name="character-picture" accept="image/png, image/jpeg" />
-            </div>
-            <div class="user-box">
-              <button type="submit" class="btn btn-primary">Next</button>
-            </div>
-          </form>
-        </div>

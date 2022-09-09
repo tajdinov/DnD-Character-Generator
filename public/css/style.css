@@ -491,3 +491,7 @@ body {
     bottom: 100%;
     }
 }
+
+.hidden {
+    display: none;
+}
