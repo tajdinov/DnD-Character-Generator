@@ -38,7 +38,7 @@ body {
     border-radius: 10px;
 }
 
-.login-box h2 {
+.login-box h2, .create_new h3 {
     margin: 0 0 30px;
     padding: 0;
     color: #fff;
@@ -546,10 +546,6 @@ body {
     border-bottom: 1px solid #fff;
     outline: none;
     background: transparent;
-}
-
-.new-character-form .user-box .form-input .type {
-    background-color: transparent;
 }
 
 .new-character-form .user-box select:focus~label,
