@@ -47,3 +47,58 @@ document
 
 document.querySelector("#create1").addEventListener("click", create1);
 document.querySelector("#create2").addEventListener("click", create2);
+
+const createFormHandler = async event => {
+  event.preventDefault();
+
+  // Collect values from the forms
+  let character_name = document.querySelector("#character-name").value.trim();
+  let character_class = document.querySelector("#character-class").value.trim();
+  let character_race = document.querySelector("#character-race").value.trim();
+  let hit_poins = document.querySelector("#hit-points").value.trim();
+  let strength = document.querySelector("#strength").value.trim();
+  let dexterity = document.querySelector("#constitution").value.trim();
+  let constitution = document.querySelector("#dexterity").value.trim();
+  let wisdom = document.querySelector("#wisdom").value.trim();
+  let intelligence = document.querySelector("#intelligence").value.trim();
+
+  if (
+    character_name &&
+    character_class &&
+    character_race &&
+    hit_poins &&
+    strength &&
+    dexterity &&
+    constitution &&
+    wisdom &&
+    intelligence
+  ) {
+    const response = await fetch("/api/character", {
+      method: "POST",
+      body: JSON.stringify({
+        character_name,
+        character_class,
+        character_race,
+        hit_poins,
+        strength,
+        dexterity,
+        constitution,
+        wisdom,
+        intelligence,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      document.location.replace("/homepage");
+    } else {
+      alert("Failed to create a character");
+    }
+  }
+};
+
+document
+  .querySelector(".create-form")
+  .addEventListener("submit", createFormHandler);

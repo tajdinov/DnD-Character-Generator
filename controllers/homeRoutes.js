@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 router.get("/", (req, res) => {
   // TODO
-  res.render("homepage");
+  res.render("create");
 });
 
 module.exports = router;

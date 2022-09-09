@@ -1,21 +1,4 @@
-<header class="header_dnd">
-      <h2>
-        Dumbos and Donkeys Character Generator
-      </h2>
-    </header>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <button class="no-button" id="logout">logout</button>
-        <main class="container container-fluid mt-5">
-        {{{ body}}}
-        {{else}}
 
-        <header class="header_dnd">
-          <h2>
-            Dumbos and Donkeys Character Generator
-          </h2>
-        </header>
-    
             <h3>Create a New Character</h3>
 
             <div class="character-first-box" id="character-first-box">
@@ -58,23 +41,23 @@
                 </div>
                 <div class="user-box">
                   <label for="strength">Strength</label>
-                  <input class="form-input" type="number" id="strength" name="strength" />
+                  <input class="form-input" type="text" id="strength" name="strength" />
                 </div>
                 <div class="user-box">
                   <label for="constitution">Constitution</label>
-                  <input class="form-input" type="number" id="constitution" name="constitution" />
+                  <input class="form-input" type="text" id="constitution" name="constitution" />
                 </div>
                 <div class="user-box">
                   <label for="dexterity">Dexterity</label>
-                  <input class="form-input" type="number" id="dexterity" name="dexterity" />
+                  <input class="form-input" type="text" id="dexterity" name="dexterity" />
                 </div>
                 <div class="user-box">
                   <label for="wisdom">Wisdom</label>
-                  <input class="form-input" type="number" id="wisdom" name="wisdom" />
+                  <input class="form-input" type="text" id="wisdom" name="wisdom" />
                 </div>
                 <div class="user-box">
                   <label for="intelligence">Intelligence</label>
-                  <input class="form-input" type="number" id="intelligence" name="intelligence" />
+                  <input class="form-input" type="text" id="intelligence" name="intelligence" />
                 </div>            
                 <div class="user-box">
                   <button type="submit" class="btn btn-primary hidden" id="create2">Next</button>
@@ -89,7 +72,7 @@
                   <input class="form-input" type="file" id="character-picture" name="character-picture" accept="image/png, image/jpeg" />
                 </div>
                 <div class="user-box">
-                    <a class="btn_create" type="submit" href="/homepage">Create</a>
+                    <a class="btn_create" type="submit" formaction="/homepage">Create</a>
                   </button>
                 </div>
               </form>
