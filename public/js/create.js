@@ -76,7 +76,7 @@ const createFormHandler = async event => {
     wisdom &&
     intelligence
   ) {
-    const response = await fetch(`/api/projects`, {
+    const response = await fetch("/api/characters", {
       method: "POST",
       body: JSON.stringify({
         character_name,

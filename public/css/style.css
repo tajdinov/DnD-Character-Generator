@@ -677,5 +677,76 @@ body {
 }
 
 .hidden {
-    display: none;
+    position: absolute; left: -99999rem
+}
+
+/* update character */
+.update-character-form {
+    position: absolute;
+    top: 550px;
+    left: 50%;
+    width: 350px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, .5);
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.update-character-form .user-box {
+    position: relative;
+}
+
+.update-character-form .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+    text-decoration: none;
+}
+
+.update-character-form .user-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.update-character-form .user-box select {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    color: #fff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+.update-character-form .user-box select:focus~label,
+.update-character-form .user-box select:valid~label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
+}
+
+
+
+.update-character-form .user-box input:focus~label,
+.update-character-form .user-box input:valid~label {
+    top: -20px;
+    left: 0;
+    color: #03e9f4;
+    font-size: 12px;
 }
