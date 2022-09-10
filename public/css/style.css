@@ -750,3 +750,24 @@ body {
     color: #03e9f4;
     font-size: 12px;
 }
+
+input {
+    margin-top: 1rem;
+}
+
+input::file-selector-button {
+    font-weight: bold;
+    color: #fff;
+    background-color: transparent;
+    padding: 0.5em;
+    border: none;
+    cursor: pointer;
+    transform: 5s;
+    border-radius: 3px;
+}
+
+input::file-selector-button:hover {
+    background: #fff;
+    color: rgb(10, 11, 21);
+    border-radius: 5px;
+}

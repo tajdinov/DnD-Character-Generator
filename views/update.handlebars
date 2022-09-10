@@ -1,41 +1,29 @@
 <div class="create_new">
     <div class="character-first-box" id="character-first-box">
         <form class="update-character-form">
-        <h3>Update your Character</h3>
+        <h3>Update {{character_name}}</h3>
         <div class="user-box">
-            <input class="form-input" value="{{character_name}}" type="text" id="character-name"  name="" required="" />
-            <label for="character-name">Name</label>
-        </div>
-        <div class="user-box">
-            <input class="form-input" value="{{character_class}}" type="text" id="character-class" name="" required="" />
-            <label for="character-class">Class</label>
-        </div>
-        <div class="user-box">
-            <input class="form-input" value="{{character_race}}" type="text" id="character-race" name="" required=""/>
-            <label for="character-race">Race</label>
-        </div>
-        <div class="user-box">
-            <input class="form-input" value="{{hit_poins}}" type="text" id="hit-points" name="" required="" />
+            <input class="form-input" value="{{hit_poins}}" type="number" id="hit-points" name="" required="" />
             <label for="hit-points">Hit Points</label>
         </div>
         <div class="user-box">
-            <input class="form-input" value="{{strength}}" type="text" id="strength" name="" required="" />
+            <input class="form-input" value="{{strength}}" type="number" id="strength" name="" required="" />
             <label for="strength">Strength</label>
         </div>
         <div class="user-box">
-            <input class="form-input" value="{{constitution}}" type="text" id="constitution" name="" required="" />
+            <input class="form-input" value="{{constitution}}" type="number" id="constitution" name="" required="" />
             <label for="constitution">Constitution</label>
         </div>
         <div class="user-box">
-            <input class="form-input" value="{{dexterity}}" type="text" id="dexterity" name="" required="" />
+            <input class="form-input" value="{{dexterity}}" type="number" id="dexterity" name="" required="" />
             <label for="dexterity">Dexterity</label>
         </div>
         <div class="user-box">
-            <input class="form-input" value="{{wisdom}}" type="text" id="wisdom" name="" required="" />
+            <input class="form-input" value="{{wisdom}}" type="number" id="wisdom" name="" required="" />
             <label for="wisdom">Wisdom</label>
         </div>
         <div class="user-box">
-            <input class="form-input" value="{{intelligence}}" type="text" id="intelligence" name="" required="" />
+            <input class="form-input" value="{{intelligence}}" type="number" id="intelligence" name="" required="" />
             <label for="intelligence">Intelligence</label>
         </div>    
         <a class="btn_submit" href="/homepage">
