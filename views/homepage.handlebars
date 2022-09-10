@@ -1,27 +1,34 @@
 <div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {{first_name}}!</h2>
-    <h3>Your Characters</h3>
-    <a class="btn_new_char" type="submit" href="/create">Create a Character</a>
-  </div>
-</div>
-
-  {{#if characters.length}}
-  <div class="col-md-6 project-list">
-
-    {{#each characters as |character|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/character/{{character.id}}">{{character.name}}</a></h4>
-      </div>
+    <div class="col-auto">
+      <h2>Welcome, {{first_name}}!</h2>
+      <h3>Your Characters</h3>
+      <a class="btn_new_char" type="submit" href="/create">Create a Character</a>
     </div>
-    <section class="character-details">
-    {{> character-details}}
-    </section>
-    {{/each}}
   </div>
-  {{/if}}
-</div>
+  
+    {{#if characters.length}}
+    <div class="character-list">
+  
+      {{#each characters as |character|}}
+      <div class="your_characters">
+
+          <h4>{{character.name}}  <i class="fa fa-edit edit_char" value="" style="font-size:24px"></i></h4>
+          <h4>Bob  <i class="fa fa-edit edit_char1" value="" style="font-size:24px"></i></h4>
+          <h4>Ben  <i class="fa fa-edit edit_char2" value="" style="font-size:24px"></i></h4>
+          <h4>Bill  <i class="fa fa-edit edit_char3" value="" style="font-size:24px"></i></h4>        
+          
+          
+
+      </div>
+      {{/each}}
+     
+
+
+
+      {{> character-details}}
+      
+    </div>
+    {{/if}}
 
 
 <script src="./js/homepage.js"></script>

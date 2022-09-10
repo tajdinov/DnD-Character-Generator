@@ -1,0 +1,52 @@
+<div class="create_new">
+    <div class="character-first-box" id="character-first-box">
+        <form class="update-character-form">
+        <h3>Update {{character_name}}</h3>
+        <div class="user-box">
+            <input class="form-input" value="{{hit_poins}}" type="number" id="hit-points" name="" required="" />
+            <label for="hit-points">Hit Points</label>
+        </div>
+        <div class="user-box">
+            <input class="form-input" value="{{strength}}" type="number" id="strength" name="" required="" />
+            <label for="strength">Strength</label>
+        </div>
+        <div class="user-box">
+            <input class="form-input" value="{{constitution}}" type="number" id="constitution" name="" required="" />
+            <label for="constitution">Constitution</label>
+        </div>
+        <div class="user-box">
+            <input class="form-input" value="{{dexterity}}" type="number" id="dexterity" name="" required="" />
+            <label for="dexterity">Dexterity</label>
+        </div>
+        <div class="user-box">
+            <input class="form-input" value="{{wisdom}}" type="number" id="wisdom" name="" required="" />
+            <label for="wisdom">Wisdom</label>
+        </div>
+        <div class="user-box">
+            <input class="form-input" value="{{intelligence}}" type="number" id="intelligence" name="" required="" />
+            <label for="intelligence">Intelligence</label>
+        </div>    
+        <a class="btn_submit" href="/homepage">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Back
+        </a>
+        <a class="btn_signup" type="submit" href="/homepage">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Update
+        </a>        
+        </form>
+    </div>
+</div>
+
+  <!-- Render script for logged in users only -->
+
+  <script src="./js/update.js"></script>
+
+
+</body>
