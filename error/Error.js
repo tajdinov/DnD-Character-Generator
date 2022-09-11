@@ -1,8 +1,9 @@
 class HandledError extends Error {
-  constructor(msg, status) {
+  constructor(msg, render = false, status = 500) {
     super(msg);
     this.message = msg;
     this.status = status;
+    this.render = render;
     this.name = "Operational Error";
   }
   static unknownError() {
@@ -21,8 +22,14 @@ class HandledError extends Error {
   static notFound() {
     return new HandledError("Not found");
   }
-  static knownErr(msg) {
-    return new HandledError("");
+  static knownErr(msg = "An error occurred") {
+    return new HandledError(msg);
+  }
+  static databaseError() {
+    return new HandledError(
+      "Our database is down, please try again soon!",
+      true
+    );
   }
 }
 
