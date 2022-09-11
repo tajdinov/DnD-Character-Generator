@@ -25,14 +25,6 @@ Character.hasOne(Race, {
   onDelete: "CASCADE",
 });
 
-Class.belongsTo(Character, {
-  foreignKey: "character_id",
-});
-
-Race.belongsTo(Character, {
-  foreignKey: "character_id",
-});
-
 module.exports = {
   User,
   Character,

@@ -9,6 +9,7 @@ const characterData = [
     wisdom: 10,
     intelligence: 10,
     user_id: 1,
+    hit_points: 15,
   },
   {
     character_name: "Frodo",
@@ -18,6 +19,7 @@ const characterData = [
     wisdom: 10,
     intelligence: 10,
     user_id: 2,
+    hit_points: 5,
   },
   {
     character_name: "Samwise",
@@ -27,6 +29,7 @@ const characterData = [
     wisdom: 10,
     intelligence: 10,
     user_id: 3,
+    hit_points: 35,
   },
   {
     character_name: "Aragorn",
@@ -36,6 +39,7 @@ const characterData = [
     wisdom: 10,
     intelligence: 10,
     user_id: 4,
+    hit_points: 55,
   },
   {
     character_name: "Legolas",
@@ -45,6 +49,7 @@ const characterData = [
     wisdom: 10,
     intelligence: 10,
     user_id: 5,
+    hit_points: 12,
   },
   {
     character_name: "Gimli",
@@ -54,6 +59,7 @@ const characterData = [
     wisdom: 10,
     intelligence: 10,
     user_id: 6,
+    hit_points: 35,
   },
   {
     character_name: "Boromir",
@@ -63,6 +69,7 @@ const characterData = [
     wisdom: 10,
     intelligence: 10,
     user_id: 7,
+    hit_points: 120,
   },
 ];
 
