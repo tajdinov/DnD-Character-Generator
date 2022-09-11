@@ -20,7 +20,7 @@ Character.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    hit_poins: {
+    hit_points: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
