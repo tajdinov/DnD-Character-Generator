@@ -794,7 +794,7 @@ input::file-selector-button:hover {
     position: absolute;
     width: 100vw;
     height: 50px;
-    background-image: url("assets/berserk-c.jpeg");
+    background-image: url("berserk-c.jpeg");
     animation: header_anim 120s linear infinite;
     text-align:right;    
 }
