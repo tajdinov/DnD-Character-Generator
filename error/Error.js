@@ -16,6 +16,10 @@ class HandledError extends Error {
     }
     return err;
   }
+  static invalidCredentials() {
+    const err = new HandledError("Invalid Credentials", 400);
+    return err;
+  }
   static unauthorised() {
     return new HandledError("Unauthorised");
   }
