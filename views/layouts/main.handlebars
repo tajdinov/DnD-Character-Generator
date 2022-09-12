@@ -1,24 +1,21 @@
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DnD Character Manager</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="/css/style.css" />
-    <script
-      src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-    ></script>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DnD Character Manager</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
 
   <body>
-    <header class="header_dnd">
-      <h2>
-        Dumbos and Donkeys Character Generator
-      </h2>
+    <header class="header_block">
+    <div id="header_block">
+     <h2>DUMBOS and DONKEYS CHARACTER MANAGER</h2>
+    </div>
+    
       {{! logged_in is defined on res.locals.logged_in // this is set in the withAuth middleware }}
       {{#if logged_in}}
         <button id="logout">logout</button>

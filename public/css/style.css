@@ -5,12 +5,14 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-color: rgb(255, 255, 255);
+    /*background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
+    */
 }
 
-@keyframes gradient {
+/*@keyframes gradient {
     0% {
         background-position: 0% 50%;
     }
@@ -21,9 +23,10 @@ body {
         background-position: 0% 50%;
     }
 }
+*/
 
 * {
-    font-family: sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .login-box {
@@ -315,7 +318,7 @@ body {
     text-align: center;
 }
 
-.header_dnd {
+/*.header_dnd {
     position: absolute;
     top: 5%;
     left: 50%;
@@ -333,6 +336,7 @@ body {
     color: #fff;
     text-align: center;
 }
+*/
 
 .signup-box {
     position: absolute;
@@ -504,7 +508,7 @@ body {
 
 .new-character-form {
     position: absolute;
-    top: 52%;
+    top: 55%;
     left: 50%;
     width: 350px;
     padding: 40px;
@@ -689,7 +693,7 @@ body {
 /* update character */
 .update-character-form {
     position: absolute;
-    top: 550px;
+    top: 600px;
     left: 50%;
     width: 350px;
     padding: 40px;
@@ -777,3 +781,116 @@ input::file-selector-button:hover {
     color: rgb(10, 11, 21);
     border-radius: 5px;
 }
+
+.fa {
+    cursor: pointer;
+}
+
+.fa:hover {
+    transform: scale(1.2);
+}
+
+.header_block {
+    position: absolute;
+    width: 100vw;
+    height: 50px;
+    background-image: url("assets/berserk-c.jpeg");
+    animation: header_anim 120s linear infinite;
+    text-align:right;    
+}
+
+@keyframes header_anim {
+    0% {
+        background-position: 100% 100%;
+    }
+    50% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+
+}
+
+.header_block h2 {
+    display: inline-block;
+    color:#fff;
+    background: linear-gradient(-45deg, #323232, #6b6b6b);
+    margin-top: 7px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 0.3em;
+    border-radius: 7px;
+    font-size: 20px;
+    font-weight:lighter;
+    background-size: 400% 400%;
+    animation: dnd 3s ease infinite;
+    
+}
+
+@keyframes dnd {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.scene {
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  perspective:600px;
+}
+
+.cube {
+  width:200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-100px);
+  transition: transform 1s;
+}
+
+
+.cube.show-1  { transform: translateZ(-100px) rotateY(   0deg); }
+.cube.show-2  { transform: translateZ(-100px) rotateY(-180deg); }
+.cube.show-3  { transform: translateZ(-100px) rotateY( -90deg); }
+.cube.show-4   { transform: translateZ(-100px) rotateY(  90deg); }
+.cube.show-5   { transform: translateZ(-100px) rotateX( -90deg); }
+.cube.show-6 { transform: translateZ(-100px) rotateX(  90deg); }
+
+
+.cube__face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 4px solid white;
+  line-height: 200px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+
+.cube__face--1  { background: black;  opacity: 0.25;}
+.cube__face--3  { background: black;   opacity: 0.25; }
+.cube__face--2  {  background: black;   opacity: 0.25; }
+.cube__face--4  {  background: black;   opacity: 0.25; }
+.cube__face--5   {  background: black;   opacity: 0.25; }
+.cube__face--6 {  background: black;  opacity: 0.25; }
+
+.cube__face--1  { transform: rotateY(  0deg) translateZ(100px); }
+.cube__face--2   { transform: rotateY(180deg) translateZ(100px); }
+.cube__face--3  { transform: rotateY( 90deg) translateZ(100px); }
+.cube__face--4   { transform: rotateY(-90deg) translateZ(100px); }
+.cube__face--5   { transform: rotateX( 90deg) translateZ(100px); }
+.cube__face--6 { transform: rotateX(-90deg) translateZ(100px); }
+
+
