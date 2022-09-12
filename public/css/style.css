@@ -394,6 +394,8 @@ body {
     padding: 10px 50px;
     right: -50px;
     color:  #fff;
+    background-color: transparent;
+    border: none;
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;
