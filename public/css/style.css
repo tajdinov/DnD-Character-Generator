@@ -88,6 +88,10 @@ body {
     display: inline-block;
     padding: 10px 20px;
     color: #fff;
+    background-color: transparent;
+    margin-top: 0;
+    border: none;
+    bottom: 10px;
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;
@@ -394,6 +398,8 @@ body {
     padding: 10px 50px;
     right: -50px;
     color:  #fff;
+    background-color: transparent;
+    border: none;
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;
