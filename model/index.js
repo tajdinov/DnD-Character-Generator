@@ -5,7 +5,6 @@ const Race = require("./Race");
 
 // A user can have many characters
 User.hasMany(Character, {
-  foreignKey: "user_id",
   onDelete: "CASCADE",
 });
 
@@ -16,12 +15,12 @@ Character.belongsTo(User, {
 
 // A character has one race and one class
 Character.hasOne(Class, {
-  foreignKey: "character_id",
+  foreignKey: "class_id",
   onDelete: "CASCADE",
 });
 
 Character.hasOne(Race, {
-  foreignKey: "character_id",
+  foreignKey: "race_id",
   onDelete: "CASCADE",
 });
 
