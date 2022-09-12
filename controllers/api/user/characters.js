@@ -2,7 +2,6 @@ const router = require("express").Router();
 const { Character } = require("../../../model");
 
 router.post("/", async (req, res, next) => {
-  console.log("made it");
   try {
     const { user_id } = req.session;
     const character = await Character.create({ ...req.body, user_id });

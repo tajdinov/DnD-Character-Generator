@@ -44,11 +44,27 @@ Character.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    class_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "class",
+        key: "id",
+      },
+    },
+    race_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "race",
+        key: "id",
+      },
+    },
     // Store a reference of the `id` of the `User` that owns this Character
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "character",
+        model: "user",
         key: "id",
       },
     },
