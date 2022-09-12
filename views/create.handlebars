@@ -1,108 +1,165 @@
 <div class="create_new">
 
+  <div class="character-first-box" id="character-first-box">
+    <form class="new-character-form">
+      <h3>Create a New Character</h3>
+      <div class="user-box">
+        <input
+          class="form-input"
+          type="text"
+          id="character-name"
+          name=""
+          required=""
+        />
+        <label for="character-name">Name</label>
+      </div>
+      <div class="user-box">
+        <select
+          class="form-input"
+          type="text"
+          id="character-class"
+          name=""
+          required=""
+        >
+          <option disabled selected value></option>
+          {{#each classes as |class|}}
+            <option value={{class.id}}>{{class.class_name}}</option>
+          {{/each}}
+        </select>
+        <label for="character-class">Class</label>
+      </div>
+      <div class="user-box">
+        <select
+          class="form-input"
+          type="text"
+          id="character-race"
+          name=""
+          required=""
+        >
+          <option disabled selected value></option>
+          {{#each races as |race|}}
+            <option value={{race.id}}>{{race.race_name}}</option>
+          {{/each}}
 
-<div class="character-first-box" id="character-first-box">
-  <form class="new-character-form">
-    <h3>Create a New Character</h3>
-    <div class="user-box">
-      <input class="form-input" type="text" id="character-name"  name="" required="" />
-      <label for="character-name">Name</label>
-    </div>
-    <div class="user-box">
-      <select class="form-input" type="text" id="character-class" name="" required="">
-        <option disabled selected value></option>
-        <option value="rogue">Rogue</option>
-        <option value="mage">Mage</option>
-        <option value="warrior">Warrior</option>
-      </select>
-      <label for="character-class">Class</label>
-    </div>
-    <div class="user-box">
-      <select class="form-input" type="text" id="character-race" name="" required="">
-        <option disabled selected value></option>
-        <option value="human">Human</option>
-        <option value="elf">Elf</option>
-        <option value="drarf">Dwarf</option>
-        <option value="orc">Orc</option>
-      </select>
-      <label for="character-race">Race</label>
-    </div>
-    <div class="user-box">
-      <button class="btn_create1" id="create1">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Next
-      </button>
-    </div>
-  </form>
-</div> 
+          <option value="human">Human</option>
+          <option value="elf">Elf</option>
+          <option value="drarf">Dwarf</option>
+          <option value="orc">Orc</option>
+        </select>
+        <label for="character-race">Race</label>
+      </div>
+      <div class="user-box">
+        <button class="btn_create1" id="create1">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Next
+        </button>
+      </div>
+    </form>
+  </div>
 
-<div class="character-second-box hidden" id="character-second-box">
-  <form class="form new-character-form">
-    <div class="user-box">
-      <button class="generateStats btn_generate">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Generate
-      </button>
-    </div>
-    <div class="user-box">
-      <input class="form-input" type="text" id="hit-points" name="" required="" />
-      <label for="hit-points">Hit Points</label>
-    </div>
-    <div class="user-box">
-      <input class="form-input" type="text" id="strength" name="" required="" />
-      <label for="strength">Strength</label>
-    </div>
-    <div class="user-box">
-      <input class="form-input" type="text" id="constitution" name="" required="" />
-      <label for="constitution">Constitution</label>
-    </div>
-    <div class="user-box">
-      <input class="form-input" type="text" id="dexterity" name="" required="" />
-      <label for="dexterity">Dexterity</label>
-    </div>
-    <div class="user-box">
-      <input class="form-input" type="text" id="wisdom" name="" required="" />
-      <label for="wisdom">Wisdom</label>
-    </div>
-    <div class="user-box">
-      <input class="form-input" type="text" id="intelligence" name="" required="" />
-      <label for="intelligence">Intelligence</label>
-    </div>            
-    <div class="user-box">
-      <button class="btn_create2 hidden" id="create2">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Next
-      </button>
-    </div>
-  </form>
-</div>
+  <div class="character-second-box hidden" id="character-second-box">
+    <form class="form new-character-form">
+      <div class="user-box">
+        <button class="generateStats btn_generate">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Generate
+        </button>
+      </div>
+      <div class="user-box">
+        <input
+          class="form-input"
+          type="text"
+          id="hit-points"
+          name=""
+          required=""
+        />
+        <label for="hit-points">Hit Points</label>
+      </div>
+      <div class="user-box">
+        <input
+          class="form-input"
+          type="text"
+          id="strength"
+          name=""
+          required=""
+        />
+        <label for="strength">Strength</label>
+      </div>
+      <div class="user-box">
+        <input
+          class="form-input"
+          type="text"
+          id="constitution"
+          name=""
+          required=""
+        />
+        <label for="constitution">Constitution</label>
+      </div>
+      <div class="user-box">
+        <input
+          class="form-input"
+          type="text"
+          id="dexterity"
+          name=""
+          required=""
+        />
+        <label for="dexterity">Dexterity</label>
+      </div>
+      <div class="user-box">
+        <input class="form-input" type="text" id="wisdom" name="" required="" />
+        <label for="wisdom">Wisdom</label>
+      </div>
+      <div class="user-box">
+        <input
+          class="form-input"
+          type="text"
+          id="intelligence"
+          name=""
+          required=""
+        />
+        <label for="intelligence">Intelligence</label>
+      </div>
+      <div class="user-box">
+        <button class="btn_create2 hidden" id="create2">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Next
+        </button>
+      </div>
+    </form>
+  </div>
 
-<div class="character-third-box hidden" id="character-third-box hidden">
-  <form class="form new-character-form">
-    <div class="user-box">
-      <input class="form-input" type="file" id="character-picture" name="" accept="image/png, image/jpeg" />
-      <label for="character-picture">Upload an image</label>
-    </div>
-    <div class="user-box create-form">
-        <button class="btn_create" type="submit" formaction="homepage.html">
+  <div class="character-third-box hidden" id="character-third-box hidden">
+    <form class="form new-character-form">
+      <div class="user-box">
+        <input
+          class="form-input"
+          type="file"
+          id="character-picture"
+          name=""
+          accept="image/png, image/jpeg"
+        />
+        <label for="character-picture">Upload an image</label>
+      </div>
+      <div class="user-box create-form">
+        <button class="btn_create" type="submit">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
           Create
         </button>
-    </div>
-  </form>
-</div>
+      </div>
+    </form>
+  </div>
 </div>
 
 <script src="./js/create.js"></script>
