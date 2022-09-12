@@ -4,15 +4,16 @@ const HandledError = require("../../../error/Error");
 
 router.post("/", async (req, res, next) => {
   // Extract details from req.body for validation
-  const { first_name, last_name, email, password } = req.body;
-  if (!first_name || !last_name || !email || !password) {
-    return next(HandledError.badRequest());
-  }
-  // Check if email already exists in database, if it does return 'bad request'
-  const user = await User.findOne({ where: { email } });
-  if (user) {
-    return next(HandledError.badRequest());
-  }
+  try {
+    const { first_name, last_name, email, password } = req.body;
+    if (!first_name || !last_name || !email || !password) {
+      return next(HandledError.badRequest());
+    }
+    // Check if email already exists in database, if it does return 'bad request'
+    const user = await User.findOne({ where: { email } });
+    if (user) {
+      return next(HandledError.badRequest());
+    }
 
     // Create the user
     const newUser = await User.create(req.body);
