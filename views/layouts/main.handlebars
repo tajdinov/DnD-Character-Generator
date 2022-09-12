@@ -27,11 +27,25 @@
   </head>
 >>>>>>> Stashed changes
 
+<<<<<<< Updated upstream
 <body>
     <header class="header_dnd">
       <h2>
         Dumbos and Donkeys Character Generator
       </h2>
+=======
+  <body>
+    <header class="header_block">
+    <div id="header_block">
+     <h2>DUMBOS and DONKEYS CHARACTER MANAGER</h2>
+    </div>
+    
+      {{! logged_in is defined on res.locals.logged_in // this is set in the withAuth middleware }}
+      {{#if logged_in}}
+        <button id="logout">logout</button>
+        <script src="/js/logout.js"></script>
+      {{/if}}
+>>>>>>> Stashed changes
     </header>
         {{{ body}}}
     <footer>
