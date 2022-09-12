@@ -1,3 +1,5 @@
+const form = document.querySelector("#create-character-form");
+
 const generateStats = async event => {
   event.preventDefault();
 
@@ -88,9 +90,9 @@ const createFormHandler = async event => {
 
   // Collect values from the forms
   let character_name = document.querySelector("#character-name").value.trim();
-  let character_class = document.querySelector("#character-class").value.trim();
-  let character_race = document.querySelector("#character-race").value.trim();
-  let hit_poins = document.querySelector("#hit-points").value.trim();
+  let class_id = document.querySelector("#character-class").value.trim();
+  let race_id = document.querySelector("#character-race").value.trim();
+  let hit_points = document.querySelector("#hit-points").value.trim();
   let strength = document.querySelector("#strength").value.trim();
   let dexterity = document.querySelector("#constitution").value.trim();
   let constitution = document.querySelector("#dexterity").value.trim();
@@ -99,22 +101,22 @@ const createFormHandler = async event => {
 
   if (
     character_name &&
-    character_class &&
-    character_race &&
-    hit_poins &&
+    class_id &&
+    race_id &&
+    hit_points &&
     strength &&
     dexterity &&
     constitution &&
     wisdom &&
     intelligence
   ) {
-    const response = await fetch("/api/character", {
+    const response = await fetch("/api/user/character", {
       method: "POST",
       body: JSON.stringify({
         character_name,
-        character_class,
-        character_race,
-        hit_poins,
+        class_id,
+        race_id,
+        hit_points,
         strength,
         dexterity,
         constitution,
@@ -127,14 +129,12 @@ const createFormHandler = async event => {
     });
 
     if (response.ok) {
-      document.location.replace("/homepage");
-      console.log(response);
+      const character = await response.json();
+      document.location.replace(`/update/${character.id}`);
     } else {
       alert("Failed to create a character");
     }
   }
 };
 
-document
-  .querySelector(".create-form")
-  .addEventListener("submit", createFormHandler);
+form.addEventListener("submit", createFormHandler);
