@@ -10,7 +10,7 @@ class HandledError extends Error {
     return new HandledError(1);
   }
   static badRequest(msg) {
-    const err = new HandledError();
+    const err = new HandledError("Bad request", false, 400);
     if (msg) {
       err.message += ": " + msg;
     }
