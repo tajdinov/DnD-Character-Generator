@@ -1,34 +1,29 @@
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-  crossorigin="anonymous"
-/>
+<link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="/css/homepage.css" />
 <div class="row">
   <div class="col-auto">
-    <h2>Welcome, {{first_name}}!</h2>
+    <h2 class="text-cyan-700 mt-5 ml-3 text-3xl">Welcome, {{first_name}}!</h2>
   </div>
 </div>
 
 {{#if characters.length}}
-  <div class="character-list">
-    <div class="your_characters_box">
-      <h3>Your Characters</h3>
-      <div class="your_characters">
+  <div class="character-list flex flex-row flex-wrap my-10 mx-20">
+    <div class="your_characters_box basis-1/4 mr-6">
+      <h3 class="text-center text-xl font-semibold">Your Characters</h3>
+      <div class="your_characters bg-clip-content p-6 bg-violet-200 border-4 border-violet-300 border-dashed mt-3">
         {{#each characters as |character|}}
-         <h4> <a href="/update/{{character.id}}">
-            <i class="fa fa-edit edit_char" value="" style="font-size:24px"></i>
+         <h4 class="text-lg text-justify leading-relaxed my-3"> <button {{character.id}}>
+            <i class="fa fa-edit edit_char" value=""></i>
 
-          </a>
+          </button>
           {{character.character_name}}</h4>
         {{/each}}
       </div>
     </div>
 
-    <div class="character_details_box">
-      <h3> Currently Selected Character</h3>
-      <div class="character_details">
+    <div class="character_details_box basis-1/2 ml-20">
+      <h3 class="text-center text-xl font-semibold"> Currently Selected Character</h3>
+      <div class="character_details bg-clip-content p-6 bg-netural-300 border-4 border-netural-300 border-dashed mt-3">
         {{> character-details}}
       </div>
     </div>
@@ -36,8 +31,8 @@
   </div>
 {{/if}}
 
-<div class="create_character">
-  <a class="btn btn-outline-primary" type="submit" href="/create">Create a
+<div class="create_character absolute bottom-5 left-20">
+  <a class="btn btn-outline-primary " type="submit" href="/create">Create a
     Character</a>
 </div>
 

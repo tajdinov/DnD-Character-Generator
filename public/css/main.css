@@ -22,8 +22,9 @@ body {
   /* text-align: right; */
 }
 
+
 .header_block h2 {
-  /* display: inline-block;
+  display: inline-block;
   color: #fff;
   background: linear-gradient(-45deg, #323232, #6b6b6b);
   margin-top: 7px;
@@ -33,9 +34,10 @@ body {
   border-radius: 7px;
   font-size: 2rem;
   font-weight: lighter;
-  background-size: 400% 400%; */
-  /* animation: dnd 3s ease infinite; */
+  background-size: 400% 400%; 
+  animation: dnd 3s ease infinite; 
 }
+
 
 @keyframes header_anim {
   0% {
