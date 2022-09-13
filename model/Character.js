@@ -44,6 +44,10 @@ Character.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    avatar: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     class_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
