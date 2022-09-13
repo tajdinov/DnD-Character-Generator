@@ -30,7 +30,19 @@ router.get("/update/:charId", async (req, res) => {
       return res.redirect("/");
     }
     const character = data.get({ plain: true });
-    res.render("update", { ...character });
+    const attributes = Object.entries(character)
+      .filter(([key]) =>
+        [
+          "hit_points",
+          "strength",
+          "dexterity",
+          "constitution",
+          "wisdom",
+          "intelligence",
+        ].includes(key)
+      )
+      .map(([key, value]) => ({ [key]: value }));
+    res.render("update", { ...character, attributes });
   } catch (error) {
     //
   }
