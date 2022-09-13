@@ -41,7 +41,7 @@ router.get("/update/:charId", async (req, res) => {
           "intelligence",
         ].includes(key)
       )
-      .map(([key, value]) => ({ [key]: value }));
+      .map(([key, value]) => ({ type: key, value }));
     res.render("update", { ...character, attributes });
   } catch (error) {
     //
