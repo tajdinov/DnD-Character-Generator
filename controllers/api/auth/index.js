@@ -33,7 +33,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return next(HandledError.badRequest());
@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
   });
 });
 
-router.post("/logout", (req, res) => {
+router.post("/logout", (req, res, next) => {
   if (req.session.logged_in) {
     // Remove the session variables
     req.session.destroy(() => {
