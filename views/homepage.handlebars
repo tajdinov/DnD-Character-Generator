@@ -1,51 +1,44 @@
-<link 
-      rel="stylesheet" 
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
-      crossorigin="anonymous"/>
-<link rel="stylesheet" href="css/homepage.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+  crossorigin="anonymous"
+/>
+<link rel="stylesheet" href="/css/homepage.css" />
 <div class="row">
-    <div class="col-auto">
-      <h2>Welcome, {{first_name}}!</h2> 
-    </div>
+  <div class="col-auto">
+    <h2>Welcome, {{first_name}}!</h2>
+  </div>
 </div>
-  
-    {{#if characters.length}}
-    <div class="character-list">
-   
-      <div class="your_characters_box">
-        <h3>Your Characters</h3>
-        
-        <div class="your_characters">
-        
-          {{#each characters as |character|}}
-          
-          <h4>{{character.character_name}}  <i class="fa fa-edit edit_char" value="" style="font-size:24px"></i></h4>
-          {{!<h4>Bob  <i class="fa fa-edit edit_char1" value="" style="font-size:24px"></i></h4>
-          <h4>Ben  <i class="fa fa-edit edit_char2" value="" style="font-size:24px"></i></h4>
-          <h4>Bill  <i class="fa fa-edit edit_char3" value="" style="font-size:24px"></i></h4>}}     
-          
-          {{/each}}
 
-        </div>
-         
+{{#if characters.length}}
+  <div class="character-list">
+    <div class="your_characters_box">
+      <h3>Your Characters</h3>
+      <div class="your_characters">
+        {{#each characters as |character|}}
+         <h4> <a href="/update/{{character.id}}">
+            <i class="fa fa-edit edit_char" value="" style="font-size:24px"></i>
+
+          </a>
+          {{character.character_name}}</h4>
+        {{/each}}
       </div>
-          
-    
-      <div class="character_details_box">
-        <h3> Currently Selected Character</h3>
-
-        <div class="character_details">
-        {{> character-details}}
-        </div>
-
-      </div>
-
     </div>
-    {{/if}}
 
-<div class = "create_character">
-  <a class="btn btn-outline-primary" type="submit" href="/create">Create a Character</a>
+    <div class="character_details_box">
+      <h3> Currently Selected Character</h3>
+      <div class="character_details">
+        {{> character-details}}
+      </div>
+    </div>
+
+  </div>
+{{/if}}
+
+<div class="create_character">
+  <a class="btn btn-outline-primary" type="submit" href="/create">Create a
+    Character</a>
 </div>
 
 <script src="./js/homepage.js"></script>
