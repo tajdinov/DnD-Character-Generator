@@ -1,12 +1,17 @@
 const router = require("express").Router();
-const { Class, Race, Character } = require("../model");
+const { Class, Race, Character, User } = require("../model");
+const HandledError = require("../error/Error");
 const Attribute = require("../model/Attribute");
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
-    const data = await Character.findAll();
+    const { user_id } = req.session;
+
+    if (!user_id) return next(HandledError.unauthorised());
+    const user = await User.findByPk(user_id);
+    const data = await Character.findAll({ where: { user_id } });
     const characters = data.map(character => character.get({ plain: true }));
-    res.render("homepage", { characters });
+    res.render("homepage", { characters, first_name: user.first_name });
   } catch (error) {}
 });
 
