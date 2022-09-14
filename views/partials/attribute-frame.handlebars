@@ -1,10 +1,18 @@
 <div
   class="relative flex w-full max-w-[150px] h-full aspect-[2/3] attribute-frame p-2"
 >
-  <div class="flex flex-col justify-center w-full h-full">
-    <p class="text-6xl text-center text-inherit">{{value}}</p>
+  <div class="flex flex-col justify-center w-full h-full display-value">
+    <p class="text-6xl text-center text-inherit value-p-text">{{value}}</p>
     <p class="text-center text-sm">{{type}}</p>
   </div>
-  {{! <button>up</button>
-  <button>down</button> }}
+  <button
+    data-type={{type}}
+    data-value={{value}}
+    class="update up up-btn"
+  >up</button>
+  <button
+    data-type={{type}}
+    data-value={{value}}
+    class="update down down-btn"
+  >down</button>
 </div>
