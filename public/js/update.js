@@ -43,7 +43,7 @@ const updateFormHandler = async event => {
 
     if (response.ok) {
       alert("Chaaracter Updated");
-      document.location.replace("/homepage");
+      document.location.replace("/update/:id");
       console.log(response);
     } else {
       alert("Failed to update a character");
