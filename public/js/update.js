@@ -1,56 +1,36 @@
-const updateFormHandler = async event => {
-  event.preventDefault();
+const updateContainer = document.getElementById("attribute-container");
 
-  // Collect values from the forms
-  let character_name = document.querySelector("#character-name").value.trim();
-  let character_class = document.querySelector("#character-class").value.trim();
-  let character_race = document.querySelector("#character-race").value.trim();
-  let hit_poins = document.querySelector("#hit-points").value.trim();
-  let strength = document.querySelector("#strength").value.trim();
-  let dexterity = document.querySelector("#constitution").value.trim();
-  let constitution = document.querySelector("#dexterity").value.trim();
-  let wisdom = document.querySelector("#wisdom").value.trim();
-  let intelligence = document.querySelector("#intelligence").value.trim();
+updateContainer.addEventListener("click", async e => {
+  if (e.target.classList.contains("update")) {
+    const attribute = e.target.getAttribute("data-type");
 
-  if (
-    character_name &&
-    character_class &&
-    character_race &&
-    hit_poins &&
-    strength &&
-    dexterity &&
-    constitution &&
-    wisdom &&
-    intelligence
-  ) {
-    const response = await fetch("/api/characters", {
-      method: "POST",
-      body: JSON.stringify({
-        character_name,
-        character_class,
-        character_race,
-        hit_poins,
-        strength,
-        dexterity,
-        constitution,
-        wisdom,
-        intelligence,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const charId = location.pathname.split("/").pop();
+    const adder = e.target.classList.contains("up")
+      ? 1
+      : e.target.classList.contains("down")
+      ? -1
+      : 0;
 
-    if (response.ok) {
-      alert("Chaaracter Updated");
-      document.location.replace("/homepage");
-      console.log(response);
-    } else {
-      alert("Failed to update a character");
-    }
+    const value = e.target
+      .closest(".attribute-frame")
+      .querySelector(".value-p-text");
+
+    value.innerText = parseInt(value.innerText) + adder;
+
+    //     const response = await fetch(`/api/user/character/update/${charId}`, {
+    //       method: "PUT",
+    //       body: JSON.stringify({
+    //         [attribute]: value,
+    //         adder,
+    //       }),
+    //       headers: { "Content-Type": "application/json" },
+    //     });
+
+    //     if (response.ok) {
+    //       document.location.reload();
+    //     } else {
+    //       alert(response.statusText);
+    //     }
+    //   }
   }
-};
-
-document
-  .querySelector(".update-character-form")
-  .addEventListener("submit", updateFormHandler);
+});
