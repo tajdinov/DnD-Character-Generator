@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="/css/homepage.css" />
 <div class="row">
   <div class="col-auto">
     <h2 class="text-cyan-700 mt-5 ml-3 text-3xl">Welcome, {{first_name}}!</h2>
@@ -8,21 +8,26 @@
 {{#if characters.length}}
   <div class="character-list flex flex-row flex-wrap my-10 mx-20">
     <div class="your_characters_box basis-1/4 mr-6">
-      <h3 class="text-center text-xl font-semibold">Your Characters</h3>
-      <div class="your_characters bg-clip-content p-6 bg-violet-200 border-4 border-violet-300 border-dashed mt-3">
-        {{#each characters as |character|}}
-         <h4 class="text-lg text-justify leading-relaxed my-3"> <button {{character.id}}>
-            <i class="fa fa-edit edit_char" value=""></i>
+      <h3 class="text-xl font-semibold">Your Characters</h3>
+      <div
+        id="characters"
+        class="grid p-6 bg-violet-200 border-4 border-violet-300 bg-clip-content border-dashed mt-3"
+      >
 
+        {{#each characters as |character|}}
+          <button class="text-xl border-2 py-3 px-5">
+            {{character.character_name}}
           </button>
-          {{character.character_name}}</h4>
         {{/each}}
       </div>
     </div>
 
     <div class="character_details_box basis-1/2 ml-20">
-      <h3 class="text-center text-xl font-semibold"> Currently Selected Character</h3>
-      <div class="character_details bg-clip-content p-6 bg-netural-300 border-4 border-netural-300 border-dashed mt-3">
+      <h3 class="text-center text-xl font-semibold">
+        Currently Selected Character</h3>
+      <div
+        class="character_details bg-clip-content p-6 bg-netural-300 border-4 border-netural-300 border-dashed mt-3"
+      >
         {{> character-details}}
       </div>
     </div>
@@ -31,7 +36,7 @@
 {{/if}}
 
 <div class="create_character absolute bottom-5 left-20">
-  <a class="btn btn-outline-primary " type="submit" href="/create">Create a
+  <a class="btn btn-outline-primary" type="submit" href="/create">Create a
     Character</a>
 </div>
 
