@@ -4,6 +4,7 @@ const resize = require("../../../utils/imageResize");
 const upload = require("../../../utils/s3");
 const { Character } = require("../../../model");
 const HandledError = require("../../../error/Error");
+const CharacterAttribute = require("../../../model/CharacterAttribute");
 
 router.post("/", async (req, res, next) => {
   try {
@@ -33,6 +34,23 @@ router.post("/image/:char_id", multer, async (req, res, next) => {
   } catch (error) {
     console.log(error);
     next(HandledError.unknownError());
+  }
+});
+
+router.put("/attribute/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const attribute = await CharacterAttribute.findByPk(id, {
+      include: [{ model: Character, attributes: ["user_id"] }],
+    });
+    if (!attribute) return next(HandledError.badRequest());
+    if (attribute.character.user_id !== req.session.user_id)
+      return next(HandledError.unauthorised());
+    await attribute.update({ value: req.body.value });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    next(error);
   }
 });
 
