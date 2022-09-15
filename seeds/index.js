@@ -4,6 +4,7 @@ const seedRace = require("./race-seeds");
 const seedUsers = require("./user-seed");
 
 const sequelize = require("../config/connection");
+const seedAttributes = require("./attribute");
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
@@ -18,6 +19,9 @@ const seedAll = async () => {
 
   await seedRace();
   console.log("\n----- RACES SEEDED -----\n");
+
+  await seedAttributes();
+  console.log("\n----- ATTRIBUTES SEEDED -----\n");
 
   await seedCharacters(user_id);
   console.log("\n----- CHARACTERS SEEDED -----\n");

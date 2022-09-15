@@ -1,18 +1,18 @@
 <div
-  class="relative flex w-full max-w-[150px] h-full aspect-[2/3] attribute-frame p-2"
+  class="relative flex w-full max-w-[150px] h-full aspect-[4/5] attribute-frame p-3"
 >
   <div class="flex flex-col justify-center w-full h-full display-value">
-    <p class="text-6xl text-center text-inherit value-p-text">{{value}}</p>
-    <p class="text-center text-sm">{{type}}</p>
+    <p
+      class="text-5xl text-center text-inherit value-p-text"
+    >{{character_attribute.value}}</p>
+    <p class="text-center text-md sm:text-lg">{{name}}</p>
   </div>
   <button
-    data-type={{type}}
-    data-value={{value}}
-    class="update up up-btn"
-  >up</button>
+    data-value={{character_attribute.id}}
+    class="update up up-btn absolute bottom-[10%] right-[15%]"
+  ><i class="fa fa-regular fa-chevron-up pointer-events-none"></i></button>
   <button
-    data-type={{type}}
-    data-value={{value}}
-    class="update down down-btn"
-  >down</button>
+    data-value={{character_attribute.id}}
+    class="update down down-btn absolute bottom-[10%] left-[15%]"
+  ><i class="fa fa-regular fa-chevron-down pointer-events-none"></i></button>
 </div>

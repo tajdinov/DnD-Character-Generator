@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Class, Race, Character } = require("../model");
+const Attribute = require("../model/Attribute");
 
 router.get("/", async (req, res) => {
   try {
@@ -23,28 +24,18 @@ router.get("/create", async (req, res) => {
   }
 });
 
-router.get("/update/:charId", async (req, res) => {
+router.get("/update/:charId", async (req, res, next) => {
   try {
-    const data = await Character.findByPk(req.params.charId);
+    const data = await Character.findByPk(req.params.charId, {
+      include: [{ model: Attribute, as: "attributes" }],
+    });
     if (!data) {
       return res.redirect("/");
     }
     const character = data.get({ plain: true });
-    const attributes = Object.entries(character)
-      .filter(([key]) =>
-        [
-          "hit_points",
-          "strength",
-          "dexterity",
-          "constitution",
-          "wisdom",
-          "intelligence",
-        ].includes(key)
-      )
-      .map(([key, value]) => ({ type: key, value }));
-    res.render("update", { ...character, attributes });
+    res.render("update", { ...character });
   } catch (error) {
-    //
+    next(error);
   }
 });
 
