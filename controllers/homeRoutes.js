@@ -17,13 +17,22 @@ router.get("/", async (req, res, next) => {
 
 router.get("/create", async (req, res) => {
   try {
-    const [classData, raceData] = await Promise.all([
+    const [classData, raceData, attributeData] = await Promise.all([
       Class.findAll(),
       Race.findAll(),
+      Attribute.findAll(),
     ]);
     const classes = classData.map(classItem => classItem.get({ plain: true }));
     const races = raceData.map(race => race.get({ plain: true }));
-    res.render("create", { classes, races });
+    const attributes = attributeData.map(attribute =>
+      attribute.get({ plain: true })
+    );
+    attributes.forEach(attribute => (attribute.diceAttributes = attributes));
+    res.render("create", {
+      classes,
+      races,
+      attributes,
+    });
   } catch (error) {
     next(HandledError.databaseError());
   }
