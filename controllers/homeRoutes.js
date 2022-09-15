@@ -32,7 +32,11 @@ router.get("/create", async (req, res) => {
 router.get("/update/:charId", async (req, res, next) => {
   try {
     const data = await Character.findByPk(req.params.charId, {
-      include: [{ model: Attribute, as: "attributes" }],
+      include: [
+        { model: Attribute, as: "attributes" },
+        { model: Class, as: "class" },
+        { model: Race, as: "race" },
+      ],
     });
     if (!data) {
       return res.redirect("/");
