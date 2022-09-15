@@ -20,37 +20,13 @@ Character.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    hit_points: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    strength: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    dexterity: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    constitution: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    wisdom: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    intelligence: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
+
     avatar: {
       type: DataTypes.STRING,
       allowNull: true,
     },
     class_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: "class",
         key: "id",
@@ -58,7 +34,6 @@ Character.init(
     },
     race_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: "race",
         key: "id",
@@ -66,7 +41,8 @@ Character.init(
     },
     // Store a reference of the `id` of the `User` that owns this Character
     user_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
+      allowNull: false,
       references: {
         model: "user",
         key: "id",
