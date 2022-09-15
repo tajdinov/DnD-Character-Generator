@@ -46,3 +46,16 @@ updateContainer.addEventListener("click", async e => {
     debouncer[attribute] = timer;
   }
 });
+
+async function uploadFile() {
+  let char_id = window.location.pathname.split("/").pop()
+  let formData = new FormData(); 
+  formData.append("image", fileupload.files[0]);
+  await fetch(`/api/user/character/image/${char_id}`, {
+    method: "POST", 
+    body: formData
+  }); 
+  alert('The file has been uploaded successfully.');
+  };
+
+ 

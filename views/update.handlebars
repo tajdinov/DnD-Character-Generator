@@ -4,27 +4,27 @@
     <div class="container mt-5">
       <div class="flex w-full justify-center">
         <div class="w-fit relative">
-        <button class="absolute right-0">
-          <i class="fa-light fa-pen fa pointer-events-none">!</i>
-        </button>
-        <input class="text-center text-7xl character mb-5 p-3" value = {{character_name}}>
+          <button class="absolute right-0">
+            <i class="fa-light fa-pen fa pointer-events-none">!</i>
+          </button>
+          <input class="text-center text-7xl character mb-5 p-3" value={{character_name}}>
+          <section class="border-2 border-black text-center p-2 mx-5">
+            <img src="{{avatar}}" alt="avatar">
+          </section>
         </div>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
-        <div class="border-2 border-black text-center p-2 mx-5"><h2
-            class="text-2xl"
-          >Race: {{race.race_name}}</h2></div>
-        <div class="border-2 border-black text-center p-2 mx-5"><h2
-            class="text-2xl"
-          >Class: {{class.class_name}}</h2></div>
+        <div class="border-2 border-black text-center p-2 mx-5">
+          <h2 class="text-2xl">Race: {{race.race_name}}</h2>
+        </div>
+        <div class="border-2 border-black text-center p-2 mx-5">
+          <h2 class="text-2xl">Class: {{class.class_name}}</h2>
+        </div>
       </div>
 
-      <div
-        class="grid grid-cols-3 lg:grid-cols-6 gap-3 place-items-center"
-        id="attribute-container"
-      >
+      <div class="grid grid-cols-3 lg:grid-cols-6 gap-3 place-items-center" id="attribute-container">
         {{#each attributes as |attribute|}}
-          {{>attribute-frame attribute="attribute"}}
+        {{>attribute-frame attribute="attribute"}}
         {{/each}}
       </div>
 
@@ -35,6 +35,10 @@
         <span></span>
         Update
       </a>
+      <div class="border-2 border-black text-center p-2 mx-5">
+        <input id="fileupload" type="file" name="fileupload" />
+        <button id="upload-button" onclick="uploadFile()"> Upload </button>
+      </div>
     </div>
   </div>
 </div>
