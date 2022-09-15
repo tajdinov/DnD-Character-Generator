@@ -22,7 +22,6 @@ body {
   /* text-align: right; */
 }
 
-
 .header_block h2 {
   display: inline-block;
   color: #fff;
@@ -34,10 +33,16 @@ body {
   border-radius: 7px;
   font-size: 2rem;
   font-weight: lighter;
-  background-size: 400% 400%; 
-  animation: dnd 3s ease infinite; 
+  background-size: 400% 400%;
+  animation: dnd 3s ease infinite;
 }
 
+.attribute-frame {
+  background-image: url(/images/border.svg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-family: fantasy;
+}
 
 @keyframes header_anim {
   0% {
