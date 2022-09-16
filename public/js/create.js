@@ -133,23 +133,20 @@ const filterAttributeSelects = () => {
 //
 const displayDiceTotal = (element, value, delay) => {
   setTimeout(() => {
-    const div = document.createElement("div");
-    element.innerText = value;
+    const display = element.querySelector(".display");
+    const rollContainer = element.querySelector(".roll-container");
+    display.innerText = value;
+    display.classList.add("emphasize");
+    rollContainer.hidden = false;
   }, delay);
 };
 
-const rollEnd = () => {
-  // Set translucent on low dice
-  // Display total and select element
-};
-
 const rollDice = async element => {
-  element.querySelector(".roll-container").hidden = false;
   const dice = element.querySelectorAll(".individual-roll");
   const rolls = await Promise.all(
     diceAnimations.map(async (dicePromise, idx) => {
-      const duration = 1800 + idx * 250;
       const value = Math.floor(Math.random() * 6 + 1);
+      const duration = 1800 + idx * 250;
       const dice = await dicePromise;
       dice.element.classList.remove("translucent");
       dice.rollDice(value, duration);
@@ -158,19 +155,15 @@ const rollDice = async element => {
   );
   rolls.sort((a, b) => b.value - a.value);
   const minDice = rolls.slice(DIE_USED);
-  console.log(minDice);
-  const min = rolls.reduce((p, c) => (c.value < p.value ? c : p));
   minDice.forEach(dice => {
     dice.element.classList.add("translucent");
   });
-
+  // Get the total of the dice, excluding any that shouldn't be used
   const total = rolls
     .slice(0, DIE_USED)
     .reduce((p, c) => p + parseInt(c.value), 0);
-  const delay = rolls.reduce((p, c) => {
-    return Math.max(p, c.duration);
-  }, 0);
-  displayDiceTotal(element.querySelector(".display"), total, delay);
+  const delay = rolls.reduce((p, c) => Math.max(p, c.duration), 0);
+  displayDiceTotal(element, total, delay);
 
   attributeValues[element.dataset.id] = {
     value: total,

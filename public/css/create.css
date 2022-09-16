@@ -1,7 +1,36 @@
+#create-character {
+  font-family: fantasy;
+}
+
 .dice {
   transition: 2s;
 }
 
 .translucent {
   opacity: 0.2;
+}
+
+.emphasize {
+  animation: pop;
+  animation-duration: 1000ms;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes pop {
+  0% {
+    color: black;
+    transform: scale(0);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  85% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
