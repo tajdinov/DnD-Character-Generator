@@ -29,15 +29,15 @@ rootDiv.addEventListener("input", e => {
 });
 
 raceButtons.addEventListener("click", e => {
-  const value = e.target.dataset.race;
+  const value = e.target.dataset;
   selectedRace = value;
-  renderInfoScreen(value);
+  renderInfoScreen(value, "race-info");
 });
 
 classButtons.addEventListener("click", e => {
-  const value = e.target.dataset.class;
+  const value = e.target.dataset;
   selectedClass = value;
-  renderInfoScreen(value);
+  renderInfoScreen(value, "class-info");
 });
 
 diceElements.addEventListener("click", e => {
@@ -48,6 +48,15 @@ diceElements.addEventListener("click", e => {
 });
 
 createBtn.addEventListener("click", createCharacter);
+
+// when renderInfoScreen is called, it should unhide the info for the selected class or race //
+const renderInfoScreen = (data, id) => {
+  const displayFrame = document.getElementById(id);
+  displayFrame.hidden = false;
+  const displayInfo = displayFrame.querySelector(".info");
+
+  displayInfo.innerText = data.description;
+};
 
 const renderAttributes = () => {
   Array.from(document.querySelectorAll(".assigned-dice")).forEach(display => {

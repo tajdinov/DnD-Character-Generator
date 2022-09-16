@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/create.css" />
 <div id="create-character">
 
-  <div class="page" id="page-name" hidden>
+  <div class="page" id="page-name">
 
     <h3>Your Character's Name:</h3>
     <div class="">
@@ -13,33 +13,36 @@
 
   <div class="page" id="page-race" hidden>
     <h1>Select a race:</h1>
-    <div id="races">
+    <div id="races" class="grid grid-cols-1">
       {{#each races as |race|}}
 
-        <button
-          data-race={{race.id}}
-          data-info={{race.description}}
-        >{{race.race_name}}</button>
+        <button data-race={{race.id}} data-description="{{race.description}}" data-name={{race.race_name}}>{{race.race_name}}</button>
+        
       {{/each}}
     </div>
-    <div id="race-info" hidden></div>
+    <div id="race-info" hidden>
+      <p class="info"></p>
+    </div>
     <button data-page="page-name">Back</button>
     <button data-page="page-class">Next</button>
   </div>
 
   <div class="page" id="page-class" hidden>
     <h1>Select a class:</h1>
-    <div id="classes">
+    <div id="classes" class="grid grid-cols-1">
       {{#each classes as |class|}}
-        <button data-class={{class.id}}>{{class.class_name}}</button>
+        <button data-class={{class.id}} data-description="{{class.description}}" data-name={{class.class_name}}>{{class.class_name}}</button>
+
       {{/each}}
     </div>
-    <div id="class-info" hidden></div>
+    <div id="class-info" hidden>
+      <p class="info"></p>
+    </div>
     <button data-page="page-race">Back</button>
     <button data-page="page-attributes">Next</button>
   </div>
 
-  <div class="page" id="page-attributes">
+  <div class="page" id="page-attributes" hidden>
     <div class="grid grid-cols-3">
       {{#each attributes as |attribute|}}
         <div class="dice w-20 h-full" data-id={{attribute.id}}>
