@@ -47,15 +47,20 @@ updateContainer.addEventListener("click", async e => {
   }
 });
 
-async function uploadFile() {
+const form = document.querySelector("#upload-image-form");
+const uploadFile = async event => {
+  event.preventDefault();
   let char_id = window.location.pathname.split("/").pop()
   let formData = new FormData(); 
   formData.append("image", fileupload.files[0]);
-  await fetch(`/api/user/character/image/${char_id}`, {
+  const response = await fetch(`/api/user/character/image/${char_id}`, {
     method: "POST", 
     body: formData
   }); 
-  alert('The file has been uploaded successfully.');
-  };
-
+  if (response.ok) {
+    document.location.replace(`/update/${char_id}`);
+  } else {
+    alert("Failed to upoad");
+  }};
+  form.addEventListener("submit", uploadFile);
  
