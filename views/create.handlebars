@@ -16,8 +16,12 @@
     <div id="races" class="grid grid-cols-1">
       {{#each races as |race|}}
 
-        <button data-race={{race.id}} data-description="{{race.description}}" data-name={{race.race_name}}>{{race.race_name}}</button>
-        
+        <button
+          data-race={{race.id}}
+          data-description="{{race.description}}"
+          data-name={{race.race_name}}
+        >{{race.race_name}}</button>
+
       {{/each}}
     </div>
     <div id="race-info" hidden>
@@ -31,7 +35,11 @@
     <h1>Select a class:</h1>
     <div id="classes" class="grid grid-cols-1">
       {{#each classes as |class|}}
-        <button data-class={{class.id}} data-description="{{class.description}}" data-name={{class.class_name}}>{{class.class_name}}</button>
+        <button
+          data-class={{class.id}}
+          data-description="{{class.description}}"
+          data-name={{class.class_name}}
+        >{{class.class_name}}</button>
 
       {{/each}}
     </div>
@@ -43,38 +51,62 @@
   </div>
 
   <div class="page" id="page-attributes" hidden>
-    <div class="grid grid-cols-3">
-      {{#each attributes as |attribute|}}
-        <div class="dice w-20 h-full" data-id={{attribute.id}}>
-          <h3>Dice</h3>
-          <button class="roll">Roll</button>
-          <div class="roll-container" hidden>
-            <div class="flex">
-              <div class="individual-roll w-6 h-6"></div>
-              <div class="individual-roll w-6 h-6"></div>
-              <div class="individual-roll w-6 h-6"></div>
-              <div class="individual-roll w-6 h-6"></div>
+    <div class="container w-fit">
+      <div class="grid grid-cols-[repeat(3,_150px)] gap-5">
+        {{#each attributes as |attribute|}}
+          <div
+            class="dice w-full h-full aspect-square border-2 border-slate-200 rounded-lg p-3"
+            data-id={{attribute.id}}
+          >
+            <button class="roll">Roll</button>
+            <div class="roll-container flex flex-col h-full w-full" hidden>
+              <div class="flex w-full justify-evenly gap-2">
+                <div
+                  class="flex text-xl justify-center items-center individual-roll border-[1px] rounded-md border-slate-300 w-full"
+                ></div>
+                <div
+                  class="flex text-xl justify-center items-center individual-roll border-[1px] rounded-md border-slate-300 w-full"
+                ></div>
+                <div
+                  class="flex text-xl justify-center items-center individual-roll border-[1px] rounded-md border-slate-300 w-full"
+                ></div>
+                <div
+                  class="flex text-xl justify-center items-center individual-roll border-[1px] rounded-md border-slate-300 w-full"
+                ></div>
+              </div>
+              <div class="flex items-center justify-center flex-1">
+                <p class="display text-4xl" draggable="true">9</p>
+              </div>
+              <select
+                data-id={{attribute.id}}
+                class="available-attributes w-full"
+              >
+                <option value="default" selected>--attribute--</option>
+                {{#each attribute.diceAttributes as |diceAttribute|}}
+                  <option
+                    value={{diceAttribute.id}}
+                  >{{diceAttribute.name}}</option>
+                {{/each}}
+              </select>
             </div>
-            <p class="display" draggable="true"></p>
-            <select class="available-attributes">
-              <option>none</option>
-              {{#each attribute.diceAttributes as |diceAttribute|}}
-                <option
-                  value={{diceAttribute.id}}
-                >{{diceAttribute.name}}</option>
-              {{/each}}
-            </select>
-          </div>
 
-        </div>
-      {{/each}}
+          </div>
+        {{/each}}
+      </div>
     </div>
     <div class="flex">
       {{#each attributes as |attribute|}}
-        <p>{{attribute.name}}</p>
-        <div class="drop-zone h-20 w-20 bg-slate-200">Drop Zone</div>
-        <p data-id={{attribute.id}} class="assigned-dice"></p>
-        {{> attribute-frame}}
+        <div
+          class="relative flex w-full max-w-[150px] h-full aspect-[4/5] attribute-frame p-3"
+        >
+          <div class="flex flex-col justify-center w-full h-full display-value">
+            <p
+              data-id={{attribute.id}}
+              class="assigned-dice text-5xl text-center text-inherit value-p-text"
+            ></p>
+            <p class="text-center text-md sm:text-lg">{{attribute.name}}</p>
+          </div>
+        </div>
       {{/each}}
     </div>
     <button data-page="page-class">Back</button>

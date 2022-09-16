@@ -23,7 +23,13 @@ rootDiv.addEventListener("click", e => {
 
 rootDiv.addEventListener("input", e => {
   const dice = e.target.closest(".dice").dataset.id;
-  attributeValues[dice].attribute = e.target.value;
+  let value = e.target.value;
+  if (value === "default") {
+    delete attributeValues[dice].attribute;
+    value = null;
+  } else {
+    attributeValues[dice].attribute = e.target.value;
+  }
   renderAttributes();
   filterAttributeSelects();
 });
@@ -63,16 +69,33 @@ const renderAttributes = () => {
     const item = Object.values(attributeValues).find(item => {
       return item.attribute === display.dataset.id;
     });
-    if (!item) return;
-    console.log(item);
+    if (!item) {
+      display.innerText = "";
+      return;
+    }
+    // console.log(item);
     display.innerText = item.value;
   });
 };
 
 const filterAttributeSelects = () => {
-  Array.from(document.querySelectorAll("available-attributes")).forEach(
+  // Performance - create a map based on attribute id for O(1) lookup
+  const attributeMap = Object.values(attributeValues).reduce((p, c) => {
+    if (c.attribute) {
+      p[c.attribute] = c;
+    }
+    return p;
+  }, {});
+  // Remove attribute options from select elements on dices (die?) if they have been assigned.
+  // However - still show the option on the dice it is selected on
+  Array.from(document.querySelectorAll(".available-attributes")).forEach(
     select => {
-      // Array.from select.querySelectorAll("option")
+      const diceId = select.dataset.id;
+      Array.from(select.querySelectorAll("option")).forEach(option => {
+        if (!option.value) return;
+        if (attributeMap[option.value]?.diceId === diceId) return;
+        option.hidden = attributeMap[option.value];
+      });
     }
   );
 };
@@ -94,7 +117,7 @@ const rollDice = element => {
   attributeValues[element.dataset.id] = {
     value: total,
     attribute: null,
-    element,
+    diceId: element.dataset.id,
   };
   console.log(attributeValues);
 };
@@ -114,91 +137,6 @@ function createCharacter() {
     },
   });
 }
-
-// const generateStats = async event => {
-//   event.preventDefault();
-
-//   let hit_points = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("hit-points").value = hit_points;
-
-//   let strength = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("strength").value = strength;
-
-//   let constitution = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("constitution").value = constitution;
-
-//   let dexterity = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("dexterity").value = dexterity;
-
-//   let wisdom = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("wisdom").value = wisdom;
-
-//   let intelligence = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("intelligence").value = intelligence;
-
-//   let next = $("#create2");
-//   next.removeClass("hidden");
-//   let btn = $(".btn_generate");
-//   btn.addClass("hidden");
-// };
-
-// const create1 = async event => {
-//   event.preventDefault();
-
-//   let box1 = $(".character-first-box");
-//   let box2 = $(".character-second-box");
-//   box1.addClass("hidden");
-//   box2.removeClass("hidden");
-// };
-
-// const create2 = async event => {
-//   event.preventDefault();
-
-//   let box2 = $(".character-second-box");
-//   let box3 = $(".character-third-box");
-
-//   box2.addClass("hidden");
-//   box3.removeClass("hidden");
-// };
-
-//select the classes we require
-// const cube = document.querySelector(".cube");
-// const currentClass = "";
-
-//this function will generate a random number between 1 and 6 (or whatever value you send it)
-// function getRandomInt(min, max) {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-// }
-
-//our main roll dice function on click
-// let rollDice = async event => {
-//   event.preventDefault();
-//   //genberate a random number between 1 and 6 with out getRandomInt function
-//   const randNum = getRandomInt(1, 7);
-//   console.log(randNum);
-//   //generate a class with the random number between 1 - 6 called showClass
-//   const showClass = "show-" + randNum;
-//   console.log(showClass);
-//   // if there is a class already selected remove it
-//   if (currentClass) {
-//     cube.classList.remove(currentClass);
-//   }
-//   // add the new showclass with the generated number
-//   cube.classList.add(showClass);
-//   //set the current class to the randomly generated number
-//   currentClass = showClass;
-// };
-// set initial side
-//rollDice();
-// document.querySelector(".generateStats").addEventListener("click", rollDice);
-// document
-//   .querySelector(".generateStats")
-//   .addEventListener("click", generateStats);
-
-// document.querySelector("#create1").addEventListener("click", create1);
-// document.querySelector("#create2").addEventListener("click", create2);
 
 // const createFormHandler = async event => {
 //   event.preventDefault();
