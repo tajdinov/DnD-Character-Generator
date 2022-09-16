@@ -1,19 +1,40 @@
+import initDice from "/js/dice.js";
+
 const rootDiv = document.getElementById("create-character");
 const raceButtons = document.getElementById("races");
 const classButtons = document.getElementById("classes");
 const pageCollection = document.querySelectorAll(".page");
-const diceElements = document.getElementById("page-attributes");
+const dicePage = document.getElementById("page-attributes");
 const createBtn = document.getElementById("create-btn");
-
-const namePage = "page-name";
-const racePage = "page-race";
-const classPage = "page-class";
-const attributesPage = "page-attributes";
+// Total number of dice rolled
+const DIE_COUNT = 4;
+// Number of dice included in total (top scoring die only)
+const DIE_USED = 3;
 
 let selectedRace;
 let selectedClass;
 const attributeValues = {};
 
+const diceAnimationContainer = document.getElementById(
+  "dice-animation-container"
+);
+
+// Create an array that holds controls to each dice
+// Create and populate div elements in the selected container at the same time
+const diceAnimations = new Array(DIE_COUNT).fill(0).map(async _ => {
+  const div = document.createElement("div");
+  diceAnimationContainer.appendChild(div);
+  div.classList.add("dice");
+  const returnValue = { ...(await initDice(div)) };
+  div.addEventListener("click", () => {
+    const value = Math.floor(Math.random() * 6) + 1;
+    returnValue.rollDice(value);
+  });
+  return returnValue;
+});
+
+// Listen for clicks from any element that has a data-page attribute
+// Used to navigate between screens on the /create route
 rootDiv.addEventListener("click", e => {
   const page = e.target.dataset.page;
   if (page) {
@@ -21,16 +42,23 @@ rootDiv.addEventListener("click", e => {
   }
 });
 
+// Listen for change events (used with Select elements to detect a new option input)
 rootDiv.addEventListener("input", e => {
-  const dice = e.target.closest(".dice").dataset.id;
+  // Find the parent dice element and get its id
+  const dice = e.target.closest(".roll").dataset.id;
+  // Get the value - (id of attribute selected)
   let value = e.target.value;
+  // If it's the default Select option then remove the attribute assigned to the attributeValues map
   if (value === "default") {
     delete attributeValues[dice].attribute;
     value = null;
   } else {
     attributeValues[dice].attribute = e.target.value;
   }
-  renderAttributes();
+  // Render all attributes at the same time to keep app synced
+  // Pass the attribute being changed so we can animate it
+  renderAttributes(attributeValues[dice].attribute);
+  // Run filter function on all Select elements so we don't show attributes that have already been assigned
   filterAttributeSelects();
 });
 
@@ -46,10 +74,11 @@ classButtons.addEventListener("click", e => {
   renderInfoScreen(value, "class-info");
 });
 
-diceElements.addEventListener("click", e => {
-  if (e.target.classList.contains("roll")) {
+// Event delegation to handle 'Roll Dice' buttons
+dicePage.addEventListener("click", e => {
+  if (e.target.classList.contains("roll-btn")) {
     e.target.hidden = true;
-    rollDice(e.target.closest(".dice"));
+    rollDice(e.target.closest(".roll"));
   }
 });
 
@@ -73,11 +102,11 @@ const renderAttributes = () => {
       display.innerText = "";
       return;
     }
-    // console.log(item);
     display.innerText = item.value;
   });
 };
 
+// Filter all Select elements so we don't show attributes that have already been assigned
 const filterAttributeSelects = () => {
   // Performance - create a map based on attribute id for O(1) lookup
   const attributeMap = Object.values(attributeValues).reduce((p, c) => {
@@ -92,34 +121,62 @@ const filterAttributeSelects = () => {
     select => {
       const diceId = select.dataset.id;
       Array.from(select.querySelectorAll("option")).forEach(option => {
-        if (!option.value) return;
-        if (attributeMap[option.value]?.diceId === diceId) return;
+        // Hide each option depending on whether the attribute (option) has been assigned
+        // Except if the select menu belongs to the element that is selecting that attribute
+        if (select.value === option.value) return;
         option.hidden = attributeMap[option.value];
       });
     }
   );
 };
 
-const rollDice = element => {
+//
+const displayDiceTotal = (element, value, delay) => {
+  setTimeout(() => {
+    const div = document.createElement("div");
+    element.innerText = value;
+  }, delay);
+};
+
+const rollEnd = () => {
+  // Set translucent on low dice
+  // Display total and select element
+};
+
+const rollDice = async element => {
   element.querySelector(".roll-container").hidden = false;
   const dice = element.querySelectorAll(".individual-roll");
-  const rolls = Array.from(dice).map(dice => {
-    const value = Math.floor(Math.random() * 6 + 1);
-    dice.innerText = value;
-    return { value, element: dice };
-  });
+  const rolls = await Promise.all(
+    diceAnimations.map(async (dicePromise, idx) => {
+      const duration = 1800 + idx * 250;
+      const value = Math.floor(Math.random() * 6 + 1);
+      const dice = await dicePromise;
+      dice.element.classList.remove("translucent");
+      dice.rollDice(value, duration);
+      return { value, duration, element: dice.element };
+    })
+  );
+  rolls.sort((a, b) => b.value - a.value);
+  const minDice = rolls.slice(DIE_USED);
+  console.log(minDice);
   const min = rolls.reduce((p, c) => (c.value < p.value ? c : p));
-  min.element.classList.add("lowest");
+  minDice.forEach(dice => {
+    dice.element.classList.add("translucent");
+  });
+
   const total = rolls
-    .filter(item => item !== min)
+    .slice(0, DIE_USED)
     .reduce((p, c) => p + parseInt(c.value), 0);
-  element.querySelector(".display").innerText = total;
+  const delay = rolls.reduce((p, c) => {
+    return Math.max(p, c.duration);
+  }, 0);
+  displayDiceTotal(element.querySelector(".display"), total, delay);
+
   attributeValues[element.dataset.id] = {
     value: total,
     attribute: null,
     diceId: element.dataset.id,
   };
-  console.log(attributeValues);
 };
 
 const navPage = selectedPage => {

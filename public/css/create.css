@@ -1,3 +1,7 @@
-.lowest {
-  color: red;
+.dice {
+  transition: 2s;
+}
+
+.translucent {
+  opacity: 0.2;
 }
