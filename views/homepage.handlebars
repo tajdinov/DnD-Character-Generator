@@ -14,9 +14,12 @@
       >
 
         {{#each characters as |character|}}
+         <a href="/update/{{character.id}}">
+
           <button class="text-xl border-2 py-3 px-5">
             {{character.character_name}}
           </button>
+         </a>
         {{/each}}
       </div>
     </div>

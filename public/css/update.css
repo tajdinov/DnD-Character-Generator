@@ -9,9 +9,8 @@
   font-family: fantasy;
 }
 
-input:focus-visible {
-  border: none;
-  outline: rgb(6, 205, 215) solid 2px;
+input:not(:read-only) {
+  outline: rgb(0, 0, 0) solid 2px;
 }
 
 input:not([type="file"]):read-only {
