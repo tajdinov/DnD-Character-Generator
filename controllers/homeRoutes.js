@@ -40,6 +40,11 @@ router.get("/create", async (req, res, next) => {
 
 router.get("/character/:charId", async (req, res, next) => {
   try {
+    const { user_id } = req.session;
+    const user = await User.findByPk(user_id);
+    const charData = await Character.findAll({ where: { user_id } });
+    const characters = charData.map(character => character.get({ plain: true }));
+
     const data = await Character.findByPk(req.params.charId, {
       include: [
         { model: Attribute, as: "attributes" },      
@@ -51,12 +56,11 @@ router.get("/character/:charId", async (req, res, next) => {
       return res.redirect("/");
     }
     const character = data.get({ plain: true });
-    res.render("character", { ...character });
+    res.render("character", { characters, first_name: user.first_name, ...character });
   } catch (error) {
     next(error);
   }
 });
-
 
 router.get("/update/:charId", async (req, res, next) => {
   try {

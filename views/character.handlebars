@@ -14,9 +14,9 @@
       >
 
         {{#each characters as |character|}}
-          <button class="charButton text-xl border-2 py-3 px-5">
+          <a class="charButton text-xl border-2 py-3 px-5" href="/character/{{id}}">
             {{character.character_name}}
-          </button>
+          </a>
         {{/each}}
       </div>
     </div>
@@ -39,4 +39,3 @@
     Character</a>
 </div>
 
-<script src="./js/character.js"></script>

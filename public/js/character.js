@@ -2,7 +2,7 @@ const edit_char = async event => {
   event.preventDefault();
 
   console.log("open character edit screen");
-  document.location.replace("/character");
+  //document.location.replace("/character");
 };
 
 //document.querySelector(".edit_char1").addEventListener("click", edit_char);
