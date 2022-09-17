@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Class, Race, Character, User } = require("../model");
 const HandledError = require("../error/Error");
 const Attribute = require("../model/Attribute");
+const { upperCaseWords } = require("../utils/string");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -43,11 +44,13 @@ router.get("/character/:charId", async (req, res, next) => {
     const { user_id } = req.session;
     const user = await User.findByPk(user_id);
     const charData = await Character.findAll({ where: { user_id } });
-    const characters = charData.map(character => character.get({ plain: true }));
+    const characters = charData.map(character =>
+      character.get({ plain: true })
+    );
 
     const data = await Character.findByPk(req.params.charId, {
       include: [
-        { model: Attribute, as: "attributes" },      
+        { model: Attribute, as: "attributes" },
         { model: Class, as: "class" },
         { model: Race, as: "race" },
       ],
@@ -56,7 +59,11 @@ router.get("/character/:charId", async (req, res, next) => {
       return res.redirect("/");
     }
     const character = data.get({ plain: true });
-    res.render("character", { characters, first_name: user.first_name, ...character });
+    res.render("character", {
+      characters,
+      first_name: user.first_name,
+      ...character,
+    });
   } catch (error) {
     next(error);
   }
@@ -66,7 +73,7 @@ router.get("/update/:charId", async (req, res, next) => {
   try {
     const data = await Character.findByPk(req.params.charId, {
       include: [
-        { model: Attribute, as: "attributes" },      
+        { model: Attribute, as: "attributes" },
         { model: Class, as: "class" },
         { model: Race, as: "race" },
       ],

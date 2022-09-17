@@ -1,13 +1,3 @@
-html {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(255, 255, 255);
-}
-
 .attribute-frame {
   background-image: url(/images/border.svg);
   background-size: 100% 100%;
@@ -17,4 +7,21 @@ body {
 
 .character {
   font-family: fantasy;
+}
+
+input:not(:read-only) {
+  outline: rgb(0, 0, 0) solid 2px;
+}
+
+input:not([type="file"]):read-only {
+  pointer-events: none;
+  user-select: text;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.ghost {
+  opacity: 0;
 }
