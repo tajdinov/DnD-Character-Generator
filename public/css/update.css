@@ -1,13 +1,3 @@
-html {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: rgb(255, 255, 255);
-}
-
 .attribute-frame {
   background-image: url(/images/border.svg);
   background-size: 100% 100%;

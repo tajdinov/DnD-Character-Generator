@@ -37,7 +37,7 @@ router.post("/image/:char_id", multer, async (req, res, next) => {
     const resizedImage = await resize(image.buffer);
     const location = await upload(resizedImage, key);
     await character.update({ avatar: location });
-    res.sendStatus(201);
+    res.status(201).json({ location });
   } catch (error) {
     console.log(error);
     next(HandledError.unknownError());
