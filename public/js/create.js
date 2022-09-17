@@ -194,6 +194,13 @@ const navPage = selectedPage => {
     page.hidden = true;
   });
   document.getElementById(selectedPage).hidden = false;
+
+  // As the page-attributes screen renders, the dice container size changes from 0 to its normal size. We need to tell the 3d renderer about the change so it can load a new frame displaying the dice
+  if (selectedPage === "page-attributes") {
+    diceAnimations.forEach(async dice => {
+      (await dice).onResize();
+    });
+  }
 };
 
 function createCharacter() {
