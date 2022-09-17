@@ -1,12 +1,16 @@
 <section class="card">
   <a href="/character/{{id}}">
     <header>{{character_name}}{{avatar}}</header>
-    <p>{{strength}}</p>
-    <p>{{dexterity}}</p>
-    <p>{{constitution}}</p>
-    <p>{{wisdom}}</p>
-    <p>{{intelligence}}</p>
-    <p>{{strength}}</p>
+    {{!<p>{{strength}}</p>
+    {{!<p>{{dexterity}}</p>
+    {{!<p>{{constitution}}</p>
+    {{!<p>{{wisdom}}</p>
+    {{!<p>{{intelligence}}</p>
+    {{!<p>{{strength}}</p>
+
+    <p>{{class.class_name}}</p>
+    <p>{{race.race_name}}</p>
+    <p>{{attribute.attribute_name}}</p>
 
     <div class="col-md-4">
       <button class="btn btn-sm btn-danger" data-id="{{character.id}}">DELETE</button>

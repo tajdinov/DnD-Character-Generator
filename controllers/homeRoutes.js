@@ -38,11 +38,30 @@ router.get("/create", async (req, res, next) => {
   }
 });
 
+router.get("/character/:charId", async (req, res, next) => {
+  try {
+    const data = await Character.findByPk(req.params.charId, {
+      include: [
+        { model: Attribute, as: "attributes" },      
+        { model: Class, as: "class" },
+        { model: Race, as: "race" },
+      ],
+    });
+    if (!data) {
+      return res.redirect("/");
+    }
+    const character = data.get({ plain: true });
+    res.render("character", { ...character });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/update/:charId", async (req, res, next) => {
   try {
     const data = await Character.findByPk(req.params.charId, {
       include: [
-        { model: Attribute, as: "attributes" },
+        { model: Attribute, as: "attributes" },      
         { model: Class, as: "class" },
         { model: Race, as: "race" },
       ],

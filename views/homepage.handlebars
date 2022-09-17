@@ -14,9 +14,9 @@
       >
 
         {{#each characters as |character|}}
-          <button class="text-xl border-2 py-3 px-5">
+          <a class="text-xl border-2 py-3 px-5" href="/character/{{id}}">
             {{character.character_name}}
-          </button>
+          </a>
         {{/each}}
       </div>
     </div>
@@ -24,11 +24,6 @@
     <div class="character_details_box basis-1/2 ml-20">
       <h3 class="text-center text-xl font-semibold">
         Currently Selected Character</h3>
-      <div
-        class="character_details bg-clip-content p-6 bg-netural-300 border-4 border-netural-300 border-dashed mt-3"
-      >
-        {{> character-details}}
-      </div>
     </div>
 
   </div>

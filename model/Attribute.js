@@ -3,7 +3,7 @@ const { Model, DataTypes } = require("sequelize");
 // import our database connection from config.js
 const sequelize = require("../config/connection");
 
-// initialize Character model (table) by extending off Sequelize's Model class
+// initialize Attribute model (table) by extending off Sequelize's Model class
 class Attribute extends Model {}
 
 Attribute.init(

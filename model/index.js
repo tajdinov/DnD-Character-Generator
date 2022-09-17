@@ -34,7 +34,9 @@ Class.hasMany(Character, {
   foreignKey: "class_id",
 });
 
-Race.hasMany(Character, { foreignKey: "race_id" });
+Race.hasMany(Character, { 
+  foreignKey: "race_id" 
+});
 
 Character.belongsToMany(Attribute, {
   through: { model: CharacterAttribute, unique: true },
@@ -47,7 +49,9 @@ Attribute.belongsToMany(Character, {
   as: "character",
 });
 
-User.hasMany(Character, { foreignKey: "user_id" });
+User.hasMany(Character, { 
+  foreignKey: "user_id" 
+});
 
 CharacterAttribute.belongsTo(Character, {
   foreignKey: "character_id",
