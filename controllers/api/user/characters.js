@@ -10,6 +10,13 @@ router.post("/", async (req, res, next) => {
   try {
     const { user_id } = req.session;
     const character = await Character.create({ ...req.body, user_id });
+    if (!Array.isArray(req.body.attributes))
+      return next(HandledError.badRequest("Missing attributes array"));
+    const attributes = req.body.attributes.map(attribute => ({
+      ...attribute,
+      character_id: character.id,
+    }));
+    CharacterAttribute.bulkCreate(attributes);
     res.json(character);
   } catch (error) {
     next(error);
