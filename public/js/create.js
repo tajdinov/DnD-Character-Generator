@@ -1,19 +1,53 @@
+import initDice from "/js/dice.js";
+
 const rootDiv = document.getElementById("create-character");
 const raceButtons = document.getElementById("races");
 const classButtons = document.getElementById("classes");
 const pageCollection = document.querySelectorAll(".page");
-const diceElements = document.getElementById("page-attributes");
+const dicePage = document.getElementById("page-attributes");
 const createBtn = document.getElementById("create-btn");
-
-const namePage = "page-name";
-const racePage = "page-race";
-const classPage = "page-class";
-const attributesPage = "page-attributes";
+// Total number of dice rolled
+const DIE_COUNT = 4;
+// Number of dice included in total (top scoring die only)
+const DIE_USED = 3;
 
 let selectedRace;
 let selectedClass;
 const attributeValues = {};
 
+const diceAnimationContainer = document.getElementById(
+  "dice-animation-container"
+);
+
+// Create dice containers and arrange them so that renderer can be sized correctly
+const diceContainers = new Array(DIE_COUNT).fill(0).map(_ => {
+  const div = document.createElement("div");
+  div.classList.add("dice-container");
+  diceAnimationContainer.appendChild(div);
+  return div;
+});
+
+// Create an array that holds controls to each dice
+// Create and populate div elements in the selected container at the same time
+const diceAnimations = diceContainers.map(async div => {
+  div.classList.add("dice");
+  const returnValue = { ...(await initDice(div)) };
+  div.addEventListener("click", () => {
+    const value = Math.floor(Math.random() * 6) + 1;
+    returnValue.rollDice(value);
+  });
+  return returnValue;
+});
+
+window.addEventListener("resize", () => {
+  // Leave renderers alone unless small drops below
+  diceAnimations.forEach(async dice => {
+    (await dice).onResize();
+  });
+});
+
+// Listen for clicks from any element that has a data-page attribute
+// Used to navigate between screens on the /create route
 rootDiv.addEventListener("click", e => {
   const page = e.target.dataset.page;
   if (page) {
@@ -21,10 +55,23 @@ rootDiv.addEventListener("click", e => {
   }
 });
 
+// Listen for change events (used with Select elements to detect a new option input)
 rootDiv.addEventListener("input", e => {
-  const dice = e.target.closest(".dice").dataset.id;
-  attributeValues[dice].attribute = e.target.value;
-  renderAttributes();
+  // Find the parent dice element and get its id
+  const dice = e.target.closest(".roll").dataset.id;
+  // Get the value - (id of attribute selected)
+  let value = e.target.value;
+  // If it's the default Select option then remove the attribute assigned to the attributeValues map
+  if (value === "default") {
+    delete attributeValues[dice].attribute;
+    value = null;
+  } else {
+    attributeValues[dice].attribute = e.target.value;
+  }
+  // Render all attributes at the same time to keep app synced
+  // Pass the attribute being changed so we can animate it
+  renderAttributes(attributeValues[dice].attribute);
+  // Run filter function on all Select elements so we don't show attributes that have already been assigned
   filterAttributeSelects();
 });
 
@@ -40,10 +87,11 @@ classButtons.addEventListener("click", e => {
   renderInfoScreen(value, "class-info");
 });
 
-diceElements.addEventListener("click", e => {
-  if (e.target.classList.contains("roll")) {
+// Event delegation to handle 'Roll Dice' buttons
+dicePage.addEventListener("click", e => {
+  if (e.target.classList.contains("roll-btn")) {
     e.target.hidden = true;
-    rollDice(e.target.closest(".dice"));
+    rollDice(e.target.closest(".roll"));
   }
 });
 
@@ -58,45 +106,87 @@ const renderInfoScreen = (data, id) => {
   displayInfo.innerText = data.description;
 };
 
-const renderAttributes = () => {
+const renderAttributes = attribute => {
   Array.from(document.querySelectorAll(".assigned-dice")).forEach(display => {
     const item = Object.values(attributeValues).find(item => {
       return item.attribute === display.dataset.id;
     });
-    if (!item) return;
-    console.log(item);
+    if (!item) {
+      display.innerText = "";
+      display.classList.remove("emphasize");
+      return;
+    }
     display.innerText = item.value;
+    if (display.dataset.id === attribute) {
+      display.classList.add("emphasize");
+    }
   });
 };
 
+// Filter all Select elements so we don't show attributes that have already been assigned
 const filterAttributeSelects = () => {
-  Array.from(document.querySelectorAll("available-attributes")).forEach(
+  // Performance - create a map based on attribute id for O(1) lookup
+  const attributeMap = Object.values(attributeValues).reduce((p, c) => {
+    if (c.attribute) {
+      p[c.attribute] = c;
+    }
+    return p;
+  }, {});
+  // Remove attribute options from select elements on dices (die?) if they have been assigned.
+  // However - still show the option on the dice it is selected on
+  Array.from(document.querySelectorAll(".available-attributes")).forEach(
     select => {
-      // Array.from select.querySelectorAll("option")
+      const diceId = select.dataset.id;
+      Array.from(select.querySelectorAll("option")).forEach(option => {
+        // Hide each option depending on whether the attribute (option) has been assigned
+        // Except if the select menu belongs to the element that is selecting that attribute
+        if (select.value === option.value) return;
+        option.hidden = attributeMap[option.value];
+      });
     }
   );
 };
 
-const rollDice = element => {
-  element.querySelector(".roll-container").hidden = false;
+//
+const displayDiceTotal = (element, value, delay) => {
+  setTimeout(() => {
+    const display = element.querySelector(".display");
+    const rollContainer = element.querySelector(".roll-container");
+    display.innerText = value;
+    display.classList.add("emphasize");
+    rollContainer.hidden = false;
+  }, delay);
+};
+
+const rollDice = async element => {
   const dice = element.querySelectorAll(".individual-roll");
-  const rolls = Array.from(dice).map(dice => {
-    const value = Math.floor(Math.random() * 6 + 1);
-    dice.innerText = value;
-    return { value, element: dice };
+  const rolls = await Promise.all(
+    diceAnimations.map(async (dicePromise, idx) => {
+      const value = Math.floor(Math.random() * 6 + 1);
+      const duration = 1800 + idx * 250;
+      const dice = await dicePromise;
+      dice.element.classList.remove("translucent");
+      dice.rollDice(value, duration);
+      return { value, duration, element: dice.element };
+    })
+  );
+  rolls.sort((a, b) => b.value - a.value);
+  const minDice = rolls.slice(DIE_USED);
+  minDice.forEach(dice => {
+    dice.element.classList.add("translucent");
   });
-  const min = rolls.reduce((p, c) => (c.value < p.value ? c : p));
-  min.element.classList.add("lowest");
+  // Get the total of the dice, excluding any that shouldn't be used
   const total = rolls
-    .filter(item => item !== min)
+    .slice(0, DIE_USED)
     .reduce((p, c) => p + parseInt(c.value), 0);
-  element.querySelector(".display").innerText = total;
+  const delay = rolls.reduce((p, c) => Math.max(p, c.duration), 0);
+  displayDiceTotal(element, total, delay);
+
   attributeValues[element.dataset.id] = {
     value: total,
     attribute: null,
-    element,
+    diceId: element.dataset.id,
   };
-  console.log(attributeValues);
 };
 
 const navPage = selectedPage => {
@@ -104,6 +194,13 @@ const navPage = selectedPage => {
     page.hidden = true;
   });
   document.getElementById(selectedPage).hidden = false;
+
+  // As the page-attributes screen renders, the dice container size changes from 0 to its normal size. We need to tell the 3d renderer about the change so it can load a new frame displaying the dice
+  if (selectedPage === "page-attributes") {
+    diceAnimations.forEach(async dice => {
+      (await dice).onResize();
+    });
+  }
 };
 
 function createCharacter() {
@@ -114,91 +211,6 @@ function createCharacter() {
     },
   });
 }
-
-// const generateStats = async event => {
-//   event.preventDefault();
-
-//   let hit_points = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("hit-points").value = hit_points;
-
-//   let strength = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("strength").value = strength;
-
-//   let constitution = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("constitution").value = constitution;
-
-//   let dexterity = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("dexterity").value = dexterity;
-
-//   let wisdom = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("wisdom").value = wisdom;
-
-//   let intelligence = Math.floor(Math.random() * 10 + 1);
-//   document.getElementById("intelligence").value = intelligence;
-
-//   let next = $("#create2");
-//   next.removeClass("hidden");
-//   let btn = $(".btn_generate");
-//   btn.addClass("hidden");
-// };
-
-// const create1 = async event => {
-//   event.preventDefault();
-
-//   let box1 = $(".character-first-box");
-//   let box2 = $(".character-second-box");
-//   box1.addClass("hidden");
-//   box2.removeClass("hidden");
-// };
-
-// const create2 = async event => {
-//   event.preventDefault();
-
-//   let box2 = $(".character-second-box");
-//   let box3 = $(".character-third-box");
-
-//   box2.addClass("hidden");
-//   box3.removeClass("hidden");
-// };
-
-//select the classes we require
-// const cube = document.querySelector(".cube");
-// const currentClass = "";
-
-//this function will generate a random number between 1 and 6 (or whatever value you send it)
-// function getRandomInt(min, max) {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-// }
-
-//our main roll dice function on click
-// let rollDice = async event => {
-//   event.preventDefault();
-//   //genberate a random number between 1 and 6 with out getRandomInt function
-//   const randNum = getRandomInt(1, 7);
-//   console.log(randNum);
-//   //generate a class with the random number between 1 - 6 called showClass
-//   const showClass = "show-" + randNum;
-//   console.log(showClass);
-//   // if there is a class already selected remove it
-//   if (currentClass) {
-//     cube.classList.remove(currentClass);
-//   }
-//   // add the new showclass with the generated number
-//   cube.classList.add(showClass);
-//   //set the current class to the randomly generated number
-//   currentClass = showClass;
-// };
-// set initial side
-//rollDice();
-// document.querySelector(".generateStats").addEventListener("click", rollDice);
-// document
-//   .querySelector(".generateStats")
-//   .addEventListener("click", generateStats);
-
-// document.querySelector("#create1").addEventListener("click", create1);
-// document.querySelector("#create2").addEventListener("click", create2);
 
 // const createFormHandler = async event => {
 //   event.preventDefault();

@@ -2,7 +2,6 @@
 <div id="create-character">
 
   <div class="page" id="page-name">
-
     <h3>Your Character's Name:</h3>
     <div class="">
       <input class="" type="text" id="character-name" />
@@ -15,9 +14,12 @@
     <h1>Select a race:</h1>
     <div id="races" class="grid grid-cols-1">
       {{#each races as |race|}}
+        <button
+          data-race={{race.id}}
+          data-description="{{race.description}}"
+          data-name={{race.race_name}}
+        >{{race.race_name}}</button>
 
-        <button data-race={{race.id}} data-description="{{race.description}}" data-name={{race.race_name}}>{{race.race_name}}</button>
-        
       {{/each}}
     </div>
     <div id="race-info" hidden>
@@ -31,7 +33,11 @@
     <h1>Select a class:</h1>
     <div id="classes" class="grid grid-cols-1">
       {{#each classes as |class|}}
-        <button data-class={{class.id}} data-description="{{class.description}}" data-name={{class.class_name}}>{{class.class_name}}</button>
+        <button
+          data-class={{class.id}}
+          data-description="{{class.description}}"
+          data-name={{class.class_name}}
+        >{{class.class_name}}</button>
 
       {{/each}}
     </div>
@@ -43,43 +49,69 @@
   </div>
 
   <div class="page" id="page-attributes" hidden>
-    <div class="grid grid-cols-3">
-      {{#each attributes as |attribute|}}
-        <div class="dice w-20 h-full" data-id={{attribute.id}}>
-          <h3>Dice</h3>
-          <button class="roll">Roll</button>
-          <div class="roll-container" hidden>
-            <div class="flex">
-              <div class="individual-roll w-6 h-6"></div>
-              <div class="individual-roll w-6 h-6"></div>
-              <div class="individual-roll w-6 h-6"></div>
-              <div class="individual-roll w-6 h-6"></div>
-            </div>
-            <p class="display" draggable="true"></p>
-            <select class="available-attributes">
-              <option>none</option>
-              {{#each attribute.diceAttributes as |diceAttribute|}}
-                <option
-                  value={{diceAttribute.id}}
-                >{{diceAttribute.name}}</option>
-              {{/each}}
-            </select>
-          </div>
+    <div class="container flex flex-col items-center mb-3">
+      {{! Dice Animation }}
+      <div
+        class="grid grid-cols-4 w-full max-w-[700px] place-items-center"
+        id="dice-animation-container"
+      >
+      </div>
 
-        </div>
-      {{/each}}
-    </div>
-    <div class="flex">
-      {{#each attributes as |attribute|}}
-        <p>{{attribute.name}}</p>
-        <div class="drop-zone h-20 w-20 bg-slate-200">Drop Zone</div>
-        <p data-id={{attribute.id}} class="assigned-dice"></p>
-        {{> attribute-frame}}
-      {{/each}}
+      {{! Attribute Rolls }}
+      <div class="grid grid-cols-3 gap-0 sm:gap-5 mb-3 w-full">
+        {{#each attributes as |attribute|}}
+          <div
+            class="roll flex w-full max-w-[150px] h-full aspect-[7/6] border-2 border-slate-200 rounded-lg p-1 sm:p-3 place-self-center"
+            data-id={{attribute.id}}
+          >
+            <button
+              class="roll-btn text-center place-self-center w-full h-full"
+            >Click to Roll</button>
+
+            {{! Can't display flex here as it over-rides the 'hidden' attribute }}
+            <div class="roll-container h-full w-full" hidden>
+              <div class="flex items-center justify-center h-2/3">
+                <p class="display text-6xl pointer-events-none"></p>
+              </div>
+              <select
+                data-id={{attribute.id}}
+                class="available-attributes w-full"
+              >
+                <option value="default" selected>--select--</option>
+                {{#each attribute.diceAttributes as |diceAttribute|}}
+                  <option
+                    value={{diceAttribute.id}}
+                  >{{diceAttribute.name}}</option>
+                {{/each}}
+              </select>
+            </div>
+
+          </div>
+        {{/each}}
+      </div>
+
+      {{! Attribute Assigning }}
+      <div class="grid grid-cols-3 lg:grid-cols-6 w-full place-items-center">
+        {{#each attributes as |attribute|}}
+          <div
+            class="relative flex w-full max-w-[150px] h-full aspect-[7/8] attribute-frame p-[10%]"
+          >
+            <div
+              class="flex flex-col justify-center w-full h-full display-value"
+            >
+              <p
+                data-id={{attribute.id}}
+                class="assigned-dice text-5xl text-center text-inherit value-p-text h-24 mt-3"
+              ></p>
+              <p class="text-center text-sm sm:text-md">{{attribute.name}}</p>
+            </div>
+          </div>
+        {{/each}}
+      </div>
     </div>
     <button data-page="page-class">Back</button>
     <button id="create-btn">Create Character</button>
   </div>
 </div>
 
-<script src="./js/create.js"></script>
+<script type="module" src="/js/create.js"></script>
