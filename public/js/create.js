@@ -11,8 +11,8 @@ const DIE_COUNT = 4;
 // Number of dice included in total (top scoring die only)
 const DIE_USED = 3;
 
-let selectedRace;
-let selectedClass;
+let race_id;
+let class_id;
 const attributeValues = {};
 
 const diceAnimationContainer = document.getElementById(
@@ -57,33 +57,36 @@ rootDiv.addEventListener("click", e => {
 
 // Listen for change events (used with Select elements to detect a new option input)
 rootDiv.addEventListener("input", e => {
-  // Find the parent dice element and get its id
-  const dice = e.target.closest(".roll").dataset.id;
+  // Find the parent dice element
+  const dice = e.target.closest(".roll");
+  if (!dice) return;
+  // Then get its id
+  const diceId = dice.dataset.id;
   // Get the value - (id of attribute selected)
   let value = e.target.value;
   // If it's the default Select option then remove the attribute assigned to the attributeValues map
   if (value === "default") {
-    delete attributeValues[dice].attribute;
+    delete attributeValues[diceId].attribute;
     value = null;
   } else {
-    attributeValues[dice].attribute = e.target.value;
+    attributeValues[diceId].attribute = e.target.value;
   }
   // Render all attributes at the same time to keep app synced
   // Pass the attribute being changed so we can animate it
-  renderAttributes(attributeValues[dice].attribute);
+  renderAttributes(attributeValues[diceId].attribute);
   // Run filter function on all Select elements so we don't show attributes that have already been assigned
   filterAttributeSelects();
 });
 
 raceButtons.addEventListener("click", e => {
   const value = e.target.dataset;
-  selectedRace = value;
+  race_id = value.id;
   renderInfoScreen(value, "race-info");
 });
 
 classButtons.addEventListener("click", e => {
   const value = e.target.dataset;
-  selectedClass = value;
+  class_id = value.id;
   renderInfoScreen(value, "class-info");
 });
 
@@ -203,65 +206,46 @@ const navPage = selectedPage => {
   }
 };
 
-function createCharacter() {
-  fetch("/api/user/character", {
-    body: JSON.stringify({}),
+const getAttributePostData = () => {
+  // Get an array of attributes (use attribute containers)
+  const attributes = Array.from(
+    document.querySelectorAll(".attribute-frame")
+  ).map(el => {
+    const attribute_id = el.dataset.id;
+    const value = Object.values(attributeValues).find(
+      item => item.attribute === attribute_id
+    )?.value;
+    return {
+      attribute_id,
+      value,
+    };
+  });
+  if (
+    attributes.length !== attributes.filter(attribute => attribute.value).length
+  )
+    return null;
+
+  return attributes;
+};
+
+async function createCharacter() {
+  // Attributes will return null if it is missing values for any attribute
+  const attributes = getAttributePostData();
+  let character_name = document.querySelector("#character-name").value.trim();
+  if (!character_name || !class_id || !race_id || !attributes) return;
+
+  const response = await fetch("/api/user/character", {
+    body: JSON.stringify({ character_name, class_id, race_id, attributes }),
     headers: {
       "Content-Type": "application/json",
     },
+    method: "POST",
   });
+
+  if (response.ok) {
+    const { id } = await response.json();
+    window.location = `/update/${id}`;
+  } else {
+    alert("Failed to create a character");
+  }
 }
-
-// const createFormHandler = async event => {
-//   event.preventDefault();
-
-//   // Collect values from the forms
-//   let character_name = document.querySelector("#character-name").value.trim();
-//   let class_id = document.querySelector("#character-class").value.trim();
-//   let race_id = document.querySelector("#character-race").value.trim();
-//   let hit_points = document.querySelector("#hit-points").value.trim();
-//   let strength = document.querySelector("#strength").value.trim();
-//   let dexterity = document.querySelector("#constitution").value.trim();
-//   let constitution = document.querySelector("#dexterity").value.trim();
-//   let wisdom = document.querySelector("#wisdom").value.trim();
-//   let intelligence = document.querySelector("#intelligence").value.trim();
-
-//   if (
-//     character_name &&
-//     class_id &&
-//     race_id &&
-//     hit_points &&
-//     strength &&
-//     dexterity &&
-//     constitution &&
-//     wisdom &&
-//     intelligence
-//   ) {
-//     const response = await fetch("/api/user/character", {
-//       method: "POST",
-//       body: JSON.stringify({
-//         character_name,
-//         class_id,
-//         race_id,
-//         hit_points,
-//         strength,
-//         dexterity,
-//         constitution,
-//         wisdom,
-//         intelligence,
-//       }),
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-
-//     if (response.ok) {
-//       const character = await response.json();
-//       document.location.replace(`/update/${character.id}`);
-//     } else {
-//       alert("Failed to create a character");
-//     }
-//   }
-// };
-
-// form.addEventListener("submit", createFormHandler);

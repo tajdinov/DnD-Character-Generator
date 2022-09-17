@@ -15,7 +15,7 @@
     <div id="races" class="grid grid-cols-1">
       {{#each races as |race|}}
         <button
-          data-race={{race.id}}
+          data-id={{race.id}}
           data-description="{{race.description}}"
           data-name={{race.race_name}}
         >{{race.race_name}}</button>
@@ -34,7 +34,7 @@
     <div id="classes" class="grid grid-cols-1">
       {{#each classes as |class|}}
         <button
-          data-class={{class.id}}
+          data-id={{class.id}}
           data-description="{{class.description}}"
           data-name={{class.class_name}}
         >{{class.class_name}}</button>
@@ -95,6 +95,7 @@
         {{#each attributes as |attribute|}}
           <div
             class="relative flex w-full max-w-[150px] h-full aspect-[7/8] attribute-frame p-[10%]"
+            data-id="{{attribute.id}}"
           >
             <div
               class="flex flex-col justify-center w-full h-full display-value"
