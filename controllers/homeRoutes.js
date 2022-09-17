@@ -57,6 +57,7 @@ router.get("/character/:charId", async (req, res, next) => {
   }
 });
 
+
 router.get("/update/:charId", async (req, res, next) => {
   try {
     const data = await Character.findByPk(req.params.charId, {
