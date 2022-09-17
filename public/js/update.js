@@ -9,6 +9,8 @@ const avatarImage = document.getElementById("avatar-img");
 const debouncer = {};
 const DEBOUNCE_TIMER = 800;
 const originalAttributes = [];
+const charId = window.location.pathname.split("/").pop();
+let originalName = nameInput.value;
 
 nameBtn.addEventListener("click", () => {
   if (nameInput.hasAttribute("readonly")) {
@@ -18,16 +20,43 @@ nameBtn.addEventListener("click", () => {
     nameUnderline.classList.add("ghost");
     nameInput.select(0, nameInput.length);
   } else {
-    nameInput.setAttribute("readonly", true);
-    nameIcon.classList.remove("fa-floppy-disk");
-    nameIcon.classList.add("fa-pen");
-    nameUnderline.classList.remove("ghost");
+    saveName();
   }
 });
+
+const setNameReadOnly = () => {
+  nameInput.setAttribute("readonly", true);
+  nameIcon.classList.remove("fa-floppy-disk");
+  nameIcon.classList.add("fa-pen");
+  nameUnderline.classList.remove("ghost");
+  nameInput.blur();
+};
 
 avatarUpload.addEventListener("input", uploadFile);
 
 attributeContainer.addEventListener("click", attributeHandler);
+
+nameInput.addEventListener("keypress", e => {
+  if (e.code === "Enter") saveName();
+});
+
+async function saveName() {
+  setNameReadOnly();
+  const character_name = nameInput.value.trim();
+  if (character_name === originalName) return;
+  const options = {
+    method: "PUT",
+    body: JSON.stringify({ character_name }),
+    headers: { "Content-Type": "application/json" },
+  };
+  console.log(options);
+  const response = await fetch(`/api/user/character/${charId}`, options);
+  if (response.ok) {
+    originalName = character_name;
+  } else {
+    alert("Failed to update the character's name");
+  }
+}
 
 async function attributeHandler(e) {
   if (e.target.classList.contains("update")) {
@@ -35,8 +64,7 @@ async function attributeHandler(e) {
     const attribute = e.target.getAttribute("data-value");
     // If another request was sent in the debounce period then cancel it
     clearTimeout(debouncer[attribute]);
-
-    // Get
+    // Get the increment value
     const addBy = e.target.classList.contains("up")
       ? 1
       : e.target.classList.contains("down")
@@ -74,10 +102,9 @@ const saveAttributes = async (attribute, value) => {
 };
 
 async function uploadFile(event) {
-  let char_id = window.location.pathname.split("/").pop();
   let formData = new FormData();
   formData.append("image", event.target.files[0]);
-  const response = await fetch(`/api/user/character/image/${char_id}`, {
+  const response = await fetch(`/api/user/character/image/${charId}`, {
     method: "POST",
     body: formData,
   });
