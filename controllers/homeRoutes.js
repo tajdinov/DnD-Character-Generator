@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
   } catch (error) {}
 });
 
-router.get("/create", async (req, res) => {
+router.get("/create", async (req, res, next) => {
   try {
     const [classData, raceData, attributeData] = await Promise.all([
       Class.findAll(),
