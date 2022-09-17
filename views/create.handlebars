@@ -67,9 +67,11 @@
             <button
               class="roll-btn text-center place-self-center w-full h-full"
             >Click to Roll</button>
-            <div class="roll-container flex flex-col h-full w-full" hidden>
-              <div class="flex items-center justify-center flex-1">
-                <p class="display text-6xl"></p>
+
+            {{! Can't display flex here as it over-rides the 'hidden' attribute }}
+            <div class="roll-container h-full w-full" hidden>
+              <div class="flex items-center justify-center h-2/3">
+                <p class="display text-6xl pointer-events-none"></p>
               </div>
               <select
                 data-id={{attribute.id}}
