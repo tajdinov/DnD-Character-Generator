@@ -1,13 +1,14 @@
-// Element containing all the attribute frames
 const attributeContainer = document.getElementById("attribute-container");
-// Image form
 const imageForm = document.querySelector("#upload-image-form");
 const nameIcon = document.getElementById("name-icon");
 const nameBtn = document.getElementById("name-btn");
 const nameInput = document.getElementById("name-input");
 const nameUnderline = document.getElementById("name-underline");
+const avatarUpload = document.getElementById("avatar-upload");
+const avatarImage = document.getElementById("avatar-img");
 const debouncer = {};
 const DEBOUNCE_TIMER = 800;
+const originalAttributes = [];
 
 nameBtn.addEventListener("click", () => {
   if (nameInput.hasAttribute("readonly")) {
@@ -24,9 +25,11 @@ nameBtn.addEventListener("click", () => {
   }
 });
 
-imageForm.addEventListener("submit", uploadFile);
+avatarUpload.addEventListener("input", uploadFile);
 
-attributeContainer.addEventListener("click", async e => {
+attributeContainer.addEventListener("click", attributeHandler);
+
+async function attributeHandler(e) {
   if (e.target.classList.contains("update")) {
     // Get the id of the 'through table' - CharacterAttribute.id
     const attribute = e.target.getAttribute("data-value");
@@ -54,7 +57,7 @@ attributeContainer.addEventListener("click", async e => {
     }, DEBOUNCE_TIMER);
     debouncer[attribute] = timer;
   }
-});
+}
 
 const saveAttributes = async (attribute, value) => {
   const response = await fetch(`/api/user/character/attribute/${attribute}`, {
@@ -66,22 +69,24 @@ const saveAttributes = async (attribute, value) => {
   });
 
   if (response.ok) {
-    console.log("save successful");
   } else {
   }
 };
 
 async function uploadFile(event) {
-  event.preventDefault();
   let char_id = window.location.pathname.split("/").pop();
   let formData = new FormData();
-  formData.append("image", fileupload.files[0]);
+  formData.append("image", event.target.files[0]);
   const response = await fetch(`/api/user/character/image/${char_id}`, {
     method: "POST",
     body: formData,
   });
   if (response.ok) {
-    document.location.replace(`/update/${char_id}`);
+    const data = await response.json();
+    // Because the url remains the same (awsbucket/user_id.character_id.png)
+    // We need to refresh the browser cache so that it doesn't just grab the existing image from memory (which will be the old image)
+    await fetch(data.location, { cache: "no-cache", mode: "no-cors" });
+    avatarImage.src = data.location;
   } else {
     alert("Failed to upoad");
   }

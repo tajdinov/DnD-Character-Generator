@@ -14,9 +14,13 @@ input:focus-visible {
   outline: rgb(6, 205, 215) solid 2px;
 }
 
-input:read-only {
+input:not([type="file"]):read-only {
   pointer-events: none;
   user-select: text;
+}
+
+input[type="file"] {
+  display: none;
 }
 
 .ghost {
