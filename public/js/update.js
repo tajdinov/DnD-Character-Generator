@@ -1,23 +1,32 @@
-const updateContainer = document.getElementById("attribute-container");
+// Element containing all the attribute frames
+const attributeContainer = document.getElementById("attribute-container");
+// Image form
+const imageForm = document.querySelector("#upload-image-form");
+const nameIcon = document.getElementById("name-icon");
+const nameBtn = document.getElementById("name-btn");
+const nameInput = document.getElementById("name-input");
+const nameUnderline = document.getElementById("name-underline");
 const debouncer = {};
 const DEBOUNCE_TIMER = 800;
 
-const saveAttributes = async (attribute, value) => {
-  const response = await fetch(`/api/user/character/attribute/${attribute}`, {
-    method: "PUT",
-    body: JSON.stringify({
-      value,
-    }),
-    headers: { "Content-Type": "application/json" },
-  });
-
-  if (response.ok) {
-    console.log("save successful");
+nameBtn.addEventListener("click", () => {
+  if (nameInput.hasAttribute("readonly")) {
+    nameInput.removeAttribute("readonly");
+    nameIcon.classList.remove("fa-pen");
+    nameIcon.classList.add("fa-floppy-disk");
+    nameUnderline.classList.add("ghost");
+    nameInput.select(0, nameInput.length);
   } else {
+    nameInput.setAttribute("readonly", true);
+    nameIcon.classList.remove("fa-floppy-disk");
+    nameIcon.classList.add("fa-pen");
+    nameUnderline.classList.remove("ghost");
   }
-};
+});
 
-updateContainer.addEventListener("click", async e => {
+imageForm.addEventListener("submit", uploadFile);
+
+attributeContainer.addEventListener("click", async e => {
   if (e.target.classList.contains("update")) {
     // Get the id of the 'through table' - CharacterAttribute.id
     const attribute = e.target.getAttribute("data-value");
@@ -47,20 +56,33 @@ updateContainer.addEventListener("click", async e => {
   }
 });
 
-const form = document.querySelector("#upload-image-form");
-const uploadFile = async event => {
+const saveAttributes = async (attribute, value) => {
+  const response = await fetch(`/api/user/character/attribute/${attribute}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      value,
+    }),
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    console.log("save successful");
+  } else {
+  }
+};
+
+async function uploadFile(event) {
   event.preventDefault();
-  let char_id = window.location.pathname.split("/").pop()
-  let formData = new FormData(); 
+  let char_id = window.location.pathname.split("/").pop();
+  let formData = new FormData();
   formData.append("image", fileupload.files[0]);
   const response = await fetch(`/api/user/character/image/${char_id}`, {
-    method: "POST", 
-    body: formData
-  }); 
+    method: "POST",
+    body: formData,
+  });
   if (response.ok) {
     document.location.replace(`/update/${char_id}`);
   } else {
     alert("Failed to upoad");
-  }};
-  form.addEventListener("submit", uploadFile);
- 
+  }
+}
