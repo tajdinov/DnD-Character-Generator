@@ -60,8 +60,6 @@ const displayRoll = {
   },
 };
 
-console.log(Math.E);
-
 // Perform the dice rolling animation
 function animate(finishTime, dice, display, scene, camera, renderer) {
   let timeRemaining = finishTime - Date.now();
@@ -96,6 +94,15 @@ const pushBackwards = (dice, scene, camera, renderer) => {
   };
 };
 
+const onResize = (div, scene, camera, renderer) => {
+  return () => {
+    renderer.setSize(div.clientWidth, div.clientHeight);
+    requestAnimationFrame(() => {
+      renderer.render(scene, camera);
+    });
+  };
+};
+
 // Initialise the scene and dice
 // Return an object with controls for the dice and a reference to the element holding it
 const initDice = async element => {
@@ -105,7 +112,7 @@ const initDice = async element => {
   const materials = await getMaterials();
   const dice = new THREE.Mesh(cubeGeometry, materials);
   camera.position.z = 6;
-  renderer.setSize(150, 150);
+  renderer.setSize(element.clientWidth, element.clientHeight);
   scene.add(dice);
   scene.background = new THREE.Color("rgb(255, 255, 255)");
   element.appendChild(renderer.domElement);
@@ -113,6 +120,7 @@ const initDice = async element => {
   return {
     rollDice: rollDice(dice, scene, camera, renderer),
     pushBackwards: pushBackwards(dice, scene, camera, renderer),
+    onResize: onResize(element, scene, camera, renderer),
     element,
   };
 };

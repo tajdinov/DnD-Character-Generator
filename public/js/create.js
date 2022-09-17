@@ -19,11 +19,17 @@ const diceAnimationContainer = document.getElementById(
   "dice-animation-container"
 );
 
+// Create dice containers and arrange them so that renderer can be sized correctly
+const diceContainers = new Array(DIE_COUNT).fill(0).map(_ => {
+  const div = document.createElement("div");
+  div.classList.add("dice-container");
+  diceAnimationContainer.appendChild(div);
+  return div;
+});
+
 // Create an array that holds controls to each dice
 // Create and populate div elements in the selected container at the same time
-const diceAnimations = new Array(DIE_COUNT).fill(0).map(async _ => {
-  const div = document.createElement("div");
-  diceAnimationContainer.appendChild(div);
+const diceAnimations = diceContainers.map(async div => {
   div.classList.add("dice");
   const returnValue = { ...(await initDice(div)) };
   div.addEventListener("click", () => {
@@ -31,6 +37,13 @@ const diceAnimations = new Array(DIE_COUNT).fill(0).map(async _ => {
     returnValue.rollDice(value);
   });
   return returnValue;
+});
+
+window.addEventListener("resize", () => {
+  // Leave renderers alone unless small drops below
+  diceAnimations.forEach(async dice => {
+    (await dice).onResize();
+  });
 });
 
 // Listen for clicks from any element that has a data-page attribute
@@ -93,16 +106,20 @@ const renderInfoScreen = (data, id) => {
   displayInfo.innerText = data.description;
 };
 
-const renderAttributes = () => {
+const renderAttributes = attribute => {
   Array.from(document.querySelectorAll(".assigned-dice")).forEach(display => {
     const item = Object.values(attributeValues).find(item => {
       return item.attribute === display.dataset.id;
     });
     if (!item) {
       display.innerText = "";
+      display.classList.remove("emphasize");
       return;
     }
     display.innerText = item.value;
+    if (display.dataset.id === attribute) {
+      display.classList.add("emphasize");
+    }
   });
 };
 

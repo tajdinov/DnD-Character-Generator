@@ -3,7 +3,14 @@
 }
 
 .dice {
-  transition: 2s;
+  transition: 3.5s;
+}
+
+/* Styling applied to each dice individually */
+.dice-container {
+  width: 100%;
+  max-width: 150px;
+  aspect-ratio: 1 / 1;
 }
 
 .translucent {
