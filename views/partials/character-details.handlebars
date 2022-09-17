@@ -1,16 +1,17 @@
 <section class="card">
-  <a href="/character/{{id}}">
-    <header>{{character_name}}{{avatar}}</header>
-    <p>{{strength}}</p>
-    <p>{{dexterity}}</p>
-    <p>{{constitution}}</p>
-    <p>{{wisdom}}</p>
-    <p>{{intelligence}}</p>
-    <p>{{strength}}</p>
+ 
+  <header>{{character_name}}{{character.avatar}}</header>
+   
+    <p>Race: {{race.race_name}}</p>
+    <p>Class: {{class.class_name}}</p>
+    <p>{{#each attributes as |attribute|}}
+        {{> attribute}}
+       {{/each}}
+    </p>
 
     <div class="col-md-4">
-      <button class="btn btn-sm btn-danger" data-id="{{character.id}}">DELETE</button>
+      <a class="btn btn-sm btn-danger" data-id="{{character.id}}">Delete</a>
+      <a class="btn btn-sm btn-danger" data-id="{{character.id}}" href="/update/{{id}}">Update</a>
     </div>
 
-  </a>
 </section>
