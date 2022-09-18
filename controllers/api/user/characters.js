@@ -82,12 +82,14 @@ router.put("/:id", async (req, res, next) => {
     const character = await Character.findByPk(id);
     // Limit the character data that can be modified here to just name and description
     // Don't want changes to class_id and race_id leaking through
-    const { character_name, description } = req.body;
+    const { character_name, character_description, description } = req.body;
     const params = {};
     if (character_name) params.character_name = character_name;
+    if (character_description) params.character_description = character_description;
     if (description) params.description = description;
     await character.update(params);
     res.sendStatus(200);
+    console.log(params);
   } catch (error) {
     next(error);
   }

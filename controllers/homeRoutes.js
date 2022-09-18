@@ -89,13 +89,16 @@ router.get("/update/:charId", async (req, res, next) => {
         { model: Attribute, as: "attributes" },
         { model: Class, as: "class" },
         { model: Race, as: "race" },
-      ],
+      ], 
+      
     });
     if (!data) {
       return res.redirect("/");
     }
     const character = data.get({ plain: true });
+    
     res.render("update", { ...character });
+    
   } catch (error) {
     next(error);
   }

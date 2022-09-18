@@ -3,7 +3,11 @@ const imageForm = document.querySelector("#upload-image-form");
 const nameIcon = document.getElementById("name-icon");
 const nameBtn = document.getElementById("name-btn");
 const nameInput = document.getElementById("name-input");
+const descriptionIcon = document.getElementById("description-icon");
+const descriptionBtn = document.getElementById("description-btn");
+const descriptionInput = document.getElementById("description-input");
 const nameUnderline = document.getElementById("name-underline");
+const descriptionUnderline = document.getElementById("description-underline");
 const avatarUpload = document.getElementById("avatar-upload");
 const avatarImage = document.getElementById("avatar-img");
 const debouncer = {};
@@ -11,6 +15,7 @@ const DEBOUNCE_TIMER = 800;
 const originalAttributes = [];
 const charId = window.location.pathname.split("/").pop();
 let originalName = nameInput.value;
+let originalDescription = descriptionInput.String;
 
 nameBtn.addEventListener("click", () => {
   if (nameInput.hasAttribute("readonly")) {
@@ -24,6 +29,18 @@ nameBtn.addEventListener("click", () => {
   }
 });
 
+descriptionBtn.addEventListener("click", () => {
+  if (descriptionInput.hasAttribute("readonly")) {
+    descriptionInput.removeAttribute("readonly");
+    descriptionIcon.classList.remove("fa-pen");
+    descriptionIcon.classList.add("fa-floppy-disk");
+    descriptionUnderline.classList.add("ghost");
+    descriptionInput.select(0, descriptionInput.length);
+  } else {
+    saveDescription();
+  }
+});
+
 const setNameReadOnly = () => {
   nameInput.setAttribute("readonly", true);
   nameIcon.classList.remove("fa-floppy-disk");
@@ -32,12 +49,24 @@ const setNameReadOnly = () => {
   nameInput.blur();
 };
 
+const setDescriptionReadOnly = () => {
+  descriptionInput.setAttribute("readonly", true);
+  descriptionIcon.classList.remove("fa-floppy-disk");
+  descriptionIcon.classList.add("fa-pen");
+  descriptionUnderline.classList.remove("ghost");
+  descriptionInput.blur();
+};
+
 avatarUpload.addEventListener("input", uploadFile);
 
 attributeContainer.addEventListener("click", attributeHandler);
 
 nameInput.addEventListener("keypress", e => {
   if (e.code === "Enter") saveName();
+});
+
+descriptionInput.addEventListener("keypress", e => {
+  if (e.code === "Enter") saveDescription();
 });
 
 async function saveName() {
@@ -55,6 +84,24 @@ async function saveName() {
     originalName = character_name;
   } else {
     alert("Failed to update the character's name");
+  }
+}
+
+async function saveDescription() {
+  setDescriptionReadOnly();
+  const character_description = descriptionInput.value.trim();
+  if (character_description === originalDescription) return;
+  const options = {
+    method: "PUT",
+    body: JSON.stringify({ character_description }),
+    headers: { "Content-Type": "application/json" },
+  };
+  console.log(options);
+  const response = await fetch(`/api/user/character/${charId}`, options);
+  if (response.ok) {
+    originalDescription = character_description;
+  } else {
+    alert("Failed to update the character's description");
   }
 }
 
