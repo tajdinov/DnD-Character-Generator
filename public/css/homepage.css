@@ -7,3 +7,16 @@ button {
 button:hover {
   background-image: url(/images/button-accept.svg);
 }
+
+.attribute-frame {
+  background-image: url(/images/border.svg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.frame {
+  background-image: url(/images/button.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
