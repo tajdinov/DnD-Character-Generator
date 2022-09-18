@@ -36,91 +36,6 @@
               </button>
             {{/each}}
           {{/if}}
-          {{! <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            character
-          </button>
-          <button
-            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
-          >
-            Last character
-          </button> }}
         </div>
       </div>
       <div class="relative mt-3">
@@ -133,23 +48,67 @@
       </div>
     </div>
 
-    <section class="flex-grow border-black border-2">
-      <h2>Name: <span id="selected-character-name"></span></h2>
-      <h2>Race:
-        <span id="selected-character-race"></span>
-      </h2>
-      <h2>Class:
-        <span id="selected-character-class"></span>
+    <section
+      class="relative grid grid-rows-[min-content,_minmax(0,_1fr),_min-content] flex-grow border-black border-2 p-5"
+    >
+      {{! PREVIEW HEADER }}
+      <div class="">
+        <div class="flex">
+          {{! NAME and CLASS }}
+          <div class="w-1/2">
+            <h2 class="text-4xl"><span id="selected-character-name"></span></h2>
+            <h2>Race:
+              <span id="selected-character-race"></span>
+            </h2>
+            <h2>Class:
+              <span id="selected-character-class"></span>
+            </h2>
+          </div>
+          {{! IMAGE }}
+          <img
+            class="w-1/2 aspect-square object-cover"
+            id="selected-character-avatar"
+            src=""
+            alt=""
+          />
+        </div>
+        <div>
+          {{#if attributes.length}}
+            {{#each attributes as |attribute|}}
+              <p>{{attribute.name}}:
+                <span
+                  id="selected-character-attribute-{{attribute.id}}"
+                ></span></p>
+            {{/each}}
+          {{/if}}
+        </div>
 
-      </h2>
-      <img id="selected-character-avatar" src="" alt="" />
+      </div>
 
-      {{#if attributes.length}}
-        {{#each attributes as |attribute|}}
-          <p>{{attribute.name}}:
-            <span id="selected-character-attribute-{{attribute.id}}"></span></p>
-        {{/each}}
-      {{/if}}
+      {{! SCROLLABLE BODY }}
+      <div
+        id="selected-character-description"
+        class="h-full overflow-auto border-2 border-black"
+      >
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro
+        inventore, amet, expedita, reiciendis aliquam similique libero quas enim
+        sequi odio aspernatur? Minima deleniti eum laudantium voluptatum
+        molestias veritatis repellat! Eligendi a ipsam est et voluptas unde
+        excepturi cum harum, ab maiores tenetur cumque magnam alias voluptatibus
+        culpa quod! Quae, cupiditate? Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Tempore eaque nulla est hic? Corporis, libero quod!
+        Aspernatur eveniet earum adipisci similique aut praesentium id nulla
+        perspiciatis repudiandae nihil aliquam voluptatibus ullam, excepturi,
+        molestias impedit doloribus vero ducimus quia, provident non!
+        Dignissimos culpa quo ad, eaque ipsam dicta consequatur tempore esse
+        nihil et soluta non repellendus illo. Dolorem unde, atque, eum soluta ab
+        odit culpa corrupti provident ducimus tenetur minima! Et repellat
+        provident veniam obcaecati hic labore aliquam eum numquam eaque, sit
+        nobis mollitia voluptatem placeat aperiam, odit voluptates sed modi
+        laudantium sequi minus! Architecto minima veritatis eligendi nisi.
+        Dicta, facere.
+      </div>
+      {{! BUTTONS }}
       <div class="flex">
         <a id="selected-character-edit" class="" href="#">Edit</a>
       </div>
