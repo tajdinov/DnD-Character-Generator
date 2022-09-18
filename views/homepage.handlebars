@@ -40,7 +40,7 @@
           {{#if characters.length}}
             {{#each characters as |character|}}
               <button
-                class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+                class="sketch text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
                 data-id="{{character.id}}"
                 data-name="{{character.character_name}}"
                 data-avatar="{{character.avatar}}"
@@ -65,13 +65,13 @@
 
     {{! PREVIEW BOX }}
     <section
-      class="relative grid grid-rows-[min-content,_minmax(0,_1fr),_min-content] h-full border-zinc-200 border-2 p-5"
+      class="relative grid grid-rows-[min-content,_min-content,_minmax(0,_1fr)] h-full border-zinc-200 border-2 p-5 gap-5"
     >
       {{! PREVIEW HEADER }}
       <div class="h-full">
         <div class="flex max-h-[50vh] overflow-scroll">
           {{! NAME and CLASS }}
-          <div class="flex-grow">
+          <div class="flex flex-col flex-grow">
             <h2 class="text-4xl"><span id="selected-character-name"></span></h2>
             <h2>Race:
               <span id="selected-character-race"></span>
@@ -79,10 +79,14 @@
             <h2>Class:
               <span id="selected-character-class"></span>
             </h2>
+            {{! BUTTONS }}
+            <div class="flex h-full items-end">
+              <a id="selected-character-edit" class="" href="#">Edit</a>
+            </div>
           </div>
           {{! IMAGE }}
           <div
-            class="relative w-1/2 max-w-[300px] aspect-square rounded-lg overflow-hidden frame"
+            class="relative w-1/2 max-w-[300px] aspect-square rounded-lg overflow-hidden"
           >
             <img
               class="absolute w-full h-full object-fill top-0 left-0"
@@ -97,26 +101,25 @@
             />
 
           </div>
+
         </div>
-        <div class="w-full grid grid-cols-3 lg:grid-cols-6 mt-5">
-          {{#if attributes.length}}
-            {{#each attributes as |attribute|}}
-              <div class="grid place-items-center display-value">
-                <div
-                  class="w-full max-w-[130px] aspect-[5/6] flex flex-col justify-center attribute-frame"
-                >
-                  <p
-                    id="selected-character-attribute-{{attribute.id}}"
-                    class="text-5xl text-center text-inherit value-p-text"
-                  ></p>
-                  <p
-                    class="text-center text-md sm:text-lg"
-                  >{{attribute.name}}</p>
-                </div>
+      </div>
+      <div class="w-full grid grid-cols-3 lg:grid-cols-6 mt-5">
+        {{#if attributes.length}}
+          {{#each attributes as |attribute|}}
+            <div class="grid place-items-center display-value">
+              <div
+                class="w-full max-w-[130px] aspect-[5/6] flex flex-col justify-center attribute-frame"
+              >
+                <p
+                  id="selected-character-attribute-{{attribute.id}}"
+                  class="text-5xl text-center text-inherit value-p-text"
+                ></p>
+                <p class="text-center text-md sm:text-lg">{{attribute.name}}</p>
               </div>
-            {{/each}}
-          {{/if}}
-        </div>
+            </div>
+          {{/each}}
+        {{/if}}
 
       </div>
 
@@ -143,10 +146,7 @@
         sed modi laudantium sequi minus! Architecto minima veritatis eligendi
         nisi. Dicta, facere.
       </div>
-      {{! BUTTONS }}
-      <div class="flex h-full">
-        <a id="selected-character-edit" class="" href="#">Edit</a>
-      </div>
+
     </section>
   </div>
 
