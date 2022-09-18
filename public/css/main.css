@@ -47,11 +47,20 @@ main {
   animation: dnd 3s ease infinite;
 }
 
+button.sketch {
+  background-image: url(/images/button.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+button.sketch:hover {
+  background-image: url(/images/button-accept.svg);
+}
+
 .attribute-frame {
   background-image: url(/images/border.svg);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  font-family: fantasy;
 }
 
 @keyframes header_anim {

@@ -25,7 +25,7 @@
   </head>
 
   <body>
-    <div class="h-screen grid grid-rows-[15%,_minmax(0,_1fr),_100px]">
+    <div class="h-screen grid grid-rows-[10%,_minmax(0,_1fr),_10%]">
 
       <header class="header_block flex-initial h-full">
         <div id="header_block">
@@ -38,14 +38,37 @@
 
         {{{body}}}
       </main>
-      <footer class="flex-none bg-zinc-400">
+      <footer class="grid place-items-center flex-none px-8">
 
         {{#if logged_in}}
-          <button class="btn btn-outline-dark" id="logout">Logout</button>
-          <script src="/js/logout.js"></script>
-          {{! create a buntton that will take the user to the homepage }}
-          <button><a class="btn btn-outline-primary" href="/">Home</a></button>
+          <div class="flex relative justify-center h-12 w-fit gap-3">
+            <img
+              class="absolute w-full left-0 bottom-0 translate-y-1/2"
+              src="/images/underline.png"
+              alt=""
+            />
+            <a class="" href="/">
+              <button class="sm:w-36 h-full px-3">
+                Characters
+              </button>
+            </a>
+
+            <a class="btn btn-outline-primary" href="/settings">
+              <button class="sm:w-36 h-full px-3">
+
+                Settings
+              </button>
+            </a>
+            <button
+              class="sm:w-36 h-full place-self-end px-3"
+              id="logout"
+            >Logout</button>
+            <script src="/js/logout.js"></script>
+
+          </div>
         {{/if}}
+
+        {{! Footer right }}
       </footer>
     </div>
   </body>
