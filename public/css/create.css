@@ -2,6 +2,10 @@
   font-family: fantasy;
 }
 
+input:focus-visible {
+  outline: none;
+}
+
 .dice {
   transition: 3.5s;
 }
@@ -15,6 +19,12 @@
 
 .translucent {
   opacity: 0.2;
+}
+
+button {
+  background-image: url(/images/button.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .emphasize {
