@@ -1,42 +1,48 @@
+<link rel="stylesheet" href="/css/login.css"/>
+<div class="login-cont grid h-screen place-items-center mt-10">
+  <img src="/images/login.jpg" style="width:30%">
 <div class="login-box">
-  <h2>Login</h2>
+  <h1 class="text-5xl font-black">Login</h1>
   <form class="login-form" autocomplete="off">
-    <div class="user-box">
+    <div class="user-box mr-8">
       <input
-        class="form-input"
+        class="form-input bg-zinc-800 text-slate-50"
         type="text"
         autocomplete="off"
         id="email-login"
         name=""
         required=""
       />
-      <label for="email-login">Email</label>
+      <label for="email-login" class="text-2xl">Email</label>
     </div>
     <div class="user-box">
       <input
-        class="form-input"
+        class="form-input bg-zinc-800 text-slate-50"
         type="password"
         autocomplete="off"
         id="password-login"
         name=""
         required=""
       />
-      <label for="password-login">Password</label>
+      <label for="password-login" class="text-2xl">Password</label>
     </div>
-    <button class="btn_submit" type="submit" href="#">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      Login
-    </button>
-    <a class="btn_signup" type="submit" href="/signup">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="flex justify-around mt-20">
+      <button class="btn_submit text-3xl" type="submit" href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Login
+      </button>
+      <a class="btn_signup text-3xl" type="submit" href="/signup">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       Signup
-    </a>
+      </a>
+    </div>
+    
   </form>
 </div>
 <div class="guide">
@@ -45,6 +51,7 @@
     character, our character builder tool and digital character sheets make it
     easier than ever to play the game!
   </p>
+</div>
 </div>
 
 <script src="./js/login.js"></script>

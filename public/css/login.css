@@ -1,0 +1,28 @@
+.login-cont {
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+}
+
+.login-box {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+}
+
+.user-box {
+    margin-top: 15%;
+}
+
+.btn_submit,
+.btn_signup {
+    background-image: url(/images/button.png);
+    background-size: 100% 110%;
+    background-repeat: no-repeat;
+}
+  
+.btn_submit:hover,
+.btn_signup:hover {
+    background-image: url(/images/button-accept.svg);
+}
