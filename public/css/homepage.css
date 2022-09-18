@@ -6,9 +6,18 @@ a:hover {
   text-shadow: 0 0 20px rgb(6, 174, 3);
 }
 
+.preview_box {
+  background-image: url(/images/border-dragon.jpg);
+  background-size: 15%;
+  background-repeat: no-repeat;
+  background-position-x: 99%;
+  background-position-y: -1%
+
+}
+
 .fancy {
   background-image: url(/images/fancy-button.png);
-  background-size: 100% 100%;
+  background-size: 50%;
   background-repeat: no-repeat;
   background-color: rgba(217, 191, 46, 0.432);
   transition: 200ms;
