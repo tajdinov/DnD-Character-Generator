@@ -8,18 +8,10 @@
 
         <h3>Your Character's Name:</h3>
 
-        <input
-          class="w-full text-center text-5xl"
-          type="text"
-          id="character-name"
-          spellcheck="false"
-        />
+        <input class="w-full text-center text-5xl" type="text" id="character-name" spellcheck="false" />
         <img class="-mt-3 w-full" src="/images/underline.png" alt="" />
 
-        <button
-          data-page="page-race"
-          class="next relative w-60 text-xl m-5 py-3 px-5 focus-visible:outline-none"
-        >
+        <button data-page="page-race" class="next relative w-60 text-xl m-5 py-3 px-5 focus-visible:outline-none">
           Next</button>
       </div>
     </div>
@@ -32,33 +24,19 @@
       <div class="flex flex-row max-w-xl mx-auto mt-16 p-3">
         <div id="races" class="grid grid-cols-1 w-40 flex-none">
           {{#each races as |race|}}
-            <button
-              class="w-full py-2"
-              data-id={{race.id}}
-              data-description="{{race.description}}"
-              data-name={{race.race_name}}
-            >{{race.race_name}}</button>
+          <button class="w-full py-2" data-id={{race.id}} data-description="{{race.description}}"
+            data-name={{race.race_name}}>{{race.race_name}}</button>
 
           {{/each}}
         </div>
         <div id="race-info" class="frame relative" hidden>
-          {{! <img
-            src="/images/corner-frame.png"
-            class="absolute top-0 left-0 w-1/4"
-            alt=""
-          /> }}
+          {{! <img src="/images/corner-frame.png" class="absolute top-0 left-0 w-1/4" alt="" /> }}
           <p class="info pl-[10%] pt-[10%]"></p>
         </div>
       </div>
       <div class="flex justify-center">
-        <button
-          data-page="page-name"
-          class="prev w-40 text-xl m-5 py-2 px-5 focus-visible:outline-none"
-        >Back</button>
-        <button
-          data-page="page-class"
-          class="next w-40 text-xl m-5 py-2 px-5 focus-visible:outline-none"
-        >Next</button>
+        <button data-page="page-name" class="prev w-40 text-xl m-5 py-2 px-5 focus-visible:outline-none">Back</button>
+        <button data-page="page-class" class="next w-40 text-xl m-5 py-2 px-5 focus-visible:outline-none">Next</button>
 
       </div>
     </div>
@@ -72,34 +50,21 @@
       <div class="flex flex-row max-w-xl mx-auto mt-16 p-3">
         <div id="classes" class="grid grid-cols-1 w-40 flex-none">
           {{#each classes as |class|}}
-            <button
-              class="w-full py-2"
-              data-id={{class.id}}
-              data-description="{{class.description}}"
-              data-name={{class.class_name}}
-            >{{class.class_name}}</button>
+          <button class="w-full py-2" data-id={{class.id}} data-description="{{class.description}}"
+            data-name={{class.class_name}}>{{class.class_name}}</button>
 
           {{/each}}
         </div>
         <div id="class-info" class="frame relative" hidden>
-          <img
-            src="/images/corner-frame.png"
-            class="absolute top-0 left-0 w-1/4"
-            alt=""
-          />
+          <img src="/images/corner-frame.png" class="absolute top-0 left-0 w-1/4" alt="" />
           <p class="info p-[10%]"></p>
 
         </div>
       </div>
       <div class="flex justify-center">
-        <button
-          data-page="page-race"
-          class="prev w-40 text-xl m-5 py-2 px-5 focus-visible:outline-none"
-        >Back</button>
-        <button
-          data-page="page-attributes"
-          class="next w-40 text-xl m-5 py-2 px-5 focus-visible:outline-none"
-        >Next</button>
+        <button data-page="page-race" class="prev w-40 text-xl m-5 py-2 px-5 focus-visible:outline-none">Back</button>
+        <button data-page="page-attributes"
+          class="next w-40 text-xl m-5 py-2 px-5 focus-visible:outline-none">Next</button>
       </div>
     </div>
   </div>
@@ -108,62 +73,45 @@
   <div class="page" id="page-attributes" hidden>
     <div class="container flex flex-col items-center mb-3">
       {{! Dice Animation }}
-      <div
-        class="grid grid-cols-4 w-full max-w-[700px] place-items-center"
-        id="dice-animation-container"
-      >
+      <div class="grid grid-cols-4 w-full max-w-[700px] place-items-center" id="dice-animation-container">
       </div>
 
       {{! Attribute Rolls }}
       <div class="grid grid-cols-3 gap-0 sm:gap-5 mb-3 w-full">
         {{#each attributes as |attribute|}}
-          <div
-            class="roll flex w-full max-w-[150px] h-full aspect-[7/6] border-2 border-slate-200 rounded-lg p-1 sm:p-3 place-self-center"
-            data-id={{attribute.id}}
-          >
-            <button
-              class="roll-btn text-center place-self-center w-full h-full"
-            >Click to Roll</button>
+        <div
+          class="roll flex w-full max-w-[150px] h-full aspect-[7/6] border-2 border-slate-200 rounded-lg p-1 sm:p-3 place-self-center"
+          data-id={{attribute.id}}>
+          <button class="roll-btn text-center place-self-center w-full h-full">Click to Roll</button>
 
-            {{! Can't display flex here as it over-rides the 'hidden' attribute }}
-            <div class="roll-container h-full w-full" hidden>
-              <div class="flex items-center justify-center h-2/3">
-                <p class="display text-6xl pointer-events-none"></p>
-              </div>
-              <select
-                data-id={{attribute.id}}
-                class="available-attributes w-full"
-              >
-                <option value="default" selected>--select--</option>
-                {{#each attribute.diceAttributes as |diceAttribute|}}
-                  <option
-                    value={{diceAttribute.id}}
-                  >{{diceAttribute.name}}</option>
-                {{/each}}
-              </select>
+          {{! Can't display flex here as it over-rides the 'hidden' attribute }}
+          <div class="roll-container h-full w-full" hidden>
+            <div class="flex items-center justify-center h-2/3">
+              <p class="display text-6xl pointer-events-none"></p>
             </div>
-
+            <select data-id={{attribute.id}} class="available-attributes w-full">
+              <option value="default" selected>--select--</option>
+              {{#each attribute.diceAttributes as |diceAttribute|}}
+              <option value={{diceAttribute.id}}>{{diceAttribute.name}}</option>
+              {{/each}}
+            </select>
           </div>
+
+        </div>
         {{/each}}
       </div>
 
       {{! Attribute Assigning }}
       <div class="grid grid-cols-3 lg:grid-cols-6 w-full place-items-center">
         {{#each attributes as |attribute|}}
-          <div
-            class="relative flex w-full max-w-[150px] h-full aspect-[7/8] attribute-frame p-[10%]"
-            data-id="{{attribute.id}}"
-          >
-            <div
-              class="flex flex-col justify-center w-full h-full display-value"
-            >
-              <p
-                data-id={{attribute.id}}
-                class="assigned-dice text-5xl text-center text-inherit value-p-text h-24 mt-3"
-              ></p>
-              <p class="text-center text-sm sm:text-md">{{attribute.name}}</p>
-            </div>
+        <div class="relative flex w-full max-w-[150px] h-full aspect-[7/8] attribute-frame p-[10%]"
+          data-id="{{attribute.id}}">
+          <div class="flex flex-col justify-center w-full h-full display-value">
+            <p data-id={{attribute.id}} class="assigned-dice text-5xl text-center text-inherit value-p-text h-24 mt-3">
+            </p>
+            <p class="text-center text-sm sm:text-md">{{attribute.name}}</p>
           </div>
+        </div>
         {{/each}}
       </div>
     </div>

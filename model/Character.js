@@ -21,6 +21,11 @@ Character.init(
       allowNull: false,
     },
 
+    character_description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
     avatar: {
       type: DataTypes.STRING,
       allowNull: true,
