@@ -6,6 +6,7 @@ const classButtons = document.getElementById("classes");
 const pageCollection = document.querySelectorAll(".page");
 const dicePage = document.getElementById("page-attributes");
 const createBtn = document.getElementById("create-btn");
+const nameInput = document.querySelector("#character-name");
 // Total number of dice rolled
 const DIE_COUNT = 4;
 // Number of dice included in total (top scoring die only)
@@ -52,6 +53,15 @@ rootDiv.addEventListener("click", e => {
   const page = e.target.dataset.page;
   if (page) {
     navPage(page);
+  }
+});
+
+nameInput.addEventListener("input", e => {
+  const button = e.target.parentElement.querySelector("button");
+  if (e.target.value.length > 0) {
+    button.removeAttribute("disabled");
+  } else {
+    button.setAttribute("disabled", true);
   }
 });
 
@@ -231,7 +241,7 @@ const getAttributePostData = () => {
 async function createCharacter() {
   // Attributes will return null if it is missing values for any attribute
   const attributes = getAttributePostData();
-  let character_name = document.querySelector("#character-name").value.trim();
+  let character_name = nameInput.value.trim();
   if (!character_name || !class_id || !race_id || !attributes) return;
 
   const response = await fetch("/api/user/character", {

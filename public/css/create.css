@@ -17,16 +17,15 @@ input:focus-visible {
   opacity: 0.2;
 }
 
-button {
-  background-image: url(/images/button.png);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
 button.next {
   background-image: url(/images/button-accept.svg);
   background-size: 100% 100%;
   background-repeat: no-repeat;
+}
+
+button.next:disabled {
+  background-image: url(/images/button.png);
+  opacity: 0.5;
 }
 
 .emphasize {
