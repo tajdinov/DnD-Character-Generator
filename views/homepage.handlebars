@@ -1,61 +1,161 @@
-<div class="row">
-  <div class="col-auto">
-    <h2 class="text-cyan-700 mt-5 ml-3 text-3xl">Welcome, {{first_name}}!</h2>
-  </div>
-</div>
+<link rel="stylesheet" href="/css/homepage.css" />
 
-<div class="character-list flex flex-row flex-wrap my-10 mx-20">
-  <div class="your_characters_box basis-1/4 mr-6">
-    <h3 class="text-xl font-semibold">Your Characters</h3>
+<div class="mx-auto grid grid-rows-[70px,_minmax(0,_1fr)] h-full p-5">
 
-    <div id="characters" class="grid p-5 mt-3">
-      <a
-        class="btn btn-outline-primary mb-3"
-        type="submit"
-        href="/create"
-      >Create a Character</a>
+  <h2 class="font-bold text-3xl mb-5">Welcome, {{first_name}}!</h2>
 
-      {{! CHARACTER LIST }}
-      <div id="character-list">
-        {{#if characters.length}}
-          {{#each characters as |character|}}
-            <button
-              class="text-xl border-2 py-3 px-5"
-              data-id="{{character.id}}"
-              data-name="{{character.character_name}}"
-              data-avatar="{{character.avatar}}"
-              data-class="{{character.class.class_name}}"
-              data-race="{{character.race.race_name}}"
-            >
-              {{character.character_name}}
-            </button>
-          {{/each}}
-        {{/if}}
+  <div class="flex flex-col sm:flex-row gap-5">
+    <div
+      class="grid grid-rows-[50px,_minmax(0,_1fr),_30px] p-3 w-full sm:w-1/3 sm:max-w-[400px] border-2 border-black"
+    >
+      <h3 class="text-2xl font-bold text-center mt-3">Characters</h3>
+      <div
+        id="characters"
+        class="grid grid-rows-[min-content,_40px,_minmax(0,_1fr)] mt-3 h-full overflow-hidden"
+      >
+        <a class="text-center w-full" type="submit" href="/create">Create a
+          Character</a>
+        <img class="-mt-1 mb-12" src="/images/underline.png" alt="" />
+
+        {{! CHARACTER LIST }}
+        <div
+          id="character-list"
+          class="grid auto-rows-min gap-1 w-full h-full overflow-auto"
+        >
+          {{#if characters.length}}
+            {{#each characters as |character|}}
+              <button
+                class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+                data-id="{{character.id}}"
+                data-name="{{character.character_name}}"
+                data-avatar="{{character.avatar}}"
+                data-class="{{character.class.class_name}}"
+                data-race="{{character.race.race_name}}"
+              >
+                {{character.character_name}}
+              </button>
+            {{/each}}
+          {{/if}}
+          {{! <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            character
+          </button>
+          <button
+            class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+          >
+            Last character
+          </button> }}
+        </div>
+      </div>
+      <div class="relative mt-3">
+
+        <img
+          class="absolute bottom-0 w-full"
+          src="/images/underline.png"
+          alt=""
+        />
       </div>
     </div>
+
+    <section class="flex-grow border-black border-2">
+      <h2>Name: <span id="selected-character-name"></span></h2>
+      <h2>Race:
+        <span id="selected-character-race"></span>
+      </h2>
+      <h2>Class:
+        <span id="selected-character-class"></span>
+
+      </h2>
+      <img id="selected-character-avatar" src="" alt="" />
+
+      {{#if attributes.length}}
+        {{#each attributes as |attribute|}}
+          <p>{{attribute.name}}:
+            <span id="selected-character-attribute-{{attribute.id}}"></span></p>
+        {{/each}}
+      {{/if}}
+      <div class="flex">
+        <a id="selected-character-edit" class="" href="#">Edit</a>
+      </div>
+    </section>
   </div>
 
-  <section class="">
-    <h2>Name: <span id="selected-character-name"></span></h2>
-    <h2>Race:
-      <span id="selected-character-race"></span>
-    </h2>
-    <h2>Class:
-      <span id="selected-character-class"></span>
-
-    </h2>
-    <img id="selected-character-avatar" src="" alt="" />
-
-    {{#if attributes.length}}
-      {{#each attributes as |attribute|}}
-        <p>{{attribute.name}}:
-          <span id="selected-character-attribute-{{attribute.id}}"></span></p>
-      {{/each}}
-    {{/if}}
-    <div class="flex">
-      <a id="selected-character-edit" class="" href="#">Edit</a>
-    </div>
-  </section>
 </div>
 
 <script src="/js/homepage.js"></script>

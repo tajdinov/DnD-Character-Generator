@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@400;700&display=swap"
       rel="stylesheet"
     />
     <link
@@ -25,9 +25,9 @@
   </head>
 
   <body>
-    <div class="h-screen flex flex-col">
+    <div class="h-screen grid grid-rows-[15%,_minmax(0,_1fr),_100px]">
 
-      <header class="header_block flex-initial h-1/6">
+      <header class="header_block flex-initial h-full">
         <div id="header_block">
           <h2>DnD CHARACTER MANAGER</h2>
         </div>
@@ -38,7 +38,7 @@
 
         {{{body}}}
       </main>
-      <footer class="flex-none">
+      <footer class="flex-none bg-zinc-400">
 
         {{#if logged_in}}
           <button class="btn btn-outline-dark" id="logout">Logout</button>
