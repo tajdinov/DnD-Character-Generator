@@ -5,3 +5,16 @@ a {
 a:hover {
   text-shadow: 0 0 20px rgb(6, 174, 3);
 }
+
+.fancy {
+  background-image: url(/images/fancy-button.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: rgba(217, 191, 46, 0.432);
+  transition: 200ms;
+}
+
+.fancy:hover {
+  background-color: rgba(217, 191, 46, 0.797);
+  font-weight: bold;
+}
