@@ -4,32 +4,58 @@
   </div>
 </div>
 
-{{#if characters.length}}
-  <div class="character-list flex flex-row flex-wrap my-10 mx-20">
-    <div class="your_characters_box basis-1/4 mr-6">
-      <h3 class="text-xl font-semibold">Your Characters</h3>
-      <div
-        id="characters"
-        class="grid p-6 bg-violet-200 border-4 border-violet-300 bg-clip-content border-dashed mt-3"
-      >
+<div class="character-list flex flex-row flex-wrap my-10 mx-20">
+  <div class="your_characters_box basis-1/4 mr-6">
+    <h3 class="text-xl font-semibold">Your Characters</h3>
 
-        {{#each characters as |character|}}
-          <a class="text-xl border-2 py-3 px-5" href="/character/{{id}}">
-            {{character.character_name}}
-          </a>
-        {{/each}}
+    <div id="characters" class="grid p-5 mt-3">
+      <a
+        class="btn btn-outline-primary mb-3"
+        type="submit"
+        href="/create"
+      >Create a Character</a>
+
+      {{! CHARACTER LIST }}
+      <div id="character-list">
+        {{#if characters.length}}
+          {{#each characters as |character|}}
+            <button
+              class="text-xl border-2 py-3 px-5"
+              data-id="{{character.id}}"
+              data-name="{{character.character_name}}"
+              data-avatar="{{character.avatar}}"
+              data-class="{{character.class.class_name}}"
+              data-race="{{character.race.race_name}}"
+            >
+              {{character.character_name}}
+            </button>
+          {{/each}}
+        {{/if}}
       </div>
     </div>
-
-    <div class="character_details_box basis-1/2 ml-20">
-      <h3 class="text-center text-xl font-semibold">
-        Currently Selected Character</h3>
-    </div>
-
   </div>
-{{/if}}
 
-<div class="create_character absolute bottom-5 left-20">
-  <a class="btn btn-outline-primary" type="submit" href="/create">Create a
-    Character</a>
+  <section class="">
+    <h2>Name: <span id="selected-character-name"></span></h2>
+    <h2>Race:
+      <span id="selected-character-race"></span>
+    </h2>
+    <h2>Class:
+      <span id="selected-character-class"></span>
+
+    </h2>
+    <img id="selected-character-avatar" src="" alt="" />
+
+    {{#if attributes.length}}
+      {{#each attributes as |attribute|}}
+        <p>{{attribute.name}}:
+          <span id="selected-character-attribute-{{attribute.id}}"></span></p>
+      {{/each}}
+    {{/if}}
+    <div class="flex">
+      <a id="selected-character-edit" class="" href="#">Edit</a>
+    </div>
+  </section>
 </div>
+
+<script src="/js/homepage.js"></script>

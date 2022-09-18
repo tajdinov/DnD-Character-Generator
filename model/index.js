@@ -34,8 +34,8 @@ Class.hasMany(Character, {
   foreignKey: "class_id",
 });
 
-Race.hasMany(Character, { 
-  foreignKey: "race_id" 
+Race.hasMany(Character, {
+  foreignKey: "race_id",
 });
 
 Character.belongsToMany(Attribute, {
@@ -49,8 +49,8 @@ Attribute.belongsToMany(Character, {
   as: "character",
 });
 
-User.hasMany(Character, { 
-  foreignKey: "user_id" 
+User.hasMany(Character, {
+  foreignKey: "user_id",
 });
 
 CharacterAttribute.belongsTo(Character, {
@@ -59,9 +59,16 @@ CharacterAttribute.belongsTo(Character, {
   onUpdate: "CASCADE",
 });
 
+CharacterAttribute.belongsTo(Attribute, {
+  foreignKey: "attribute_id",
+  as: "attribute",
+});
+
 module.exports = {
   User,
   Character,
+  Attribute,
+  CharacterAttribute,
   Class,
   Race,
 };

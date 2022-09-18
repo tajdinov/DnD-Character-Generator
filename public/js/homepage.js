@@ -1,11 +1,25 @@
-const edit_char = async event => {
-  event.preventDefault();
+const characterList = document.getElementById("character-list");
+const namePreview = document.getElementById("selected-character-name");
+const racePreview = document.getElementById("selected-character-race");
+const classPreview = document.getElementById("selected-character-class");
+const avatarPreview = document.getElementById("selected-character-avatar");
+const editPreview = document.getElementById("selected-character-edit");
 
-  console.log("open character edit screen");
-  //document.location.replace("/character");
-};
+characterList.addEventListener("click", async e => {
+  const data = e.target.dataset;
+  if (!data.id) return;
 
-//document.querySelector(".edit_char1").addEventListener("click", edit_char);
-//document.querySelector(".edit_char2").addEventListener("click", edit_char);
-//document.querySelector(".edit_char3").addEventListener("click", edit_char);
-//document.querySelector(".charButton").addEventListener("click", edit_char);
+  const res = await fetch(`/api/user/character/attributes/${data.id}`);
+
+  const attributes = await res.json();
+  namePreview.innerText = data.name;
+  racePreview.innerText = data.race;
+  classPreview.innerText = data.class;
+  avatarPreview.src = data.avatar;
+  editPreview.setAttribute("href", `/update/${data.id}`);
+  attributes.forEach(attribute => {
+    const id = `selected-character-attribute-${attribute.attribute_id}`;
+    const element = document.getElementById(id);
+    element.innerText = attribute.value;
+  });
+});

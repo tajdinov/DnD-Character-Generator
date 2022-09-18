@@ -10,9 +10,22 @@ router.get("/", async (req, res, next) => {
 
     if (!user_id) return next(HandledError.unauthorised());
     const user = await User.findByPk(user_id);
-    const data = await Character.findAll({ where: { user_id } });
+    const data = await Character.findAll({
+      where: { user_id },
+      include: [
+        { model: Race, as: "race" },
+        { model: Class, as: "class" },
+      ],
+    });
+    const attributeData = await Attribute.findAll();
+    const attributes = attributeData.map(model => model.get({ plain: true }));
     const characters = data.map(character => character.get({ plain: true }));
-    res.render("homepage", { characters, first_name: user.first_name });
+    console.log(characters);
+    res.render("homepage", {
+      characters,
+      first_name: user.first_name,
+      attributes,
+    });
   } catch (error) {}
 });
 
