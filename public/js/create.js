@@ -91,12 +91,18 @@ rootDiv.addEventListener("input", e => {
 raceButtons.addEventListener("click", e => {
   const value = e.target.dataset;
   race_id = value.id;
+  const nextButton = document.querySelector("button[data-page='page-class']");
+  nextButton.removeAttribute("disabled");
   renderInfoScreen(value, "race-info");
 });
 
 classButtons.addEventListener("click", e => {
   const value = e.target.dataset;
   class_id = value.id;
+  const nextButton = document.querySelector(
+    "button[data-page='page-attributes']"
+  );
+  nextButton.removeAttribute("disabled");
   renderInfoScreen(value, "class-info");
 });
 
