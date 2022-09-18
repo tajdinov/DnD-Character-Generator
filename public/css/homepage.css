@@ -20,3 +20,11 @@ button:hover {
   background-repeat: no-repeat;
   z-index: 1;
 }
+
+a {
+  transition: 200ms;
+}
+
+a:hover {
+  text-shadow: 0 0 20px rgb(6, 174, 3);
+}
