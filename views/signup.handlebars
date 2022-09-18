@@ -1,50 +1,55 @@
-<link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/signup.css">
+<div class="signup-cont grid h-screen place-items-center mt-10">
+  <img src="/images/signup.jpg" style="width:40%">
 <div class="signup-box">
-  <h2>Signup</h2>
-  <form class="signup-form">
+  <h1 class="text-5xl font-black">Signup</h1>
+  <form class="signup-form" autocomplete="off">
     <div class="user-box">
       <input
-        class="form-input"
+        class="form-input bg-zinc-800 text-slate-50"
         type="text"
+        autocomplete="off"
         id="first-name-signup"
         name=""
         required=""
       />
-      <label for="name-signup">First name</label>
+      <label for="name-signup" class="text-2xl">First name</label>
     </div>
     <div class="user-box">
       <input
-        class="form-input"
+        class="form-input bg-zinc-800 text-slate-50"
         type="text"
+        autocomplete="off"
         id="last-name-signup"
         name=""
         required=""
       />
-      <label for="name-signup">Last name</label>
+      <label for="name-signup" class="text-2xl">Last name</label>
     </div>
-    <div class="user-box">
+    <div class="user-box -ml-10">
       <input
-        class="form-input"
+        class="form-input bg-zinc-800 text-slate-50"
         type="email"
+        autocomplete="off"
         id="email-signup"
         name=""
         required=""
       />
-      <label for="email-signup">Email</label>
+      <label for="email-signup" class="text-2xl">Email</label>
     </div>
     <div class="user-box">
       <input
-        class="form-input"
+        class="form-input bg-zinc-800 text-slate-50"
         type="password"
+        autocomplete="off"
         id="password-signup"
         name=""
         required=""
       />
-      <label for="password-signup">Password</label>
+      <label for="password-signup" class="text-2xl">Password</label>
     </div>
 
-    <button class="btn_signup_form" href="#">
+    <button class="btn_signup_form text-3xl mt-20" href="#">
       <span></span>
       <span></span>
       <span></span>
@@ -59,6 +64,7 @@
     character, our character builder tool and digital character sheets make it
     easier than ever to play the game!
   </p>
+</div>
 </div>
 
 <script src="./js/signup.js"></script>

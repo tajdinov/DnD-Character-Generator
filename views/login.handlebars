@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="/css/login.css"/>
-<div class="login-cont grid h-screen place-items-center mt-10">
-  <img src="/images/login.jpg" style="width:30%">
+<div class="login-cont grid h-screen place-items-center mt-10 flex flex-wrap">
+  <img src="/images/login.jpg" style="width:40%">
+
 <div class="login-box">
   <h1 class="text-5xl font-black">Login</h1>
   <form class="login-form" autocomplete="off">
@@ -26,15 +27,15 @@
       />
       <label for="password-login" class="text-2xl">Password</label>
     </div>
-    <div class="flex justify-around mt-20">
-      <button class="btn_submit text-3xl" type="submit" href="#">
+    <div class="flex justify-center mt-20">
+      <button class="btn_submit text-3xl mr-20" type="submit" href="#">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
         Login
       </button>
-      <a class="btn_signup text-3xl" type="submit" href="/signup">
+      <a class="btn_signup text-3xl ml-20" type="submit" href="/signup">
         <span></span>
         <span></span>
         <span></span>
@@ -45,7 +46,7 @@
     
   </form>
 </div>
-<div class="guide">
+<div class="guide w-">
   <h2>User Guide</h2>
   <p>Whether you are a veteran of the game or just learning how to create a DnD
     character, our character builder tool and digital character sheets make it
@@ -53,5 +54,6 @@
   </p>
 </div>
 </div>
+
 
 <script src="./js/login.js"></script>
