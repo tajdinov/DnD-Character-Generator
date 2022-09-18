@@ -2,9 +2,8 @@ const router = require("express").Router();
 const multer = require("multer")().single("image");
 const resize = require("../../../utils/imageResize");
 const upload = require("../../../utils/s3");
-const { Character } = require("../../../model");
+const { Character, CharacterAttribute, Attribute } = require("../../../model");
 const HandledError = require("../../../error/Error");
-const CharacterAttribute = require("../../../model/CharacterAttribute");
 
 router.post("/", async (req, res, next) => {
   try {
@@ -19,6 +18,22 @@ router.post("/", async (req, res, next) => {
     CharacterAttribute.bulkCreate(attributes);
     res.json(character);
   } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/attributes/:character_id", async (req, res, next) => {
+  try {
+    const { character_id } = req.params;
+    console.log(character_id);
+    const attributes = await CharacterAttribute.findAll({
+      where: { character_id },
+      attributes: ["attribute_id", "value"],
+      // include: [{ model: Attribute, as: "attribute", attributes: ["name"] }],
+    });
+    res.json(attributes);
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 });

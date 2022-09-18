@@ -17,7 +17,11 @@ class HandledError extends Error {
     return err;
   }
   static invalidCredentials() {
-    const err = new HandledError("Invalid Credentials", 400);
+    const err = new HandledError(
+      "User name or password is incorrect",
+      false,
+      400
+    );
     return err;
   }
   static unauthorised() {

@@ -1,35 +1,139 @@
-<div class="row">
-  <div class="col-auto">
-    <h2 class="text-cyan-700 mt-5 ml-3 text-3xl">Welcome, {{first_name}}!</h2>
-  </div>
-</div>
+<link rel="stylesheet" href="/css/homepage.css" />
 
-{{#if characters.length}}
-  <div class="character-list flex flex-row flex-wrap my-10 mx-20">
-    <div class="your_characters_box basis-1/4 mr-6">
-      <h3 class="text-xl font-semibold">Your Characters</h3>
+<div class="mx-auto grid grid-rows-[70px,_minmax(0,_1fr)] h-full p-5">
+
+  <h2 class="font-bold text-3xl mb-5">Welcome, {{first_name}}!</h2>
+
+  <div class="flex flex-col sm:flex-row gap-5">
+    <div
+      class="grid grid-rows-[50px,_minmax(0,_1fr),_30px] p-3 w-full sm:w-1/3 sm:max-w-[400px] border-2 border-zinc-200"
+    >
+      <h3 class="text-2xl font-bold text-center mt-3">Characters</h3>
       <div
         id="characters"
-        class="grid p-6 bg-violet-200 border-4 border-violet-300 bg-clip-content border-dashed mt-3"
+        class="grid grid-rows-[min-content,_40px,_minmax(0,_1fr)] mt-3 h-full overflow-hidden"
       >
+        <a class="text-center w-full" type="submit" href="/create">Create a
+          Character</a>
+        <img class="-mt-1 mb-12" src="/images/underline.png" alt="" />
 
-        {{#each characters as |character|}}
-          <a class="text-xl border-2 py-3 px-5" href="/character/{{id}}">
-            {{character.character_name}}
-          </a>
-        {{/each}}
+        {{! CHARACTER LIST }}
+        <div
+          id="character-list"
+          class="grid auto-rows-min gap-1 w-full h-full overflow-auto"
+        >
+          {{#if characters.length}}
+            {{#each characters as |character|}}
+              <button
+                class="text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+                data-id="{{character.id}}"
+                data-name="{{character.character_name}}"
+                data-avatar="{{character.avatar}}"
+                data-class="{{character.class.class_name}}"
+                data-race="{{character.race.race_name}}"
+              >
+                {{character.character_name}}
+              </button>
+            {{/each}}
+          {{/if}}
+        </div>
+      </div>
+      <div class="relative mt-3">
+
+        <img
+          class="absolute bottom-0 w-full"
+          src="/images/underline.png"
+          alt=""
+        />
       </div>
     </div>
 
-    <div class="character_details_box basis-1/2 ml-20">
-      <h3 class="text-center text-xl font-semibold">
-        Currently Selected Character</h3>
-    </div>
+    <section
+      class="relative grid grid-rows-[min-content,_minmax(0,_1fr),_min-content] flex-grow border-zinc-200 border-2 p-5"
+    >
+      {{! PREVIEW HEADER }}
+      <div class="">
+        <div class="flex">
+          {{! NAME and CLASS }}
+          <div class="w-1/2">
+            <h2 class="text-4xl"><span id="selected-character-name"></span></h2>
+            <h2>Race:
+              <span id="selected-character-race"></span>
+            </h2>
+            <h2>Class:
+              <span id="selected-character-class"></span>
+            </h2>
+          </div>
+          {{! IMAGE }}
+          <div
+            class="relative w-1/2 aspect-square rounded-lg overflow-hidden frame"
+          >
+            <img
+              class="absolute w-full h-full object-fill top-0 left-0"
+              src="/images/button.png"
+              alt=""
+            />
+            <img
+              class="w-full h-full object-cover pt-[7%] pb-[9%] pr-[4%]"
+              id="selected-character-avatar"
+              src=""
+              alt=""
+            />
 
+          </div>
+        </div>
+        <div class="grid grid-cols-3 md:grid-cols-6 mt-5">
+          {{#if attributes.length}}
+            {{#each attributes as |attribute|}}
+              <div class="grid place-items-center display-value">
+                <div
+                  class="w-full max-w-[130px] aspect-[5/6] flex flex-col justify-center attribute-frame"
+                >
+                  <p
+                    id="selected-character-attribute-{{attribute.id}}"
+                    class="text-5xl text-center text-inherit value-p-text"
+                  ></p>
+                  <p
+                    class="text-center text-md sm:text-lg"
+                  >{{attribute.name}}</p>
+                </div>
+              </div>
+            {{/each}}
+          {{/if}}
+        </div>
+
+      </div>
+
+      {{! SCROLLABLE BODY }}
+      <div
+        id="selected-character-description"
+        class="h-full overflow-auto border-2 border-zinc-200"
+      >
+        BIO ------- Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+        Porro inventore, amet, expedita, reiciendis aliquam similique libero
+        quas enim sequi odio aspernatur? Minima deleniti eum laudantium
+        voluptatum molestias veritatis repellat! Eligendi a ipsam est et
+        voluptas unde excepturi cum harum, ab maiores tenetur cumque magnam
+        alias voluptatibus culpa quod! Quae, cupiditate? Lorem ipsum dolor sit
+        amet consectetur adipisicing elit. Tempore eaque nulla est hic?
+        Corporis, libero quod! Aspernatur eveniet earum adipisci similique aut
+        praesentium id nulla perspiciatis repudiandae nihil aliquam voluptatibus
+        ullam, excepturi, molestias impedit doloribus vero ducimus quia,
+        provident non! Dignissimos culpa quo ad, eaque ipsam dicta consequatur
+        tempore esse nihil et soluta non repellendus illo. Dolorem unde, atque,
+        eum soluta ab odit culpa corrupti provident ducimus tenetur minima! Et
+        repellat provident veniam obcaecati hic labore aliquam eum numquam
+        eaque, sit nobis mollitia voluptatem placeat aperiam, odit voluptates
+        sed modi laudantium sequi minus! Architecto minima veritatis eligendi
+        nisi. Dicta, facere.
+      </div>
+      {{! BUTTONS }}
+      <div class="flex">
+        <a id="selected-character-edit" class="" href="#">Edit</a>
+      </div>
+    </section>
   </div>
-{{/if}}
 
-<div class="create_character absolute bottom-5 left-20">
-  <a class="btn btn-outline-primary" type="submit" href="/create">Create a
-    Character</a>
 </div>
+
+<script src="/js/homepage.js"></script>
