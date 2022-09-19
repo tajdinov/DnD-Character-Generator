@@ -3,6 +3,7 @@ const namePreview = document.getElementById("selected-character-name");
 const racePreview = document.getElementById("selected-character-race");
 const classPreview = document.getElementById("selected-character-class");
 const avatarPreview = document.getElementById("selected-character-avatar");
+const bioPreview = document.getElementById("selected-character-bio");
 const editPreview = document.getElementById("selected-character-edit");
 
 characterList.addEventListener("click", async e => {
@@ -16,6 +17,7 @@ characterList.addEventListener("click", async e => {
   racePreview.innerText = data.race;
   classPreview.innerText = data.class;
   avatarPreview.src = data.avatar;
+  bioPreview.innerText = data.bio;
   editPreview.setAttribute("href", `/update/${data.id}`);
   attributes.forEach(attribute => {
     const id = `selected-character-attribute-${attribute.attribute_id}`;
