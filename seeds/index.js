@@ -14,16 +14,16 @@ const seedAll = async () => {
   const user_id = await seedUsers();
   console.log("\n----- USERS SEEDED -----\n");
 
-  await seedClass();
+  const classes = await seedClass();
   console.log("\n----- CLASSES SEEDED -----\n");
 
-  await seedRace();
+  const races = await seedRace();
   console.log("\n----- RACES SEEDED -----\n");
 
   await seedAttributes();
   console.log("\n----- ATTRIBUTES SEEDED -----\n");
 
-  await seedCharacters(user_id);
+  await seedCharacters(user_id, classes, races);
   console.log("\n----- CHARACTERS SEEDED -----\n");
 
   process.exit(0);
