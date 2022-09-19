@@ -7,12 +7,16 @@ router.post("/", async (req, res, next) => {
   try {
     const { first_name, last_name, email, password } = req.body;
     if (!first_name || !last_name || !email || !password) {
-      return next(HandledError.badRequest());
+      return next(
+        HandledError.badRequest(
+          "Missing data, please provide a first name, last name, email and password"
+        )
+      );
     }
     // Check if email already exists in database, if it does return 'bad request'
     const user = await User.findOne({ where: { email } });
     if (user) {
-      return next(HandledError.badRequest());
+      return next(HandledError.badRequest("User already exists"));
     }
 
     // Create the user
@@ -29,7 +33,7 @@ router.post("/", async (req, res, next) => {
       });
     }
   } catch (error) {
-    res.sendStatus(400);
+    next(error);
   }
 });
 
