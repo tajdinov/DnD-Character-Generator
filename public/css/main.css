@@ -63,6 +63,22 @@ button.sketch:hover {
   background-repeat: no-repeat;
 }
 
+.fancy {
+  background-image: url(/images/fancy-button.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transition: 200ms;
+}
+
+.yellow {
+  background-color: rgba(217, 191, 46, 0.432);
+}
+
+.fancy:hover {
+  background-color: rgba(217, 191, 46, 0.797);
+  font-weight: bold;
+}
+
 @keyframes header_anim {
   0% {
     background-position: 100% 100%;

@@ -17,16 +17,9 @@ input:focus-visible {
   opacity: 0.2;
 }
 
-button {
+button.sketch:disabled {
   background-image: url(/images/button.png);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-button.next {
-  background-image: url(/images/button-accept.svg);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  opacity: 0.5;
 }
 
 .emphasize {
@@ -35,6 +28,12 @@ button.next {
   animation-direction: normal;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+}
+
+.corner-frame {
+  background-image: url(/images/corner-frame.png);
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
 }
 
 @keyframes pop {
