@@ -1,70 +1,78 @@
-<link rel="stylesheet" href="css/signup.css">
-<div class="signup-cont grid h-screen place-items-center mt-10">
-  <img src="/images/signup.jpg" style="width:40%">
-<div class="signup-box">
-  <h1 class="text-5xl font-black">Signup</h1>
-  <form class="signup-form" autocomplete="off">
-    <div class="user-box">
-      <input
-        class="form-input bg-zinc-800 text-slate-50"
-        type="text"
-        autocomplete="off"
-        id="first-name-signup"
-        name=""
-        required=""
-      />
-      <label for="name-signup" class="text-2xl">First name</label>
-    </div>
-    <div class="user-box">
-      <input
-        class="form-input bg-zinc-800 text-slate-50"
-        type="text"
-        autocomplete="off"
-        id="last-name-signup"
-        name=""
-        required=""
-      />
-      <label for="name-signup" class="text-2xl">Last name</label>
-    </div>
-    <div class="user-box -ml-10">
-      <input
-        class="form-input bg-zinc-800 text-slate-50"
-        type="email"
-        autocomplete="off"
-        id="email-signup"
-        name=""
-        required=""
-      />
-      <label for="email-signup" class="text-2xl">Email</label>
-    </div>
-    <div class="user-box">
-      <input
-        class="form-input bg-zinc-800 text-slate-50"
-        type="password"
-        autocomplete="off"
-        id="password-signup"
-        name=""
-        required=""
-      />
-      <label for="password-signup" class="text-2xl">Password</label>
-    </div>
+<link rel="stylesheet" href="css/signup.css" />
+<div class="grid grid-rows-[minmax(0,_1fr)] h-full">
+  <div class="relative max-w-[800xp] place-self-center p-[22%]">
+    <img
+      src="/images/signup.jpg"
+      class="w-full h-full object-fill absolute top-0 left-0 -z-10"
+    />
+    <div class="w-full">
+      <h1 class="text-5xl font-black">Signup</h1>
+      <form class="flex flex-col gap-5 mt-6" autocomplete="off">
+        <div class="flex flex-col">
+          <label for="name-signup" class="text-2xl">First name</label>
+          <input
+            class="border-b-2 border-zinc-400 bg-transparent"
+            type="text"
+            autocomplete="off"
+            id="first-name-signup"
+            name=""
+            required=""
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="name-signup" class="text-2xl">Last name</label>
+          <input
+            class="border-b-2 border-zinc-400 bg-transparent"
+            type="text"
+            autocomplete="off"
+            id="last-name-signup"
+            name=""
+            required=""
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="email-signup" class="text-2xl">Email</label>
+          <input
+            class="border-b-2 border-zinc-400 font-sans bg-transparent"
+            type="email"
+            autocomplete="off"
+            id="email-signup"
+            name=""
+            required=""
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="password-signup" class="text-2xl">Password</label>
+          <input
+            class="border-b-2 border-zinc-400 bg-transparent"
+            type="password"
+            autocomplete="off"
+            id="password-signup"
+            name=""
+            required=""
+          />
 
-    <button class="btn_signup_form text-3xl mt-20" href="#">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      Signup
-    </button>
-  </form>
-</div>
-<div class="guide">
-  <h2>User Guide</h2>
-  <p>Whether you are a veteran of the game or just learning how to create a DnD
-    character, our character builder tool and digital character sheets make it
-    easier than ever to play the game!
-  </p>
-</div>
+        </div>
+        <div class="flex justify-between mt-6">
+          <a class="w-full" href="/login">
+            <button type="button" class="sketch w-full p-2">
+              Back
+            </button>
+          </a>
+          <button class="sketch w-full p-2">
+            Signup
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {{! <div class="bg-zinc-200 p-6 text-center text-xl">
+    <h2 class="font-bold">User Guide</h2>
+    <p class="leading-none">Whether you are a veteran of the game or just
+      learning how to create a DnD character, our character builder tool and
+      digital character sheets make it easier than ever to play the game!
+    </p>
+  </div> }}
 </div>
 
 <script src="./js/signup.js"></script>
