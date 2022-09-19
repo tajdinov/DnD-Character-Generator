@@ -8,7 +8,8 @@
     "watch:app": "nodemon -e handlebars,js server.js",
     "start": "node server.js",
     "seed": "node seeds/index.js",
-    "tailwind:css": "postcss public/css/main.css -o public/css/app.css --watch"
+    "tailwind:css": "postcss public/css/main.css -o public/css/app.css --watch",
+    "tailwind:prod": "postcss public/css/main.css -o public/css/app.css"
   },
   "repository": {
     "type": "git",
