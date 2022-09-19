@@ -2,11 +2,6 @@
   background-image: url(/images/border.svg);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  font-family: fantasy;
-}
-
-.character {
-  font-family: fantasy;
 }
 
 input:not(:read-only) {
