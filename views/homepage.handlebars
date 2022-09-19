@@ -46,6 +46,7 @@
                 data-avatar="{{character.avatar}}"
                 data-class="{{character.class.class_name}}"
                 data-race="{{character.race.race_name}}"
+                data-bio="{{character.character_description}}"
               >
                 {{character.character_name}}
               </button>
@@ -64,102 +65,95 @@
     </div>
 
     {{! PREVIEW BOX }}
-    <section
-      class="relative grid grid-rows-[min-content,_min-content,_minmax(0,_1fr)] h-full border-zinc-200 border-2 p-5 gap-5"
-    >
-      {{! PREVIEW HEADER }}
-      <div class="h-full">
-        <div class="flex max-h-[50vh] overflow-scroll">
-          {{! NAME and CLASS }}
-          <div class="flex flex-col flex-grow">
-            <h2 class="text-4xl"><span id="selected-character-name"></span></h2>
-            <h2>Race:
-              <span id="selected-character-race"></span>
-            </h2>
-            <h2>Class:
-              <span id="selected-character-class"></span>
-            </h2>
-            {{! BUTTONS }}
-            <div class="flex h-full items-end">
-              <div
-                class="flex flex-col xl:flex-row justify-center w-full gap-2 xl:gap-10 h-fit"
-              >
-                <a id="selected-character-view" href="#"><button
-                    class="fancy yellow w-[200px] max-w-[150px] lg:max-w-[200px] p-2"
-                  >View</button>
-                </a>
-                <a id="selected-character-edit" class="" href="#"><button
-                    class="fancy yellow w-[200px] max-w-[150px] lg:max-w-[200px] p-2"
+    <section class="h-full border-zinc-200 border-2">
+      <div id="preview" hidden>
+
+        <div
+          class="relative grid grid-rows-[min-content,_min-content,_minmax(0,_1fr)] h-full p-5 gap-5"
+        >
+
+          {{! PREVIEW HEADER }}
+
+          <div class="h-full">
+            <div class="flex max-h-[50vh] overflow-scroll">
+              {{! NAME and CLASS }}
+              <div class="flex flex-col flex-grow">
+                <h2 class="text-4xl"><span
+                    id="selected-character-name"
+                  ></span></h2>
+                <h2>Race:
+                  <span id="selected-character-race"></span>
+                </h2>
+                <h2>Class:
+                  <span id="selected-character-class"></span>
+                </h2>
+                {{! BUTTONS }}
+                <div class="flex h-full items-end">
+                  <div
+                    class="flex flex-col xl:flex-row justify-center w-full gap-2 xl:gap-10 h-fit"
                   >
-                    Edit
-                  </button></a>
+                    <a id="selected-character-view" href="#"><button
+                        class="fancy yellow w-[200px] max-w-[150px] lg:max-w-[200px] p-2"
+                      >View</button>
+                    </a>
+                    <a id="selected-character-edit" class="" href="#"><button
+                        class="fancy yellow w-[200px] max-w-[150px] lg:max-w-[200px] p-2"
+                      >
+                        Edit
+                      </button></a>
+
+                  </div>
+                </div>
+              </div>
+              {{! IMAGE }}
+              <div
+                class="relative w-1/2 max-w-[300px] aspect-square rounded-lg overflow-hidden"
+              >
+                <img
+                  class="absolute w-full h-full object-fill top-0 left-0"
+                  src="/images/button.png"
+                  alt=""
+                />
+                <img
+                  class="w-full h-full object-cover rounded-lg pl-[2%] pt-[7%] pb-[9%] pr-[4%]"
+                  id="selected-character-avatar"
+                  src=""
+                  alt=""
+                />
 
               </div>
+
             </div>
           </div>
-          {{! IMAGE }}
-          <div
-            class="relative w-1/2 max-w-[300px] aspect-square rounded-lg overflow-hidden"
-          >
-            <img
-              class="absolute w-full h-full object-fill top-0 left-0"
-              src="/images/button.png"
-              alt=""
-            />
-            <img
-              class="w-full h-full object-cover rounded-lg pl-[2%] pt-[7%] pb-[9%] pr-[4%]"
-              id="selected-character-avatar"
-              src=""
-              alt=""
-            />
+          <div class="w-full grid grid-cols-3 lg:grid-cols-6 mt-5">
+            {{#if attributes.length}}
+              {{#each attributes as |attribute|}}
+                <div class="grid place-items-center display-value">
+                  <div
+                    class="w-full max-w-[130px] aspect-[5/6] flex flex-col justify-center attribute-frame"
+                  >
+                    <p
+                      id="selected-character-attribute-{{attribute.id}}"
+                      class="text-5xl text-center text-inherit value-p-text"
+                    ></p>
+                    <p
+                      class="text-center text-md sm:text-lg"
+                    >{{attribute.name}}</p>
+                  </div>
+                </div>
+              {{/each}}
+            {{/if}}
 
           </div>
 
+          {{! SCROLLABLE BODY }}
+          <div
+            id="selected-character-bio"
+            class="h-full overflow-auto border-2 border-zinc-200"
+          >
+          </div>
         </div>
       </div>
-      <div class="w-full grid grid-cols-3 lg:grid-cols-6 mt-5">
-        {{#if attributes.length}}
-          {{#each attributes as |attribute|}}
-            <div class="grid place-items-center display-value">
-              <div
-                class="w-full max-w-[130px] aspect-[5/6] flex flex-col justify-center attribute-frame"
-              >
-                <p
-                  id="selected-character-attribute-{{attribute.id}}"
-                  class="text-5xl text-center text-inherit value-p-text"
-                ></p>
-                <p class="text-center text-md sm:text-lg">{{attribute.name}}</p>
-              </div>
-            </div>
-          {{/each}}
-        {{/if}}
-
-      </div>
-
-      {{! SCROLLABLE BODY }}
-      <div
-        id="selected-character-description"
-        class="h-full overflow-auto border-2 border-zinc-200"
-      >
-        BIO ------- Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        Porro inventore, amet, expedita, reiciendis aliquam similique libero
-        quas enim sequi odio aspernatur? Minima deleniti eum laudantium
-        voluptatum molestias veritatis repellat! Eligendi a ipsam est et
-        voluptas unde excepturi cum harum, ab maiores tenetur cumque magnam
-        alias voluptatibus culpa quod! Quae, cupiditate? Lorem ipsum dolor sit
-        amet consectetur adipisicing elit. Tempore eaque nulla est hic?
-        Corporis, libero quod! Aspernatur eveniet earum adipisci similique aut
-        praesentium id nulla perspiciatis repudiandae nihil aliquam voluptatibus
-        ullam, excepturi, molestias impedit doloribus vero ducimus quia,
-        provident non! Dignissimos culpa quo ad, eaque ipsam dicta consequatur
-        tempore esse nihil et soluta non repellendus illo. Dolorem unde, atque,
-        eum soluta ab odit culpa corrupti provident ducimus tenetur minima! Et
-        repellat provident veniam obcaecati hic labore aliquam eum numquam
-        eaque, sit nobis mollitia voluptatem placeat aperiam, odit voluptates
-        sed modi laudantium sequi minus! Architecto minima veritatis eligendi
-        nisi. Dicta, facere.
-      </div>
-
     </section>
   </div>
 
