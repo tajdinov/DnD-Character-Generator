@@ -5,6 +5,7 @@ const classPreview = document.getElementById("selected-character-class");
 const avatarPreview = document.getElementById("selected-character-avatar");
 const bioPreview = document.getElementById("selected-character-bio");
 const editPreview = document.getElementById("selected-character-edit");
+const previewDiv = document.getElementById("preview");
 
 characterList.addEventListener("click", async e => {
   const data = e.target.dataset;
@@ -13,6 +14,7 @@ characterList.addEventListener("click", async e => {
   const res = await fetch(`/api/user/character/attributes/${data.id}`);
 
   const attributes = await res.json();
+  previewDiv.removeAttribute("hidden");
   namePreview.innerText = data.name;
   racePreview.innerText = data.race;
   classPreview.innerText = data.class;
