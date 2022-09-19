@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "npm run watch:app & npm run tailwind:css",
+    "build": "postcss public/css/main.css -o public/css/app.css",
     "watch:app": "nodemon -e handlebars,js server.js",
     "start": "node server.js",
     "seed": "node seeds/index.js",
