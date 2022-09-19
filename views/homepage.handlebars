@@ -65,15 +65,13 @@
     </div>
 
     {{! PREVIEW BOX }}
-    <section class="h-full border-zinc-200 border-2">
+    <section class="h-full border-zinc-200 border-2 overflow-auto">
       <div id="preview" hidden>
-
         <div
-          class="relative grid grid-rows-[min-content,_min-content,_minmax(0,_1fr)] h-full p-5 gap-5"
+          class="relative grid grid-rows-[min-content,_min-content,_min-content] h-full p-5 gap-5"
         >
 
           {{! PREVIEW HEADER }}
-
           <div class="h-full">
             <div class="flex max-h-[50vh] overflow-scroll">
               {{! NAME and CLASS }}
@@ -90,12 +88,12 @@
                 {{! BUTTONS }}
                 <div class="flex h-full items-end">
                   <div
-                    class="flex flex-col xl:flex-row justify-center w-full gap-2 xl:gap-10 h-fit"
+                    class="flex flex-col justify-center w-full gap-2 xl:gap-10 h-fit"
                   >
-                    <a id="selected-character-view" href="#"><button
+                    {{! <a id="selected-character-view" href="#"><button
                         class="fancy yellow w-[200px] max-w-[150px] lg:max-w-[200px] p-2"
                       >View</button>
-                    </a>
+                    </a> }}
                     <a id="selected-character-edit" class="" href="#"><button
                         class="fancy yellow w-[200px] max-w-[150px] lg:max-w-[200px] p-2"
                       >
@@ -125,6 +123,7 @@
 
             </div>
           </div>
+          {{! ATTRIBUTES }}
           <div class="w-full grid grid-cols-3 lg:grid-cols-6 mt-5">
             {{#if attributes.length}}
               {{#each attributes as |attribute|}}
@@ -147,10 +146,11 @@
           </div>
 
           {{! SCROLLABLE BODY }}
-          <div
-            id="selected-character-bio"
-            class="h-full overflow-auto border-2 border-zinc-200"
-          >
+          <div class="">
+            <h2>Biography</h2>
+            <div class="min-h-[5rem] overflow-auto border-2 border-zinc-200">
+              <p id="selected-character-bio" class=""></p>
+            </div>
           </div>
         </div>
       </div>
