@@ -11,19 +11,5 @@ a:hover {
   background-size: 15%;
   background-repeat: no-repeat;
   background-position-x: 99%;
-  background-position-y: -1%
-
-}
-
-.fancy {
-  background-image: url(/images/fancy-button.png);
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-color: rgba(217, 191, 46, 0.432);
-  transition: 200ms;
-}
-
-.fancy:hover {
-  background-color: rgba(217, 191, 46, 0.797);
-  font-weight: bold;
+  background-position-y: -1%;
 }

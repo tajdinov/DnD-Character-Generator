@@ -88,20 +88,32 @@ rootDiv.addEventListener("input", e => {
   filterAttributeSelects();
 });
 
+function removeClassFromButtons(element, className) {
+  Array.from(element.querySelectorAll("button")).forEach(button =>
+    button.classList.remove(className)
+  );
+}
+
 raceButtons.addEventListener("click", e => {
+  if (!e.target.matches("button")) return;
   const value = e.target.dataset;
   race_id = value.id;
   const nextButton = document.querySelector("button[data-page='page-class']");
   nextButton.removeAttribute("disabled");
+  removeClassFromButtons(e.currentTarget, "yellow");
+  e.target.classList.add("yellow");
   renderInfoScreen(value, "race-info");
 });
 
 classButtons.addEventListener("click", e => {
+  if (!e.target.matches("button")) return;
   const value = e.target.dataset;
   class_id = value.id;
   const nextButton = document.querySelector(
     "button[data-page='page-attributes']"
   );
+  removeClassFromButtons(e.currentTarget, "yellow");
+  e.target.classList.add("yellow");
   nextButton.removeAttribute("disabled");
   renderInfoScreen(value, "class-info");
 });
