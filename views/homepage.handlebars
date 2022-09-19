@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="/css/homepage.css"/>
+<link rel="stylesheet" href="/css/homepage.css" />
 
 <div
   class="preview_box mx-auto grid grid-rows-[min-content,_minmax(0,_1fr)] h-full p-5 overflow-scroll"
 >
-  <div class="flex flex-row ">
-    <img src="/images/welcome.jpg" style="width:15%"/>
+  <div class="flex flex-row">
+    <img src="/images/welcome.jpg" style="width:15%" />
     <h2 class="font-bold text-3xl mt-5">{{first_name}}!</h2>
   </div>
 
@@ -35,12 +35,12 @@
         {{! CHARACTER LIST }}
         <div
           id="character-list"
-          class="grid auto-rows-min gap-1 w-full h-full overflow-auto"
+          class="grid auto-rows-min gap-1 w-full h-full place-items-center overflow-auto"
         >
           {{#if characters.length}}
             {{#each characters as |character|}}
               <button
-                class="sketch text-xl py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
+                class="sketch text-xl w-full max-w-[300px] py-3 px-5 hover:scale-[1.02] bg-transparent transition-all"
                 data-id="{{character.id}}"
                 data-name="{{character.character_name}}"
                 data-avatar="{{character.avatar}}"
