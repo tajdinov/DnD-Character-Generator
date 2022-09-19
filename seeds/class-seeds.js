@@ -63,6 +63,10 @@ const classData = [
   },
 ];
 
-const seedClass = () => Class.bulkCreate(classData);
+const seedClass = async () => {
+  const classes = await Class.bulkCreate(classData);
+  const ids = classes.map(cls => cls.id);
+  return ids;
+};
 
 module.exports = seedClass;

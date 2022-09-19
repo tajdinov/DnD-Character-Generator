@@ -43,6 +43,10 @@ const raceData = [
   },
 ];
 
-const seedRace = () => Race.bulkCreate(raceData);
+const seedRace = async () => {
+  const data = await Race.bulkCreate(raceData);
+  const ids = data.map(race => race.id);
+  return ids;
+};
 
 module.exports = seedRace;

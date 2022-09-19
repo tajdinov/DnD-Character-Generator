@@ -12,9 +12,9 @@ const characterData = [
     // wisdom: 10,
     // intelligence: 10,
     // hit_points: 15,
-    user_id: 1,
-    class_id: 12,
-    race_id: 8,
+    // user_id: 1,
+    // class_id: 12,
+    // race_id: 8,
   },
   {
     character_name: "Frodo",
@@ -24,9 +24,9 @@ const characterData = [
     // wisdom: 10,
     // intelligence: 10,
     // hit_points: 5,
-    user_id: 1,
-    class_id: 2,
-    race_id: 7,
+    // user_id: 1,
+    // class_id: 2,
+    // race_id: 7,
   },
   {
     character_name: "Samwise",
@@ -36,9 +36,9 @@ const characterData = [
     // wisdom: 10,
     // intelligence: 10,
     // hit_points: 35,
-    user_id: 3,
-    class_id: 5,
-    race_id: 7,
+    // user_id: 3,
+    // class_id: 5,
+    // race_id: 7,
   },
   // {
   //   character_name: "Aragorn",
@@ -192,10 +192,12 @@ const attributes = [
   },
 ];
 
-const seedCharacters = async user_id => {
+const seedCharacters = async (user_id, classes, races) => {
   const characters = characterData.map(character => ({
     ...character,
     user_id,
+    class_id: classes[Math.floor(Math.random() * classes.length)],
+    race_id: races[Math.floor(Math.random() * races.length)],
   }));
 
   await Character.bulkCreate(characters);
@@ -206,7 +208,7 @@ const seedCharacters = async user_id => {
       { model: Class, as: "class", attributes: ["class_name"] },
     ],
   });
-  console.log(util.inspect(character.get({ plain: true }), undefined, 5));
+  // console.log(util.inspect(character.get({ plain: true }), undefined, 5));
 };
 
 module.exports = seedCharacters;
