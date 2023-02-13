@@ -17,7 +17,7 @@ if (CLEARDB_DATABASE_URL) {
   console.log("Attempting to connect with connection url");
   sequelize = new Sequelize(CLEARDB_DATABASE_URL);
 } else {
-  sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  sequelize = new Sequelize(MYSQLDATABASE, MYSQLUSER, MYSQLPASSWORD, {
     host: MYSQLHOST || "localhost",
     dialect: "mysql",
     port: 3306 || MYSQLPORT,
