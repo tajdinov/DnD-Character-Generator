@@ -4,6 +4,9 @@ require("dotenv").config();
 let sequelize;
 
 const {
+  MYSQLDATABASE,
+  MYSQLUSER,
+  MYSQLPASSWORD,
   DB_NAME,
   DB_USER,
   DB_PASSWORD,
