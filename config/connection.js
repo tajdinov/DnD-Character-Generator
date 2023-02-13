@@ -13,11 +13,6 @@ if (CLEARDB_DATABASE_URL) {
   sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
     host: "localhost",
     dialect: "mysql",
-    dialectOptions: {
-      socketPath: "your socket path",
-      supportBigNumbers: true,
-      bigNumberStrings: true,
-    },
     port: 3306,
   });
 }
