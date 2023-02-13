@@ -3,7 +3,7 @@ require("dotenv").config();
 
 let sequelize;
 
-const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, CLEARDB_DATABASE_URL } =
+const { DB_NAME, DB_USER, DB_PASSWORD, MYSQL_URL, CLEARDB_DATABASE_URL } =
   process.env;
 
 if (CLEARDB_DATABASE_URL) {
