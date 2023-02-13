@@ -10,6 +10,7 @@ const {
   MYSQLHOST,
   CLEARDB_DATABASE_URL,
   MYSQLPORT,
+  MYSQL_URL,
 } = process.env;
 
 if (CLEARDB_DATABASE_URL) {
@@ -17,7 +18,7 @@ if (CLEARDB_DATABASE_URL) {
   sequelize = new Sequelize(CLEARDB_DATABASE_URL);
 } else {
   sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-    host: MYSQLHOST || "localhost",
+    host: MYSQL_URL || "localhost",
     dialect: "mysql",
     port: 3306 || MYSQLPORT,
   });
