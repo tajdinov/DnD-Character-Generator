@@ -19,7 +19,7 @@ const {
 
 if (CLEARDB_DATABASE_URL) {
   console.log("Attempting to connect with connection url");
-  sequelize = new Sequelize(CLEARDB_DATABASE_URL);
+  sequelize = new Sequelize(MYSQL_URL);
 } else {
   sequelize = new Sequelize(MYSQLDATABASE, MYSQLUSER, MYSQLPASSWORD, {
     host: MYSQLHOST || "localhost",
