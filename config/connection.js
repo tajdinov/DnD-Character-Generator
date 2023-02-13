@@ -11,7 +11,7 @@ if (CLEARDB_DATABASE_URL) {
   sequelize = new Sequelize(CLEARDB_DATABASE_URL);
 } else {
   sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-    host: "localhost",
+    host: "mysql://root:SvKWio1PvDNPaTQvSEqz@containers-us-west-185.railway.app:6200/railway",
     dialect: "mysql",
     port: 3306,
   });
