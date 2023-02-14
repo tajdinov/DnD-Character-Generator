@@ -16,7 +16,7 @@ const {
   MYSQL_URL,
 } = process.env;
 
-if (CLEARDB_DATABASE_URL) {
+if (MYSQL_URL) {
   console.log("Attempting to connect with connection url");
   sequelize = new Sequelize(MYSQL_URL);
 } else {
