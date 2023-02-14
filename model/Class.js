@@ -21,7 +21,7 @@ Class.init(
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: true,
     },
   },
