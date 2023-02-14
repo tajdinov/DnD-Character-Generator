@@ -21,7 +21,7 @@ Class.init(
       allowNull: false,
     },
     description: {
-      type: DataTypes.VARCHAR(1000),
+      type: DataTypes.STRING,
       allowNull: true,
     },
   },
