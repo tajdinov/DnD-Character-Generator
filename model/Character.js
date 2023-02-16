@@ -17,17 +17,17 @@ Character.init(
       autoIncrement: true,
     },
     character_name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
 
     character_description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: true,
     },
 
     avatar: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: true,
     },
     class_id: {

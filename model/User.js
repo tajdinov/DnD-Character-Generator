@@ -22,15 +22,15 @@ User.init(
       defaultValue: UUIDV4(),
     },
     first_name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
     last_name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
       unique: true,
       validate: {
@@ -38,7 +38,7 @@ User.init(
       },
     },
     password: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
       validate: {
         len: [8],

@@ -17,7 +17,7 @@ Class.init(
       autoIncrement: true,
     },
     class_name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
     description: {

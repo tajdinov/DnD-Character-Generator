@@ -17,11 +17,11 @@ Race.init(
       autoIncrement: true,
     },
     race_name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1234),
       allowNull: true,
     },
   },
